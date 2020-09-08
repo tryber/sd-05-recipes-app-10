@@ -3,17 +3,18 @@ import { Link } from 'react-router-dom';
 import drinkIcon from '../images/drinkIcon.svg';
 import exploreIcon from '../images/exploreIcon.svg';
 import mealIcon from '../images/mealIcon.svg';
+import './Footer.css';
 
 const Footer = () => {
   return (
-    <div className="footer">
-      <Link to="bebidas">
+    <div className="footer" data-testid="footer">
+      <Link to="bebidas" data-testid="drinks-bottom-btn">
         <img src={drinkIcon}></img>
       </Link>
-      <Link to="explore">
+      <Link to="explore" data-testid="explore-bottom-btn">
         <img src={exploreIcon}></img>
       </Link>
-      <Link to="comidas">
+      <Link to="comidas" data-testid="food-bottom-btn">
         <img src={mealIcon}></img>
       </Link>
     </div>
@@ -21,5 +22,3 @@ const Footer = () => {
 };
 
 export default Footer;
-
-// /Apresenta os ícones corretos (drinkIcon.svg, exploreIcon.svg e mealIcon.svg, disponíveis na pasta src/images/).
