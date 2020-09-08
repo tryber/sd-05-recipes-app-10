@@ -1,13 +1,7 @@
-class  extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {  }
-    }
-    render() { 
-        return (
-            <div>teste</div>
-        );
-    }
+import React, { Fragment } from 'react';
+
+const Login = () => {
+    return ( <Fragment>Login</Fragment> );
 }
  
-export default ;
+export default Login;
