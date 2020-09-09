@@ -7,20 +7,18 @@ import { ReceitasContext } from '../Context/ReceitasContext';
 import drinkCategories from './drinkCategories';
 
 const MealCategories = () => {
-  const { qualAPI } = useContext(ReceitasContext);
+  const { qualPage } = useContext(ReceitasContext);
   const [ allCategories, setAllCategories ] = useState([]);
-
+//   qualPage,
+  // setqualPage//
   useEffect(() => {
-    if(qualAPI === 'meal') {
+    if(qualPage === 'meal') {
     setAllCategories(mealCategories.meals.slice(0,5));
-    } else if ( qualAPI === 'drink') {
+    } else if ( qualPage === 'drink') {
       setAllCategories(drinkCategories.drinks.slice(0,5))
     }
 
-  }, [qualAPI])
-
-  // mealCategories
-  // console.log('qualApi' + qualApi)
+  }, [qualPage])
 
   return ( 
     <div className="all-categories">

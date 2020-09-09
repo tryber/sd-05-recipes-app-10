@@ -4,11 +4,11 @@ import { createContext } from 'react';
 export const ReceitasContext = createContext();
 
 export const ReceitasContextProvider = ({children}) => {
-  const [qualAPI, setQualAPI] = useState('meal');
+  const [qualPage, setqualPage] = useState('meal');
 
 const context = {
-  qualAPI,
-  setQualAPI
+  qualPage,
+  setqualPage
 }
 
   return ( <ReceitasContext.Provider value={context}>

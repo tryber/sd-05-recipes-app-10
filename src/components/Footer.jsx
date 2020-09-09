@@ -7,10 +7,10 @@ import './Footer.css';
 import { ReceitasContext } from '../Context/ReceitasContext';
 
 const Footer = () => {
-  const { setQualAPI } = useContext(ReceitasContext);
+  const { setqualPage } = useContext(ReceitasContext);
 
   const whichPageFnc = (page) => {
-    setQualAPI(page)
+    setqualPage(page)
   }
 
   return (
