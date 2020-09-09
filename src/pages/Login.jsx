@@ -1,10 +1,14 @@
 import React, { useEffect } from 'react';
-import { fetchCategories } from '../services/ApiRequest';
+import { fetchCategories, fetchMealDB, fetchDrinkDB } from '../services/ApiRequest';
+import { useContext } from 'react';
+import { ReceitasContext } from '../Context/ReceitasContext';
 
 export default function Login() {
+  const { setMealDB, setDrinkDB } = useContext(ReceitasContext);
   useEffect(() => {
     // console.log(fetchCategories())
-    fetchCategories().then(e => console.log(e))
+    fetchMealDB().then(e => setMealDB(e))
+    fetchDrinkDB().then(e => setDrinkDB(e))
   }, [])
   return (
     <div>
