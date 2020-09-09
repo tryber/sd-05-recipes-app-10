@@ -6,7 +6,9 @@ export const ReceitasContext = createContext();
 
 export const ReceitasContextProvider = ({ children }) => {
   const [qualPage, setqualPage] = useState('meal');
-  const [mealDB, setMealDB] = useState({});
+  const [mealDB, setMealDB] = useState({
+    areas: [], categorias: [], ingredientes: []
+  });
   const [drinkDB, setDrinkDB] = useState({});
 const context = {
   qualPage,
