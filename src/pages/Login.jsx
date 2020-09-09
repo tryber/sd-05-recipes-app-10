@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { fetchCategories } from '../services/ApiRequest';
 
 export default function Login() {
+  useEffect(() => {
+    // console.log(fetchCategories())
+    fetchCategories().then(e => console.log(e))
+  }, [])
   return (
     <div>
       <h1>Login</h1>
