@@ -10,19 +10,19 @@ const Footer = () => {
   const { setqualPage } = useContext(ReceitasContext);
 
   const whichPageFnc = (page) => {
-    setqualPage(page)
-  }
+    setqualPage(page);
+  };
 
   return (
     <div className="footer" data-testid="footer">
-      <Link to="bebidas">
-        <img data-testid="drinks-bottom-btn" onClick={() => whichPageFnc('drink')} src={drinkIcon}></img>
+      <Link to="bebidas" onClick={() => whichPageFnc('drink')}>
+        <img data-testid="drinks-bottom-btn" alt="drink" src={drinkIcon} />
       </Link>
       <Link to="explorar">
-        <img data-testid="explore-bottom-btn" src={exploreIcon}></img>
+        <img data-testid="explore-bottom-btn" alt="explore" src={exploreIcon} />
       </Link>
-      <Link to="comidas">
-        <img data-testid="food-bottom-btn" onClick={() => whichPageFnc('meal')} src={mealIcon}></img>
+      <Link to="comidas" onClick={() => whichPageFnc('meal')}>
+        <img data-testid="food-bottom-btn" alt="meal" src={mealIcon} />
       </Link>
     </div>
   );

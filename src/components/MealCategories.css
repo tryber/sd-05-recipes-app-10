@@ -1,18 +1,16 @@
 .category {
-/* position: absolute; */
-width: 105px;
-height: 5%;
-left: 130px;
-top: 75px;
-background: #C4C4C4;
-margin: 3px;
-display: flex;
-align-items: flex-end;
-font-family: Roboto;
-font-style: normal;
-font-weight: normal;
-font-size: 18px;
-line-height: 21px;
+
+  /* position: absolute; */
+  align-items: flex-end;
+  background: #c4c4c4;
+  display: flex;
+  font-size: 18px;
+  height: 5%;
+  left: 130px;
+  line-height: 21px;
+  margin: 3px;
+  top: 75px;
+  width: 105px;
 }
 
 .all-categories {
