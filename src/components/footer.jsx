@@ -1,4 +1,6 @@
-class  extends Component {
+import React from 'react';
+
+export default function Footer() {
     constructor(props) {
         super(props);
         this.state = {  }
@@ -11,5 +13,3 @@ class  extends Component {
         );
     }
 }
- 
-export default ;

@@ -1,13 +1,15 @@
-class  extends Component {
+import React from 'react';
+
+export default function Header() {
     constructor(props) {
         super(props);
         this.state = {  }
     }
     render() { 
         return (
-            <div>Hey</div>
+            <div>
+                Oi
+            </div>
         );
     }
 }
- 
-export default ;
