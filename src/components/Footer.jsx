@@ -18,7 +18,7 @@ const Footer = () => {
       <Link to="bebidas" onClick={() => whichPageFnc('drink')}>
         <img data-testid="drinks-bottom-btn" alt="drink" src={drinkIcon} />
       </Link>
-      <Link to="explorar">
+      <Link to="explorar" onClick={() => whichPageFnc('explorar')}>
         <img data-testid="explore-bottom-btn" alt="explore" src={exploreIcon} />
       </Link>
       <Link to="comidas" onClick={() => whichPageFnc('meal')}>

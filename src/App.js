@@ -17,6 +17,7 @@ function App() {
             <Route exact path="/comidas" component={Comidas} />
             <Route exact path="/bebidas" component={Bebidas} />
             <Route exact path="/explorar" component={Explore} />
+            <Route exact path="explorar/comidas" component={Explore} />
           </Switch>
         </BrowserRouter>
       </ReceitasContextProvider>
