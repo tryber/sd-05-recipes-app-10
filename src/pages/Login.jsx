@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
-export default function Login(props) {
-  const {login} = props;
+export default function Login() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
-  const [disabled, setDisabled] = useState(true);
+  const [isDisabled, isSetDisabled] = useState(true);
 
 
   // Fonte regex https://www.devmedia.com.br/iniciando-expressoes-regulares/6557
@@ -13,9 +12,9 @@ export default function Login(props) {
     const regexSenha = /^\w{4,10}$ ^[a-zA-Z]\w{3,9}$ ^[a-zA-Z]\w*\d+\w*$/;
 
     if (regexEmail.test(xEmail) && regexSenha.test(xSenha)) {
-      setDisabled(false);
+      isSetDisabled(false);
     } else {
-      setDisabled(true);
+      isSetDisabled(true);
     }
   }
 
@@ -41,7 +40,7 @@ export default function Login(props) {
         value={senha}
         onChange={(e) => setSenha(e.target.value)}
       />
-      <button type="submit" data-testid="login-submit-btn" type="button" disabled={disabled} onClick={() => login(email, senha)}>
+      <button type="submit" data-testid="login-submit-btn" disabled={isDisabled}>
         Entrar
       </button>
     </div>
