@@ -1,4 +1,8 @@
 .footer {
-  position: fixed;
+  align-items: center;
+  justify-content: center;
   bottom: 0px;
+  display: flex;
+  position: fixed;
+  justify-content: space-around;
 }

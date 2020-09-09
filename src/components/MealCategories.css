@@ -1,0 +1,21 @@
+.category {
+/* position: absolute; */
+width: 105px;
+height: 28px;
+left: 130px;
+top: 75px;
+background: #C4C4C4;
+margin: 3px;
+display: flex;
+align-items: flex-end;
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 18px;
+line-height: 21px;
+}
+
+.all-categories {
+  display: flex;
+  flex-wrap: wrap;
+}

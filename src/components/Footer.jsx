@@ -8,15 +8,15 @@ import './Footer.css';
 const Footer = () => {
   return (
     <div className="footer" data-testid="footer">
-      <Link to="bebidas" data-testid="drinks-bottom-btn">
-        <img src={drinkIcon}></img>
-      </Link>
-      <Link to="explore" data-testid="explore-bottom-btn">
-        <img src={exploreIcon}></img>
-      </Link>
-      <Link to="comidas" data-testid="food-bottom-btn">
-        <img src={mealIcon}></img>
-      </Link>
+        <Link to="bebidas" data-testid="drinks-bottom-btn">
+          <img src={drinkIcon}></img>
+        </Link>
+        <Link to="explorar" data-testid="explore-bottom-btn">
+          <img src={exploreIcon}></img>
+        </Link>
+        <Link to="comidas" data-testid="food-bottom-btn">
+          <img src={mealIcon}></img>
+        </Link>
     </div>
   );
 };
