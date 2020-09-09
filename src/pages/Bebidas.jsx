@@ -1,15 +1,13 @@
 import React, { Fragment } from 'react';
-import Header from '../components/header';
 import Footer from '../components/Footer';
 import MealCategories from '../components/MealCategories';
 
-const Comidas = () => (
+const Bebidas = () => (
   <Fragment>
-    Comidas
-    <Header />
+    Bebidas
     <MealCategories />
     <Footer />
   </Fragment>
 );
 
-export default Comidas;
+export default Bebidas;
