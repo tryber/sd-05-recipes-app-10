@@ -1,13 +1,9 @@
-class  extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {  }
-    }
-    render() { 
-        return (
-            <div>Hey</div>
-        );
-    }
+import React from 'react'
+
+const Header = () => {
+  return (
+    <div></div>
+  );
 }
- 
-export default ;
+
+export default Header;
