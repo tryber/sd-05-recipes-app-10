@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe.only('Todos os elementos devem respeitar os atributos descritos no protótipo para o menu inferior disponível na tela principal de receitas', () => {
+describe('Todos os elementos devem respeitar os atributos descritos no protótipo para o menu inferior disponível na tela principal de receitas', () => {
   it('Tem os data-testids footer, drinks-bottom-btn, explore-bottom-btn e food-bottom-btn', () => {
     cy.visit('http://localhost:3000/comidas');
 
