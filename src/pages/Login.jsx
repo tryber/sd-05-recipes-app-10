@@ -1,11 +1,17 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { ReceitasContext } from '../Context/ReceitasContext';
 import { Link } from 'react-router-dom';
+import { fetchMealDB, fetchDrinkDB } from '../services/ApiRequest';
+import { ReceitasContext } from '../Context/ReceitasContext';
 
 export default function Login() {
   const { email, setEmail, senha, setSenha } = useContext(ReceitasContext);
   const [isDisabled, isSetDisabled] = useState(true);
+  const { setMealDB, setDrinkDB } = useContext(ReceitasContext);
 
+  useEffect(() => {
+    fetchMealDB().then((e) => setMealDB(e));
+    fetchDrinkDB().then((e) => setDrinkDB(e));
+  }, []);
 
   // Fonte regex https://www.devmedia.com.br/iniciando-expressoes-regulares/6557
   function validaInput(xEmail, xSenha) {
@@ -45,8 +51,14 @@ export default function Login() {
         minLength="6"
         onChange={(e) => setSenha(e.target.value)}
       />
+
       <Link to="/comidas">
-        <button type="submit" data-testid="login-submit-btn" disabled={isDisabled} onClick={() => saveStorage()}>
+        <button
+          type="submit"
+          data-testid="login-submit-btn"
+          disabled={isDisabled}
+          onClick={() => saveStorage()}
+        >
           Entrar
         </button>
       </Link>
