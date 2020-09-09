@@ -8,7 +8,7 @@ export const ReceitasContextProvider = ({children}) => {
 
 const context = {
   qualPage,
-  setqualPage
+  setqualPage,
 }
 
   return ( <ReceitasContext.Provider value={context}>

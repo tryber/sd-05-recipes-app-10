@@ -13,7 +13,7 @@ const MealCategories = () => {
   // setqualPage//
   useEffect(() => {
     if(qualPage === 'meal') {
-    setAllCategories(mealCategories.meals.slice(0,5));
+      setAllCategories(mealCategories.meals.slice(0,5));
     } else if ( qualPage === 'drink') {
       setAllCategories(drinkCategories.drinks.slice(0,5))
     }

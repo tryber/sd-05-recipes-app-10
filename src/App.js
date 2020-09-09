@@ -4,6 +4,7 @@ import Login from './pages/Login';
 import Comidas from './pages/Comidas';
 import Bebidas from './pages/Bebidas';
 import Explore from './pages/Explore';
+import './App.css';
 import { ReceitasContextProvider } from './Context/ReceitasContext';
 
 function App() {
