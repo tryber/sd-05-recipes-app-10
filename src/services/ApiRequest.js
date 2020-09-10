@@ -1,6 +1,7 @@
 const categories = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
 const areas = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
 const ingredientes = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list';
+const revenue = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
 
 const drinkCategories =
   'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
@@ -21,11 +22,17 @@ export const fetchMealDB = async () => {
   const ingredientesData = await fetch(ingredientes)
     .then((res) => res.json())
     .then((data) => data.meals);
-
+  const revenueData = await fetch(revenue)
+    .then((res) => res.json())
+    .then((data) => data.meals)
+  const detalhamento = revenueData.find((idMeal) => fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idMeal}`))
+  console.log(detalhamento)
   return {
     categorias: categoriesData,
     areas: areasData,
     ingredientes: ingredientesData,
+    revenue: revenueData,
+    detalhamento: detalhamento,
   };
 };
 

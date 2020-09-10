@@ -10,6 +10,8 @@ export const ReceitasContextProvider = ({ children }) => {
     areas: [],
     categorias: [],
     ingredientes: [],
+    revenue: [],
+    detalhamento: [],
   });
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');

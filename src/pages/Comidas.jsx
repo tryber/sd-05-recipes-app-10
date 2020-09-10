@@ -4,6 +4,7 @@ import Footer from '../components/Footer';
 import MealCategories from '../components/MealCategories';
 import { ReceitasContext } from '../Context/ReceitasContext';
 import { fetchMealDB, fetchDrinkDB } from '../services/ApiRequest';
+import DetalhesComida from './DetalhesComida';
 
 const Comidas = () => {
   const { setMealDB, setDrinkDB, qualPage } = useContext(ReceitasContext);
@@ -17,6 +18,7 @@ const Comidas = () => {
     <Fragment>
       Comidas
       <Header />
+      <DetalhesComida />
       <MealCategories />
       <Footer />
     </Fragment>
