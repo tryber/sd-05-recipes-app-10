@@ -6,26 +6,29 @@ import Bebidas from './pages/Bebidas';
 import Explore from './pages/Explore';
 import './App.css';
 import { ReceitasContextProvider } from './Context/ReceitasContext';
-import ExplorarBebidas from './pages/ExplorarBebidas';
-import ExplorarComidas from './pages/ExplorarComidas';
+import ExplorarComidasOuBebidas from './pages/ExplorarComidasOuBebidas';
+import ExplorarComidasOuBebidasPorIngrediente from './pages/ExplorarComidasOuBebidasPorIngrediente';
 
 function App() {
   return (
     <div className="meals">
-      <ReceitasContextProvider>
         <BrowserRouter>
+      <ReceitasContextProvider>
           <Switch>
             <Route exact path="/" component={Login} />
             <Route exact path="/comidas" component={Comidas} />
             <Route exact path="/bebidas" component={Bebidas} />
             <Route exact path="/explorar" component={Explore} />
-            <Route exact path="/explorar/comidas" component={ExplorarComidas} />
-            <Route exact path="/explorar/bebidas" component={ExplorarBebidas} />
+            <Route exact path="/explorar/comidas" component={ExplorarComidasOuBebidas} />
+            <Route exact path="/explorar/comidas/ingredientes" component={ExplorarComidasOuBebidasPorIngrediente} />
+            <Route exact path="/explorar/bebidas/ingredientes" component={ExplorarComidasOuBebidasPorIngrediente} />
           </Switch>
-        </BrowserRouter>
       </ReceitasContextProvider>
+        </BrowserRouter>
     </div>
   );
 }
 
 export default App;
+///explorar/comidas/ingredientes
+// /explorar/bebidas/ingredientes
