@@ -1,5 +1,6 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
+import { useState } from 'react';
 import drinkIcon from '../images/drinkIcon.svg';
 import exploreIcon from '../images/exploreIcon.svg';
 import mealIcon from '../images/mealIcon.svg';
@@ -8,22 +9,36 @@ import { ReceitasContext } from '../Context/ReceitasContext';
 
 const Footer = () => {
   const { setqualPage } = useContext(ReceitasContext);
+  const [pageToRedirect, setPageToRedirect] = useState('');
+  const [shouldRedirect, setShouldRedirect] = useState(false);
 
-  const whichPageFnc = (page) => {
-    setqualPage(page);
+  const handleRedirect = (whereToGo) => {
+    setPageToRedirect(`${whereToGo}`);
+    setShouldRedirect(true);
+    setqualPage(`${whereToGo}`);
   };
+
+  useEffect(() => { setShouldRedirect(false); }, [shouldRedirect]);
+
+  if (shouldRedirect) {
+    return (
+      <div>
+        <Redirect to={{ pathname: `/${pageToRedirect}` }} />
+      </div>
+    );
+  }
 
   return (
     <div className="footer" data-testid="footer">
-      <Link to="bebidas" onClick={() => whichPageFnc('drink')}>
+      <button onClick={() => handleRedirect('bebidas')}>
         <img data-testid="drinks-bottom-btn" alt="drink" src={drinkIcon} />
-      </Link>
-      <Link to="explorar">
+      </button>
+      <button onClick={() => handleRedirect('explorar')}>
         <img data-testid="explore-bottom-btn" alt="explore" src={exploreIcon} />
-      </Link>
-      <Link to="comidas" onClick={() => whichPageFnc('meal')}>
+      </button>
+      <button onClick={() => handleRedirect('comidas')}>
         <img data-testid="food-bottom-btn" alt="meal" src={mealIcon} />
-      </Link>
+      </button>
     </div>
   );
 };

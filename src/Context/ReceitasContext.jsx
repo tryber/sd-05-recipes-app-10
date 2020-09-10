@@ -13,7 +13,12 @@ export const ReceitasContextProvider = ({ children }) => {
   });
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
-  const [drinkDB, setDrinkDB] = useState({});
+  const [drinkDB, setDrinkDB] = useState({
+    alcoholFilters: [],
+    categorias: [],
+    glasses: [],
+    ingredientes: [],
+  });
 
   const context = {
     qualPage,
@@ -28,7 +33,11 @@ export const ReceitasContextProvider = ({ children }) => {
     setDrinkDB,
   };
 
-  return <ReceitasContext.Provider value={context}>{children}</ReceitasContext.Provider>;
+  return (
+    <ReceitasContext.Provider value={context}>
+      {children}
+    </ReceitasContext.Provider>
+  );
 };
 
 ReceitasContextProvider.propTypes = {

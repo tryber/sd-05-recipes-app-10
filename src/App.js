@@ -4,22 +4,40 @@ import Login from './pages/Login';
 import Comidas from './pages/Comidas';
 import Bebidas from './pages/Bebidas';
 import Explore from './pages/Explore';
+import Perfil from './pages/Perfil';
 import './App.css';
 import { ReceitasContextProvider } from './Context/ReceitasContext';
+// import ExplorarComidasOuBebidas from './pages/ExplorarComidas';
+import ExplorarComidasOuBebidasPorIngrediente from './pages/ExplorarComidasOuBebidasPorIngrediente';
+import ExplorarBebidas from './pages/ExplorarBebidas';
+import ExplorarComidas from './pages/ExplorarComidas';
 
 function App() {
   return (
     <div className="meals">
-      <ReceitasContextProvider>
-        <BrowserRouter>
+      <BrowserRouter>
+        <ReceitasContextProvider>
           <Switch>
             <Route exact path="/" component={Login} />
             <Route exact path="/comidas" component={Comidas} />
             <Route exact path="/bebidas" component={Bebidas} />
             <Route exact path="/explorar" component={Explore} />
+            <Route exact path="/explorar/bebidas" component={ExplorarBebidas} />
+            <Route exact path="/explorar/comidas" component={ExplorarComidas} />
+            <Route
+              exact
+              path="/explorar/comidas/ingredientes"
+              component={ExplorarComidasOuBebidasPorIngrediente}
+            />
+            <Route
+              exact
+              path="/explorar/bebidas/ingredientes"
+              component={ExplorarComidasOuBebidasPorIngrediente}
+            />
+            <Route exact path="/perfil" component={Perfil} />
           </Switch>
-        </BrowserRouter>
-      </ReceitasContextProvider>
+        </ReceitasContextProvider>
+      </BrowserRouter>
     </div>
   );
 }
