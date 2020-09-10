@@ -16,10 +16,10 @@ const Header = () => {
       <header>
         <div>
           <Link to="/perfil">
-            <img alt='profile' data-testid="profile-top-btn" src={profileIcon} />
+            <img alt="profile" data-testid="profile-top-btn" src={profileIcon} />
           </Link>
           <Link className="search-icon" onClick={() => changeStyle()}>
-            <img alt='search loupe' data-testid="search-top-btn" src={searchIcon} />
+            <img alt="search loupe" data-testid="search-top-btn" src={searchIcon} />
           </Link>
         </div>
       </header>
