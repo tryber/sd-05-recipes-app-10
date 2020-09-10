@@ -1,29 +1,57 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useEffect } from 'react';
+import { Link, Redirect } from 'react-router-dom';
 import drinkIcon from '../images/drinkIcon.svg';
 import exploreIcon from '../images/exploreIcon.svg';
 import mealIcon from '../images/mealIcon.svg';
 import './Footer.css';
 import { ReceitasContext } from '../Context/ReceitasContext';
+import { useState } from 'react';
 
 const Footer = () => {
   const { setqualPage } = useContext(ReceitasContext);
+  const [pageToRedirect, setPageToRedirect] = useState('');
+  const [shouldRedirect, setShouldRedirect] = useState(false);
 
   const whichPageFnc = (page) => {
     setqualPage(page);
+    switch (page) {
+      case 'drink':
+        setPageToRedirect('bebidas');
+        setShouldRedirect(true);
+        break;
+      case 'meal':
+        if (pageToRedirect !== 'comidas') {
+          setPageToRedirect('comidas');
+          setShouldRedirect(true);
+        }
+        break;
+      case 'explorar':
+        setPageToRedirect('explorar');
+        setShouldRedirect(true);
+        break;
+      default:
+        return null;
+    }
   };
+
+  if (shouldRedirect)
+    return (
+      <div>
+        <Redirect to={{ pathname: `/${pageToRedirect}` }} />
+      </div>
+    );
 
   return (
     <div className="footer" data-testid="footer">
-      <Link to="bebidas" onClick={() => whichPageFnc('drink')}>
+      <div onClick={() => whichPageFnc('drink')}>
         <img data-testid="drinks-bottom-btn" alt="drink" src={drinkIcon} />
-      </Link>
-      <Link to="explorar" onClick={() => whichPageFnc('explorar')}>
+      </div>
+      <div onClick={() => whichPageFnc('explorar')}>
         <img data-testid="explore-bottom-btn" alt="explore" src={exploreIcon} />
-      </Link>
-      <Link to="comidas" onClick={() => whichPageFnc('meal')}>
+      </div>
+      <div onClick={() => whichPageFnc('meal')}>
         <img data-testid="food-bottom-btn" alt="meal" src={mealIcon} />
-      </Link>
+      </div>
     </div>
   );
 };
