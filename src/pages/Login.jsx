@@ -1,34 +1,23 @@
-// <<<<<<< HEAD
-import React, { useEffect, useState } from 'react';
-import { useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { fetchMealDB, fetchDrinkDB } from '../services/ApiRequest';
 import { ReceitasContext } from '../Context/ReceitasContext';
 
-// export default function Login() {
-//   const { setMealDB, setDrinkDB } = useContext(ReceitasContext);
-//   useEffect(() => {
-//     // console.log(fetchCategories())
-//     fetchMealDB().then(e => setMealDB(e))
-//     fetchDrinkDB().then(e => setDrinkDB(e))
-//   }, [])
-// =======
-// import React, { useState, useEffect } from 'react';
+// Fonte regex https://www.devmedia.com.br/iniciando-expressoes-regulares/6557
 
 export default function Login() {
-  const [email, setEmail] = useState('');
-  const [senha, setSenha] = useState('');
+  const { email, setEmail, senha, setSenha } = useContext(ReceitasContext);
   const [isDisabled, isSetDisabled] = useState(true);
   const { setMealDB, setDrinkDB } = useContext(ReceitasContext);
+
   useEffect(() => {
     fetchMealDB().then((e) => setMealDB(e));
     fetchDrinkDB().then((e) => setDrinkDB(e));
   }, [setMealDB, setDrinkDB ]);
 
-  // Fonte regex https://www.devmedia.com.br/iniciando-expressoes-regulares/6557
   function validaInput(xEmail, xSenha) {
     const regexEmail = /^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$/;
-    const regexSenha = /^\w{4,10}$ ^[a-zA-Z]\w{3,9}$ ^[a-zA-Z]\w*\d+\w*$/;
+    const regexSenha = /^[^W_]{7,100}$/;
 
     if (regexEmail.test(xEmail) && regexSenha.test(xSenha)) {
       isSetDisabled(false);
@@ -36,6 +25,12 @@ export default function Login() {
       isSetDisabled(true);
     }
   }
+
+  const saveStorage = () => {
+    localStorage.setItem('mealsToken', 1);
+    localStorage.setItem('cocktailsToken', 1);
+    localStorage.setItem('user', JSON.stringify({ email }));
+  };
 
   useEffect(() => {
     validaInput(email, senha);
@@ -45,24 +40,22 @@ export default function Login() {
     <div>
       <h1>Login</h1>
       <input
-        type="email"
-        placeholder="Email"
-        data-testid="email-input"
-        value={email}
+        type="email" value={email} placeholder="Email" data-testid="email-input"
         onChange={(e) => setEmail(e.target.value)}
       />
       <input
-        type="text"
-        placeholder="Senha"
-        data-testid="password-input"
-        minLength="6"
-        value={senha}
+        type="text" placeholder="Senha" value={senha} data-testid="password-input" minLength="6"
         onChange={(e) => setSenha(e.target.value)}
       />
-      <button type="submit" data-testid="login-submit-btn" disabled={isDisabled}>
-        Entrar
-      </button>
-      <Link to="/comidas">comidas</Link>
+
+      <Link to="/comidas">
+        <button
+          type="submit" data-testid="login-submit-btn" disabled={isDisabled}
+          onClick={() => saveStorage()}
+        >
+          Entrar
+        </button>
+      </Link>
     </div>
   );
 }
