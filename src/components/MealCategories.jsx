@@ -14,7 +14,7 @@ const MealCategories = () => {
     } else if (qualPage === 'drink') {
       setAllCategories(drinkDB.categorias.slice(0, 5));
     }
-  }, [qualPage]);
+  }, [drinkDB, mealDB]);
 
   return (
     <div className="all-categories">
