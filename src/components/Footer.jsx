@@ -12,29 +12,6 @@ const Footer = () => {
   const [pageToRedirect, setPageToRedirect] = useState('');
   const [shouldRedirect, setShouldRedirect] = useState(false);
 
-  // const whichPageFnc = (page) => {
-  //   setqualPage(page);
-  //   switch (page) {
-  //     case 'drink':
-  //       setPageToRedirect('bebidas');
-  //       setShouldRedirect(true);
-  //       break;
-  //     case 'meal':
-  //       if (pageToRedirect !== 'comidas') {
-  //         setPageToRedirect('comidas');
-  //         setShouldRedirect(true);
-  //       }
-  //       break;
-  //     case 'explorar':
-  //       setPageToRedirect('explorar');
-  //       setShouldRedirect(true);
-  //       break;
-  //     default:
-  //       return null;
-  //   }
-  //   return null
-  // };
-
   const handleRedirect = (whereToGo) => {
     setPageToRedirect(`${whereToGo}`);
     setShouldRedirect(true);

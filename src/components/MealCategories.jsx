@@ -16,10 +16,10 @@ const MealCategories = () => {
   //   }
   // }, [drinkDB, mealDB, qualPage]);
 
-  if (qualPage === 'comidas') {
+  if (qualPage === 'bebidas') {
     return (
       <div className="all-categories">
-        {mealDB.categorias.slice(0, 5).map(({ strCategory }) => (
+        {drinkDB.categorias.slice(0, 5).map(({ strCategory }) => (
           <div
             className="category"
             data-testid={`${strCategory}-category-filter`}

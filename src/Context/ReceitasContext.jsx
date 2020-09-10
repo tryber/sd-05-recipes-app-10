@@ -13,7 +13,12 @@ export const ReceitasContextProvider = ({ children }) => {
   });
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
-  const [drinkDB, setDrinkDB] = useState({});
+  const [drinkDB, setDrinkDB] = useState({
+    alcoholFilters: [],
+    categorias: [],
+    glasses: [],
+    ingredientes:[],
+  });
 
   const context = {
     qualPage,

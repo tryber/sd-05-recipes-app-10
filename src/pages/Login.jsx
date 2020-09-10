@@ -9,7 +9,6 @@ export default function Login() {
   const { email, setEmail, senha, setSenha } = useContext(ReceitasContext);
   const [isDisabled, isSetDisabled] = useState(true);
 
-  
   function validaInput(xEmail, xSenha) {
     const regexEmail = /^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$/;
     const regexSenha = /^[^W_]{7,100}$/;
@@ -42,7 +41,7 @@ export default function Login() {
         type="text" placeholder="Senha" value={senha} data-testid="password-input" minLength="6"
         onChange={(e) => setSenha(e.target.value)}
       />
-
+      <Link to='/comidas'>corte caminho aqui</Link>
       <Link to="/comidas">
         <button
           type="submit" data-testid="login-submit-btn" disabled={isDisabled}
