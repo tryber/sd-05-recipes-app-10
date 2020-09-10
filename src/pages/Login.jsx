@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { fetchMealDB, fetchDrinkDB } from '../services/ApiRequest';
 import { ReceitasContext } from '../Context/ReceitasContext';
 
+// Fonte regex https://www.devmedia.com.br/iniciando-expressoes-regulares/6557
+
 export default function Login() {
   const { email, setEmail, senha, setSenha } = useContext(ReceitasContext);
   const [isDisabled, isSetDisabled] = useState(true);
@@ -13,7 +15,6 @@ export default function Login() {
     fetchDrinkDB().then((e) => setDrinkDB(e));
   }, []);
 
-  // Fonte regex https://www.devmedia.com.br/iniciando-expressoes-regulares/6557
   function validaInput(xEmail, xSenha) {
     const regexEmail = /^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$/;
     const regexSenha = /^[^W_]{7,100}$/;
@@ -28,7 +29,7 @@ export default function Login() {
   const saveStorage = () => {
     localStorage.setItem('mealsToken', 1);
     localStorage.setItem('cocktailsToken', 1);
-    localStorage.setItem('email', JSON.stringify({ email }));
+    localStorage.setItem('user', JSON.stringify({ email }));
   };
 
   useEffect(() => {
@@ -39,24 +40,17 @@ export default function Login() {
     <div>
       <h1>Login</h1>
       <input
-        type="email"
-        placeholder="Email"
-        data-testid="email-input"
+        type="email" value={email} placeholder="Email" data-testid="email-input"
         onChange={(e) => setEmail(e.target.value)}
       />
       <input
-        type="text"
-        placeholder="Senha"
-        data-testid="password-input"
-        minLength="6"
+        type="text" placeholder="Senha" value={senha} data-testid="password-input" minLength="6"
         onChange={(e) => setSenha(e.target.value)}
       />
 
       <Link to="/comidas">
         <button
-          type="submit"
-          data-testid="login-submit-btn"
-          disabled={isDisabled}
+          type="submit" data-testid="login-submit-btn" disabled={isDisabled}
           onClick={() => saveStorage()}
         >
           Entrar
