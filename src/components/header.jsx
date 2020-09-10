@@ -23,9 +23,7 @@ const Header = () => {
           </Link>
         </div>
       </header>
-      <div style={!showMenu ? { 'visibility': 'hidden' } : null}>
-        <Search />
-      </div>
+      {showMenu && <Search />}
     </div>
   );
 };
