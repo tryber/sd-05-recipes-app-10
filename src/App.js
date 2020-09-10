@@ -6,8 +6,10 @@ import Bebidas from './pages/Bebidas';
 import Explore from './pages/Explore';
 import './App.css';
 import { ReceitasContextProvider } from './Context/ReceitasContext';
-import ExplorarComidasOuBebidas from './pages/ExplorarComidasOuBebidas';
+// import ExplorarComidasOuBebidas from './pages/ExplorarComidas';
 import ExplorarComidasOuBebidasPorIngrediente from './pages/ExplorarComidasOuBebidasPorIngrediente';
+import ExplorarBebidas from './pages/ExplorarBebidas';
+import ExplorarComidas from './pages/ExplorarComidas';
 
 function App() {
   return (
@@ -19,7 +21,8 @@ function App() {
             <Route exact path="/comidas" component={Comidas} />
             <Route exact path="/bebidas" component={Bebidas} />
             <Route exact path="/explorar" component={Explore} />
-            <Route exact path="/explorar/comidas" component={ExplorarComidasOuBebidas} />
+            <Route exact path="/explorar/bebidas" component={ExplorarBebidas} />
+            <Route exact path="/explorar/comidas" component={ExplorarComidas} />
             <Route exact path="/explorar/comidas/ingredientes" component={ExplorarComidasOuBebidasPorIngrediente} />
             <Route exact path="/explorar/bebidas/ingredientes" component={ExplorarComidasOuBebidasPorIngrediente} />
           </Switch>

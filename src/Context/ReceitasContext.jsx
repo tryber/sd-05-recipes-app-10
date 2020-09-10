@@ -24,5 +24,5 @@ export const ReceitasContextProvider = ({ children }) => {
 };
 
 ReceitasContextProvider.propTypes = {
-  children: propTypes.func.isRequired,
+  children: propTypes.object.isRequired,
 };

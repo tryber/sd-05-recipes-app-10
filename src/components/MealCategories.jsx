@@ -14,7 +14,7 @@ const MealCategories = () => {
     } else if (qualPage === 'drink') {
       setAllCategories(drinkDB.categorias.slice(0, 5));
     }
-  }, [drinkDB, mealDB ]);
+  }, [drinkDB, mealDB, qualPage]);
 
   return (
     <div className="all-categories">
@@ -22,6 +22,7 @@ const MealCategories = () => {
         <div
           className="category"
           data-testid={`${strCategory}-category-filter`}
+          key={strCategory}
         >
           {strCategory}
         </div>

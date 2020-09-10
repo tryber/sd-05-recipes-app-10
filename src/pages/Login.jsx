@@ -23,7 +23,7 @@ export default function Login() {
   useEffect(() => {
     fetchMealDB().then((e) => setMealDB(e));
     fetchDrinkDB().then((e) => setDrinkDB(e));
-  }, []);
+  }, [setMealDB, setDrinkDB ]);
 
   // Fonte regex https://www.devmedia.com.br/iniciando-expressoes-regulares/6557
   function validaInput(xEmail, xSenha) {
