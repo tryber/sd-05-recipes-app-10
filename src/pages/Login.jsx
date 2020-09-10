@@ -10,10 +10,10 @@ export default function Login() {
   const [isDisabled, isSetDisabled] = useState(true);
   const { setMealDB, setDrinkDB } = useContext(ReceitasContext);
 
-  useEffect(() => {
-    fetchMealDB().then((e) => setMealDB(e));
-    fetchDrinkDB().then((e) => setDrinkDB(e));
-  }, [setMealDB, setDrinkDB]);
+  // useEffect(() => {
+  //   fetchMealDB().then((e) => setMealDB(e));
+  //   fetchDrinkDB().then((e) => setDrinkDB(e));
+  // }, [setMealDB, setDrinkDB]);
 
   function validaInput(xEmail, xSenha) {
     const regexEmail = /^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$/;

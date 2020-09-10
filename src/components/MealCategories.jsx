@@ -9,9 +9,9 @@ const MealCategories = () => {
   const [allCategories, setAllCategories] = useState([]);
 
   useEffect(() => {
-    if (qualPage === 'meal') {
+    if (qualPage === 'comidas') {
       setAllCategories(mealDB.categorias.slice(0, 5));
-    } else if (qualPage === 'drink') {
+    } else if (qualPage === 'bebidas') {
       setAllCategories(drinkDB.categorias.slice(0, 5));
     }
   }, [drinkDB, mealDB, qualPage]);

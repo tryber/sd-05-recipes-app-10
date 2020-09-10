@@ -12,27 +12,33 @@ const Footer = () => {
   const [pageToRedirect, setPageToRedirect] = useState('');
   const [shouldRedirect, setShouldRedirect] = useState(false);
 
-  const whichPageFnc = (page) => {
-    setqualPage(page);
-    switch (page) {
-      case 'drink':
-        setPageToRedirect('bebidas');
-        setShouldRedirect(true);
-        break;
-      case 'meal':
-        if (pageToRedirect !== 'comidas') {
-          setPageToRedirect('comidas');
-          setShouldRedirect(true);
-        }
-        break;
-      case 'explorar':
-        setPageToRedirect('explorar');
-        setShouldRedirect(true);
-        break;
-      default:
-        return null;
-    }
-    return null
+  // const whichPageFnc = (page) => {
+  //   setqualPage(page);
+  //   switch (page) {
+  //     case 'drink':
+  //       setPageToRedirect('bebidas');
+  //       setShouldRedirect(true);
+  //       break;
+  //     case 'meal':
+  //       if (pageToRedirect !== 'comidas') {
+  //         setPageToRedirect('comidas');
+  //         setShouldRedirect(true);
+  //       }
+  //       break;
+  //     case 'explorar':
+  //       setPageToRedirect('explorar');
+  //       setShouldRedirect(true);
+  //       break;
+  //     default:
+  //       return null;
+  //   }
+  //   return null
+  // };
+
+  const handleRedirect = (whereToGo) => {
+    setPageToRedirect(`${whereToGo}`);
+    setShouldRedirect(true);
+    setqualPage(`${whereToGo}`);
   };
 
   useEffect(() => { setShouldRedirect(false); }, [shouldRedirect]);
@@ -47,15 +53,15 @@ const Footer = () => {
 
   return (
     <div className="footer" data-testid="footer">
-      <div onClick={() => whichPageFnc('drink')}>
+      <button onClick={() => handleRedirect('bebidas')}>
         <img data-testid="drinks-bottom-btn" alt="drink" src={drinkIcon} />
-      </div>
-      <div onClick={() => whichPageFnc('explorar')}>
+      </button>
+      <button onClick={() => handleRedirect('explorar')}>
         <img data-testid="explore-bottom-btn" alt="explore" src={exploreIcon} />
-      </div>
-      <div onClick={() => whichPageFnc('meal')}>
+      </button>
+      <button onClick={() => handleRedirect('comidas')}>
         <img data-testid="food-bottom-btn" alt="meal" src={mealIcon} />
-      </div>
+      </button>
     </div>
   );
 };
