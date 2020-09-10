@@ -17,7 +17,7 @@ export const ReceitasContextProvider = ({ children }) => {
     alcoholFilters: [],
     categorias: [],
     glasses: [],
-    ingredientes:[],
+    ingredientes: [],
   });
 
   const context = {
@@ -33,7 +33,11 @@ export const ReceitasContextProvider = ({ children }) => {
     setDrinkDB,
   };
 
-  return <ReceitasContext.Provider value={context}>{children}</ReceitasContext.Provider>;
+  return (
+    <ReceitasContext.Provider value={context}>
+      {children}
+    </ReceitasContext.Provider>
+  );
 };
 
 ReceitasContextProvider.propTypes = {

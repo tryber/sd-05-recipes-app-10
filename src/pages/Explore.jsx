@@ -36,13 +36,8 @@ const Explore = (props) => {
 
 Explore.propTypes = {
   history: propTypes.shape({
-    push: propTypes.func.isRequired
-  }).isRequired
+    push: propTypes.func.isRequired,
+  }).isRequired,
 };
 
 export default Explore;
-
-// Explore.propTypes = {
-//   history: PropTypes.shape({
-//     push: PropTypes.func.isRequired
-//   }).isRequired,
