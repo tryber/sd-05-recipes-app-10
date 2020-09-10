@@ -8,13 +8,8 @@ import { ReceitasContext } from '../Context/ReceitasContext';
 export default function Login() {
   const { email, setEmail, senha, setSenha } = useContext(ReceitasContext);
   const [isDisabled, isSetDisabled] = useState(true);
-  const { setMealDB, setDrinkDB } = useContext(ReceitasContext);
 
-  // useEffect(() => {
-  //   fetchMealDB().then((e) => setMealDB(e));
-  //   fetchDrinkDB().then((e) => setDrinkDB(e));
-  // }, [setMealDB, setDrinkDB]);
-
+  
   function validaInput(xEmail, xSenha) {
     const regexEmail = /^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$/;
     const regexSenha = /^[^W_]{7,100}$/;
