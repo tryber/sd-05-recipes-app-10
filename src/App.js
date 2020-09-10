@@ -4,6 +4,7 @@ import Login from './pages/Login';
 import Comidas from './pages/Comidas';
 import Bebidas from './pages/Bebidas';
 import Explore from './pages/Explore';
+import Perfil from './pages/Perfil';
 import './App.css';
 import { ReceitasContextProvider } from './Context/ReceitasContext';
 // import ExplorarComidasOuBebidas from './pages/ExplorarComidas';
@@ -33,6 +34,7 @@ function App() {
               path="/explorar/bebidas/ingredientes"
               component={ExplorarComidasOuBebidasPorIngrediente}
             />
+            <Route exact path="/perfil" component={Perfil} />
           </Switch>
         </ReceitasContextProvider>
       </BrowserRouter>
