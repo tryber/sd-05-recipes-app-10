@@ -12,6 +12,8 @@ import ExplorarComidasOuBebidasPorIngrediente from './pages/ExplorarComidasOuBeb
 import ExplorarBebidas from './pages/ExplorarBebidas';
 import ExplorarComidas from './pages/ExplorarComidas';
 import ExplorarComidasOuBebidasPorArea from './pages/ExplorarComidasOuBebidasPorArea';
+import ReceitasFeitas from './pages/ReceitasFeitas';
+import ReceitasFavoritas from './pages/ReceitasFavoritas';
 
 function App() {
   return (
@@ -46,6 +48,9 @@ function App() {
               component={ExplorarComidasOuBebidasPorArea}
             />
             <Route exact path="/perfil" component={Perfil} />
+            <Route exact path="/receitas-feitas" component={ReceitasFeitas} />
+            <Route exact path="/receitas-favoritas" component={ReceitasFavoritas} />
+
           </Switch>
         </ReceitasContextProvider>
       </BrowserRouter>
