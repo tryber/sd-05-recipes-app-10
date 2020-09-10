@@ -3,11 +3,9 @@ import { Link } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import Search from '../components/Search';
-import './Header.css';
-
 
 const Header = () => {
-  const [showMenu, setShowMenu] = useState(true);
+  const [showMenu, setShowMenu] = useState(false);
 
   const alterarEstilo = () => {
     setShowMenu(!showMenu);
@@ -26,21 +24,7 @@ const Header = () => {
         </div>
       </header>
       <div style={!showMenu ? { "visibility": "hidden" } : null}>
-        <div>
-          <input type="text" placeholder="Buscar Receitas" data-testid="search-input" />
-        </div>
-        <label>
-          <input type="radio" data-testid="ingredient-search-radio" />Ingrediente
-        </label>
-        <label>
-          <input type="radio" data-testid="name-search-radio" />Nome
-        </label>
-        <label>
-          <input type="radio" data-testid="first-letter-search-radio" />Primeira letra
-        </label>
-        <div>
-          <button data-testid="exec-search-btn">Buscar</button>
-        </div>
+        <Search />
       </div>
     </div>
   );
