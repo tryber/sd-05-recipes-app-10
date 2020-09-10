@@ -13,7 +13,7 @@ export default function Login() {
   useEffect(() => {
     fetchMealDB().then((e) => setMealDB(e));
     fetchDrinkDB().then((e) => setDrinkDB(e));
-  }, [setMealDB, setDrinkDB ]);
+  }, [setMealDB, setDrinkDB]);
 
   function validaInput(xEmail, xSenha) {
     const regexEmail = /^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$/;

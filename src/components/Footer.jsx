@@ -1,11 +1,11 @@
 import React, { useContext, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
+import { useState } from 'react';
 import drinkIcon from '../images/drinkIcon.svg';
 import exploreIcon from '../images/exploreIcon.svg';
 import mealIcon from '../images/mealIcon.svg';
 import './Footer.css';
 import { ReceitasContext } from '../Context/ReceitasContext';
-import { useState } from 'react';
 
 const Footer = () => {
   const { setqualPage } = useContext(ReceitasContext);
@@ -32,16 +32,18 @@ const Footer = () => {
       default:
         return null;
     }
+    return null
   };
 
   useEffect(() => { setShouldRedirect(false); }, [shouldRedirect]);
 
-  if (shouldRedirect)
+  if (shouldRedirect) {
     return (
       <div>
         <Redirect to={{ pathname: `/${pageToRedirect}` }} />
       </div>
     );
+  }
 
   return (
     <div className="footer" data-testid="footer">

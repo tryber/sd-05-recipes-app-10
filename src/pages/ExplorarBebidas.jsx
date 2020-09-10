@@ -1,11 +1,11 @@
 import React, { useContext, useEffect } from 'react';
-import Footer from '../components/Footer';
-import { ReceitasContext } from '../Context/ReceitasContext';
 import { useState } from 'react';
 import { Redirect } from 'react-router-dom';
+import Footer from '../components/Footer';
+import { ReceitasContext } from '../Context/ReceitasContext';
 
-const ExplorarBebidas = (props) => {
-  const { qualPage, setqualPage } = useContext(ReceitasContext);
+const ExplorarBebidas = () => {
+  const { setqualPage } = useContext(ReceitasContext);
   // const [comidasOuBebidas, SetComidasOuBebidas] = useState('');
   const [pageToRedirect, setPageToRedirect] = useState('');
   const [shouldRedirect, setShouldRedirect] = useState(false);
@@ -20,12 +20,13 @@ const ExplorarBebidas = (props) => {
     setShouldRedirect(false);
   }, [shouldRedirect]);
 
-  if (shouldRedirect)
+  if (shouldRedirect) {
     return (
       <div>
         <Redirect to={{ pathname: `/${pageToRedirect}` }} />
       </div>
     );
+  }
 
   return (
     <div>

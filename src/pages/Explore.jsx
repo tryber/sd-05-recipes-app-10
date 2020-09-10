@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
-import Footer from '../components/Footer';
 import { useContext } from 'react';
+import propTypes from 'prop-types';
+import Footer from '../components/Footer';
 import { ReceitasContext } from '../Context/ReceitasContext';
 
 const Explore = (props) => {
@@ -22,8 +23,7 @@ const Explore = (props) => {
         onClick={() => {
           props.history.push('/explorar/bebidas');
           setqualPage('/explorar/bebidas');
-          }
-        }
+        }}
         type="button"
         data-testid="explore-drinks"
       >
@@ -33,4 +33,9 @@ const Explore = (props) => {
     </Fragment>
   );
 };
+
+Explore.propTypes = {
+  history: propTypes.object.isRequired,
+};
+
 export default Explore;

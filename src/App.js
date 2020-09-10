@@ -14,8 +14,8 @@ import ExplorarComidas from './pages/ExplorarComidas';
 function App() {
   return (
     <div className="meals">
-        <BrowserRouter>
-      <ReceitasContextProvider>
+      <BrowserRouter>
+        <ReceitasContextProvider>
           <Switch>
             <Route exact path="/" component={Login} />
             <Route exact path="/comidas" component={Comidas} />
@@ -23,15 +23,21 @@ function App() {
             <Route exact path="/explorar" component={Explore} />
             <Route exact path="/explorar/bebidas" component={ExplorarBebidas} />
             <Route exact path="/explorar/comidas" component={ExplorarComidas} />
-            <Route exact path="/explorar/comidas/ingredientes" component={ExplorarComidasOuBebidasPorIngrediente} />
-            <Route exact path="/explorar/bebidas/ingredientes" component={ExplorarComidasOuBebidasPorIngrediente} />
+            <Route
+              exact
+              path="/explorar/comidas/ingredientes"
+              component={ExplorarComidasOuBebidasPorIngrediente}
+            />
+            <Route
+              exact
+              path="/explorar/bebidas/ingredientes"
+              component={ExplorarComidasOuBebidasPorIngrediente}
+            />
           </Switch>
-      </ReceitasContextProvider>
-        </BrowserRouter>
+        </ReceitasContextProvider>
+      </BrowserRouter>
     </div>
   );
 }
 
 export default App;
-///explorar/comidas/ingredientes
-// /explorar/bebidas/ingredientes

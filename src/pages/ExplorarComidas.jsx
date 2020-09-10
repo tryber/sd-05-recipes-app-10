@@ -1,20 +1,14 @@
 import React, { useContext, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
+import { useState } from 'react';
 import Footer from '../components/Footer';
 import { ReceitasContext } from '../Context/ReceitasContext';
-import { useState } from 'react';
-import { Redirect } from 'react-router-dom';
 
-const ExplorarComidas = (props) => {
-  const { qualPage, setqualPage } = useContext(ReceitasContext);
+const ExplorarComidas = () => {
+  const { setqualPage } = useContext(ReceitasContext);
   // const [comidasOuBebidas, SetComidasOuBebidas] = useState('');
   const [pageToRedirect, setPageToRedirect] = useState('');
   const [shouldRedirect, setShouldRedirect] = useState(false);
-
-  // if (qualPage === '/explorar/comidas') {
-  //   SetComidasOuBebidas('Comidas');
-  // } else if (qualPage === '/explorar/bebidas') {
-  //   SetComidasOuBebidas('Bebidas');
-  // }
 
   const handleRedirect = (whereToExplore) => {
     setPageToRedirect(`explorar/comidas/${whereToExplore}`);
@@ -26,12 +20,13 @@ const ExplorarComidas = (props) => {
     setShouldRedirect(false);
   }, [shouldRedirect]);
 
-  if (shouldRedirect)
+  if (shouldRedirect) {
     return (
       <div>
         <Redirect to={{ pathname: `/${pageToRedirect}` }} />
       </div>
     );
+  }
 
   return (
     <div>

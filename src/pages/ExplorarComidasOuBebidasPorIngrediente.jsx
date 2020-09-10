@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Footer from '../components/Footer';
 
 const ExplorarComidasOuBebidasPorIngrediente = () => {
-  return ( <> ExplorarComidasOuBebidasPorIngrediente
-  <Footer />
-   </> );
-}
- 
+  return (
+    <Fragment>
+      ExplorarComidasOuBebidasPorIngrediente
+      <Footer />
+    </Fragment>
+  );
+};
+
 export default ExplorarComidasOuBebidasPorIngrediente;
