@@ -34,6 +34,8 @@ const Footer = () => {
     }
   };
 
+  useEffect(() => { setShouldRedirect(false); }, [shouldRedirect]);
+
   if (shouldRedirect)
     return (
       <div>
