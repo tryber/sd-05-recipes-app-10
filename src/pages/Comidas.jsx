@@ -8,7 +8,6 @@ const Comidas = () => (
   <Fragment>
     Comidas
     <Header />
-    <Search />
     <MealCategories />
     <Footer />
   </Fragment>

@@ -14,15 +14,12 @@ const MealCategories = () => {
     } else if (qualPage === 'drink') {
       setAllCategories(drinkDB.categorias.slice(0, 5));
     }
-  }, [drinkDB]);
+  }, [drinkDB, mealDB]);
 
   return (
     <div className="all-categories">
       {allCategories.map(({ strCategory }) => (
-        <div
-          className="category"
-          data-testid={`${strCategory}-category-filter`}
-        >
+        <div className="category" data-testid={`${strCategory}-category-filter`}>
           {strCategory}
         </div>
       ))}
