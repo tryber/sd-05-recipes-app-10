@@ -7,27 +7,27 @@ import Search from '../components/Search';
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
 
-  const alterarEstilo = () => {
+  const changeStyle = () => {
     setShowMenu(!showMenu);
-  }
+  };
 
   return (
     <div>
       <header>
         <div>
           <Link to="/perfil">
-            <img data-testid="profile-top-btn" src={profileIcon} />
+            <img alt='profile' data-testid="profile-top-btn" src={profileIcon} />
           </Link>
-          <Link className="search-icon" onClick={() => alterarEstilo()}>
-            <img data-testid="search-top-btn" src={searchIcon} />
+          <Link className="search-icon" onClick={() => changeStyle()}>
+            <img alt='search loupe' data-testid="search-top-btn" src={searchIcon} />
           </Link>
         </div>
       </header>
-      <div style={!showMenu ? { "visibility": "hidden" } : null}>
+      <div style={!showMenu ? { 'visibility': 'hidden' } : null}>
         <Search />
       </div>
     </div>
   );
-}
+};
 
 export default Header;
