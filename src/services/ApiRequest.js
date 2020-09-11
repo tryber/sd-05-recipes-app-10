@@ -25,7 +25,7 @@ export const fetchMealDB = async () => {
   const revenueData = await fetch(revenue)
     .then((res) => res.json())
     .then((data) => data.meals);
-  const detalhamento = revenueData
+  const recipeDetails = revenueData
     .find((idMeal) => fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idMeal}`));
 
   return {
@@ -33,7 +33,7 @@ export const fetchMealDB = async () => {
     areas: areasData,
     ingredientes: ingredientesData,
     revenue: revenueData,
-    detalhamento,
+    recipeDetails,
   };
 };
 

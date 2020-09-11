@@ -6,35 +6,61 @@ import '../style/DetalhesComida.css';
 
 const DetalhesComida = () => {
   const { mealDB } = useContext(ReceitasContext);
-  console.log('aqui', mealDB.detalhamento);
+  console.log('aqui', mealDB.recipeDetails);
 
   const handleIngredients = () => {
     return (
       <div>
         <h3>Ingredients</h3>
         <ul className="list-ingredients">
-          <li>- {mealDB.detalhamento.strIngredient1} - {mealDB.detalhamento.strMeasure1}</li>
-          <li>- {mealDB.detalhamento.strIngredient2} - {mealDB.detalhamento.strMeasure2}</li>
-          <li>- {mealDB.detalhamento.strIngredient3} - {mealDB.detalhamento.strMeasure3}</li>
-          <li>- {mealDB.detalhamento.strIngredient4} - {mealDB.detalhamento.strMeasure4}</li>
-          <li>- {mealDB.detalhamento.strIngredient5} - {mealDB.detalhamento.strMeasure5}</li>
-          <li>- {mealDB.detalhamento.strIngredient6} - {mealDB.detalhamento.strMeasure6}</li>
-          <li>- {mealDB.detalhamento.strIngredient7} - {mealDB.detalhamento.strMeasure7}</li>
-          <li>- {mealDB.detalhamento.strIngredient8} - {mealDB.detalhamento.strMeasure8}</li>
-          <li>- {mealDB.detalhamento.strIngredient9} - {mealDB.detalhamento.strMeasure9}</li>
-          <li>- {mealDB.detalhamento.strIngredient10} - {mealDB.detalhamento.strMeasure10}</li>
-          <li>- {mealDB.detalhamento.strIngredient11} - {mealDB.detalhamento.strMeasure11}</li>
-          <li>- {mealDB.detalhamento.strIngredient12} - {mealDB.detalhamento.strMeasure12}</li>
-          <li>- {mealDB.detalhamento.strIngredient13} - {mealDB.detalhamento.strMeasure13}</li>
-          <li>- {mealDB.detalhamento.strIngredient14} - {mealDB.detalhamento.strMeasure14}</li>
-          <li>- {mealDB.detalhamento.strIngredient15} - {mealDB.detalhamento.strMeasure15}</li>
-          <li>- {mealDB.detalhamento.strIngredient16} - {mealDB.detalhamento.strMeasure16}</li>
-          <li>- {mealDB.detalhamento.strIngredient17} - {mealDB.detalhamento.strMeasure17}</li>
-          <li>- {mealDB.detalhamento.strIngredient18} - {mealDB.detalhamento.strMeasure18}</li>
-          <li>- {mealDB.detalhamento.strIngredient19} - {mealDB.detalhamento.strMeasure19}</li>
-          <li>- {mealDB.detalhamento.strIngredient20} - {mealDB.detalhamento.strMeasure20}</li>
+          <li>- {mealDB.recipeDetails.strIngredient1} - {mealDB.recipeDetails.strMeasure1}</li>
+          <li>- {mealDB.recipeDetails.strIngredient2} - {mealDB.recipeDetails.strMeasure2}</li>
+          <li>- {mealDB.recipeDetails.strIngredient3} - {mealDB.recipeDetails.strMeasure3}</li>
+          <li>- {mealDB.recipeDetails.strIngredient4} - {mealDB.recipeDetails.strMeasure4}</li>
+          <li>- {mealDB.recipeDetails.strIngredient5} - {mealDB.recipeDetails.strMeasure5}</li>
+          <li>- {mealDB.recipeDetails.strIngredient6} - {mealDB.recipeDetails.strMeasure6}</li>
+          <li>- {mealDB.recipeDetails.strIngredient7} - {mealDB.recipeDetails.strMeasure7}</li>
+          <li>- {mealDB.recipeDetails.strIngredient8} - {mealDB.recipeDetails.strMeasure8}</li>
+          <li>- {mealDB.recipeDetails.strIngredient9} - {mealDB.recipeDetails.strMeasure9}</li>
+          <li>- {mealDB.recipeDetails.strIngredient10} - {mealDB.recipeDetails.strMeasure10}</li>
+          <li>- {mealDB.recipeDetails.strIngredient11} - {mealDB.recipeDetails.strMeasure11}</li>
+          <li>- {mealDB.recipeDetails.strIngredient12} - {mealDB.recipeDetails.strMeasure12}</li>
+          <li>- {mealDB.recipeDetails.strIngredient13} - {mealDB.recipeDetails.strMeasure13}</li>
+          <li>- {mealDB.recipeDetails.strIngredient14} - {mealDB.recipeDetails.strMeasure14}</li>
+          <li>- {mealDB.recipeDetails.strIngredient15} - {mealDB.recipeDetails.strMeasure15}</li>
+          <li>- {mealDB.recipeDetails.strIngredient16} - {mealDB.recipeDetails.strMeasure16}</li>
+          <li>- {mealDB.recipeDetails.strIngredient17} - {mealDB.recipeDetails.strMeasure17}</li>
+          <li>- {mealDB.recipeDetails.strIngredient18} - {mealDB.recipeDetails.strMeasure18}</li>
+          <li>- {mealDB.recipeDetails.strIngredient19} - {mealDB.recipeDetails.strMeasure19}</li>
+          <li>- {mealDB.recipeDetails.strIngredient20} - {mealDB.recipeDetails.strMeasure20}</li>
         </ul>
       </div>
+    );
+  }
+
+  const handleStrInstructions = () => {
+    return (
+      <div>
+        <h3>Instructions</h3>
+        <p>{mealDB.recipeDetails.strInstructions}</p>
+      </div>
+    );
+  }
+
+  const handleStrYoutube = () => {
+    return (
+      <div>
+        <h3>Vídeo</h3>
+        <video width="320" height="240" controls>
+          <source data-testid="video" src={mealDB.recipeDetails.strYoutube} type="video/mp4" />
+        </video>
+      </div>
+    );
+  }
+
+  const handleRecommendations = () => {
+    return (
+      <div></div>
     );
   }
 
@@ -44,18 +70,20 @@ const DetalhesComida = () => {
         <img
           alt="detail"
           data-testid="recipe-photo"
-          src={mealDB.detalhamento.strMealThumb}
+          src={mealDB.recipeDetails.strMealThumb}
         />
       </div>
       <div>
-        <h2 data-testid="recipe-title">{mealDB.detalhamento.strMeal}</h2>
-        <h4 data-testid="recipe-category">{mealDB.detalhamento.strCategory}</h4>
+        <h2 data-testid="recipe-title">{mealDB.recipeDetails.strMeal}</h2>
+        <h4 data-testid="recipe-category">{mealDB.recipeDetails.strCategory}</h4>
       </div>
       <div>
         <img alt="share button" data-testid="share-btn" src={shareIcon} />
         <img alt="favorite button" data-testid="favorite-btn" src={whiteHeartIcon} />
       </div>
       {handleIngredients()}
+      {handleStrInstructions()}
+      {handleStrYoutube()}
     </div>
   );
 };

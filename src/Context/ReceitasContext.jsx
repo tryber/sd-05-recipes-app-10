@@ -11,7 +11,7 @@ export const ReceitasContextProvider = ({ children }) => {
     categorias: [],
     ingredientes: [],
     revenue: [],
-    detalhamento: [],
+    recipeDetails: [],
   });
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
