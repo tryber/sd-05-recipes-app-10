@@ -20,7 +20,7 @@ const RecipesListByCategory = () => {
     if(qualPage === 'comidas') {
     fetchMealsFilterdByCategory(category).then((e) => setRecipesFiltered(e));
     }
-  }, [category, drinkCategory]);
+  }, [category, drinkCategory, qualPage]);
 
 
   return (

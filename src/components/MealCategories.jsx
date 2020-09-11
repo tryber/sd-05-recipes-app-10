@@ -4,7 +4,7 @@ import './MealCategories.css';
 import { ReceitasContext } from '../Context/ReceitasContext';
 
 const MealCategories = () => {
-  const { qualPage, mealDB, drinkDB,setDrinkCategory, setCategory } = useContext(ReceitasContext);
+  const { qualPage, mealDB, drinkDB,setDrinkCategory,  setCategory } = useContext(ReceitasContext);
 
   if (qualPage === 'bebidas') {
     return (
@@ -22,7 +22,7 @@ const MealCategories = () => {
       </div>
     );
   }
-
+ if (qualPage === 'comidas') {
   return (
     <div className="all-categories">
       {mealDB.categorias.slice(0, 5).map(({ strCategory }) => (
@@ -37,6 +37,7 @@ const MealCategories = () => {
       ))}
     </div>
   );
+      }
 };
 
 export default MealCategories;

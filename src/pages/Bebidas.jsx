@@ -3,8 +3,14 @@ import Footer from '../components/Footer';
 import MealCategories from '../components/MealCategories';
 import Header from '../components/header';
 import RecipesListByCategory from '../components/RecipesListByCategory';
+import { useContext } from 'react';
+import { ReceitasContext } from '../Context/ReceitasContext';
 
-const Bebidas = () => (
+const Bebidas = () => {
+const { setqualPage } = useContext(ReceitasContext);
+
+setqualPage('bebidas');
+return(
   <Fragment>
     Bebidas
     <Header />
@@ -13,5 +19,6 @@ const Bebidas = () => (
     <Footer />
   </Fragment>
 );
+}
 
 export default Bebidas;
