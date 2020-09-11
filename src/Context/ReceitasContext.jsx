@@ -20,6 +20,7 @@ export const ReceitasContextProvider = ({ children }) => {
     categorias: [],
     glasses: [],
     ingredientes: [],
+    recommendDrinks: [],
   });
 
   const context = {

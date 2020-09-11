@@ -5,8 +5,9 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import '../style/DetalhesComida.css';
 
 const DetalhesComida = () => {
-  const { mealDB } = useContext(ReceitasContext);
-  console.log('aqui', mealDB.recipeDetails);
+  const { mealDB, drinkDB } = useContext(ReceitasContext);
+  console.log('mealDB', mealDB.recipeDetails);
+  console.log('drinks', drinkDB.recommendDrinks);
 
   const handleIngredients = () => {
     return (
@@ -58,9 +59,20 @@ const DetalhesComida = () => {
     );
   }
 
-  const handleRecommendations = () => {
+  const handleRecommendationsDrinks = () => {
     return (
-      <div></div>
+      <div>
+        <h3>Recomendadas</h3>
+        {drinkDB.recommendDrinks.slice(0, 6).map((drink) => (
+          <div className="drinks-card-details">
+            <img alt="drinks" src={drink.strDrinkThumb} />
+            <div>
+              <p>{drink.strAlcoholic}</p>
+              <h4>{drink.strDrink}</h4>
+            </div>
+          </div>
+        ))}
+      </div>
     );
   }
 
@@ -84,6 +96,7 @@ const DetalhesComida = () => {
       {handleIngredients()}
       {handleStrInstructions()}
       {handleStrYoutube()}
+      {handleRecommendationsDrinks()}
     </div>
   );
 };
