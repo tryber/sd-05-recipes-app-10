@@ -22,7 +22,14 @@ function handleIngredients(mealDB) {
     <div>
       <h3>Ingredients</h3>
       <ul>
-        {quantities.map((element, index) => <li className="quantidades" data-testid={`${index}-ingredient-name-and-measure`}>- {ingredients[index]} - {quantities[index]}</li>)}
+        {quantities
+          .map((element, index) =>
+            <li
+              className="quantidades"
+              data-testid={`${index}-ingredient-name-and-measure`}
+            >- {ingredients[index]} - {element}</li>
+          )
+        }
       </ul>
     </div>
   );
