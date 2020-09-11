@@ -1,41 +1,32 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { ReceitasContext } from '../Context/ReceitasContext';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import '../style/DetalhesComida.css';
 
 function handleIngredients(mealDB) {
+  let quantities = [];
+  let ingredients = [];
+
+  Object.entries(mealDB.recipeDetails).map((element) => {
+    if (element[0].includes('strMeasure') && element[1] !== ' ') {
+      quantities.push(element[1]);
+    }
+    if (element[0].includes('strIngredient') && element[1] !== '') {
+      ingredients.push(element[1]);
+    }
+  });
+
   return (
     <div>
       <h3>Ingredients</h3>
       <ul>
-        {Object.entries(mealDB.recipeDetails).map(function(element, index) {
-          if (element[0].includes('strIngredient') && element[1] !== '') {
-            return (
-              <li data-testid={`${index}-ingredient-name-and-measure`}>{element[1]}</li>
-            );
-          }
-        })}
+        {quantities.map((element, index) => <li className="quantidades" data-testid={`${index}-ingredient-name-and-measure`}>- {ingredients[index]} - {quantities[index]}</li>)}
       </ul>
     </div>
   );
 }
-
-// function handleStrMeasure() {
-//   return (
-//     <div>
-//       <ul>
-//         {Object.entries(mealDB.recipeDetails).map((element, index) => {
-//           if (element[0].includes('strMeasure') && element[1] !== ' ') {
-//             return (
-//               <li data-testid={`${index}-ingredient-name-and-measure`}>{element[1]}</li>
-//             );
-//           }
-//         })}
-//       </ul>
-//     </div>
-//   );
-// }
 
 function handleStrInstructions(mealDB) {
   return (
@@ -94,16 +85,27 @@ const DetalhesComida = () => {
         <h4 data-testid="recipe-category">{mealDB.recipeDetails.strCategory}</h4>
       </div>
       <div>
-        <img alt="share button" data-testid="share-btn" src={shareIcon} />
-        <img alt="favorite button" data-testid="favorite-btn" src={whiteHeartIcon} />
+        <Link>
+          <img alt="share button" data-testid="share-btn" src={shareIcon} />
+        </Link>
+        <Link>
+          <img alt="favorite button" data-testid="favorite-btn" src={whiteHeartIcon} />
+        </Link>
       </div>
       <div>
-        {handleIngredients(mealDB)}
-        {/* {handleStrMeasure()} */}
+        <div>
+          {handleIngredients(mealDB)}
+        </div>
+        <div>
+          {handleStrInstructions(mealDB)}
+        </div>
+        <div>
+          {handleStrYoutube(mealDB)}
+        </div>
+        <div>
+          {handleRecommendationsDrinks(drinkDB)}
+        </div>
       </div>
-      {handleStrInstructions(mealDB)}
-      {handleStrYoutube(mealDB)}
-      {handleRecommendationsDrinks(drinkDB)}
     </div>
   );
 };
