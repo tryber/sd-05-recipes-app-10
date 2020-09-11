@@ -6,10 +6,10 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import '../style/DetalhesComida.css';
 
 function handleIngredients(mealDB) {
-  let quantities = [];
-  let ingredients = [];
+  const quantities = [];
+  const ingredients = [];
 
-  Object.entries(mealDB.recipeDetails).map((element) => {
+  Object.entries(mealDB.recipeDetails).forEach((element) => {
     if (element[0].includes('strMeasure') && element[1] !== ' ') {
       quantities.push(element[1]);
     }
@@ -27,7 +27,7 @@ function handleIngredients(mealDB) {
             <li
               className="quantidades"
               data-testid={`${index}-ingredient-name-and-measure`}
-            >- {ingredients[index]} - {element}</li>
+            >- {ingredients[index]} - {element}</li>,
           )
         }
       </ul>
