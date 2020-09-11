@@ -4,7 +4,7 @@ import './MealCategories.css';
 import { ReceitasContext } from '../Context/ReceitasContext';
 
 const MealCategories = () => {
-  const { qualPage, mealDB, drinkDB, setCategory } = useContext(ReceitasContext);
+  const { qualPage, mealDB, drinkDB,setDrinkCategory, setCategory } = useContext(ReceitasContext);
 
   if (qualPage === 'bebidas') {
     return (
@@ -14,6 +14,7 @@ const MealCategories = () => {
             className="category"
             data-testid={`${strCategory}-category-filter`}
             key={strCategory}
+            onClick={() => setDrinkCategory(strCategory) }
           >
             {strCategory}
           </div>

@@ -21,7 +21,7 @@ const Comidas = () => {
       <Header />
       <MealCategories />
        <RecipesListByCategory />
-       {/* <DrinksListByCategory /> */}
+       <DrinksListByCategory />
       <Footer />
     </Fragment>
   );

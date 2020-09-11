@@ -11,10 +11,11 @@ export const fetchMealsFilterdByCategory = (category) => {
   .then((data) => data.meals)
 }
 
-const filteredDrinksUrl = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Ordinary_Drink';
+const filteredDrinksUrl = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=';
 
 export const fetchDrinksFilteredByCategory = (category) => {
-  return fetch(filteredDrinksUrl)
+  console.log('entrou no fetch de drink')
+  return fetch(filteredDrinksUrl + category)
   .then((res) => res.json())
   .then((data) => data.drinks)
 }

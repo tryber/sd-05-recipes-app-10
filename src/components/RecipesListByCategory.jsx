@@ -5,19 +5,20 @@ import { fetchMealsFilterdByCategory, fetchDrinksFilteredByCategory } from '../s
 import RecipeCard from './RecipeCard';
 
 const RecipesListByCategory = () => {
-  const { qualPage,category, recipesFiltered, setRecipesFiltered } = useContext(
+  const {drinkCategory, qualPage,category, recipesFiltered, setRecipesFiltered } = useContext(
     ReceitasContext,
   );
 
   useEffect(() => {
-    if(qualPage === 'bebidas') {
-      fetchDrinksFilteredByCategory().then((e) => {
-        console.log(e);
-        setRecipesFiltered(e)
-      });
-    }
+    // if(qualPage === 'bebidas') {
+    //   // setCategory();
+    //   fetchDrinksFilteredByCategory(drinkCategory).then((e) => {
+    //     console.log(e);
+    //     setRecipesFiltered(e)
+    //   }, error => console.log(error));
+    // }
     fetchMealsFilterdByCategory(category).then((e) => setRecipesFiltered(e));
-  }, [category, qualPage]);
+  }, [category]);
 
 
   return (
