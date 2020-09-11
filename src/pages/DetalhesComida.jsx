@@ -6,34 +6,37 @@ import '../style/DetalhesComida.css';
 
 const DetalhesComida = () => {
   const { mealDB, drinkDB } = useContext(ReceitasContext);
-  console.log('mealDB', mealDB.recipeDetails);
+  console.log('mealDB', mealDB);
   console.log('drinks', drinkDB.recommendDrinks);
 
   const handleIngredients = () => {
     return (
       <div>
         <h3>Ingredients</h3>
-        <ul className="list-ingredients">
-          <li>- {mealDB.recipeDetails.strIngredient1} - {mealDB.recipeDetails.strMeasure1}</li>
-          <li>- {mealDB.recipeDetails.strIngredient2} - {mealDB.recipeDetails.strMeasure2}</li>
-          <li>- {mealDB.recipeDetails.strIngredient3} - {mealDB.recipeDetails.strMeasure3}</li>
-          <li>- {mealDB.recipeDetails.strIngredient4} - {mealDB.recipeDetails.strMeasure4}</li>
-          <li>- {mealDB.recipeDetails.strIngredient5} - {mealDB.recipeDetails.strMeasure5}</li>
-          <li>- {mealDB.recipeDetails.strIngredient6} - {mealDB.recipeDetails.strMeasure6}</li>
-          <li>- {mealDB.recipeDetails.strIngredient7} - {mealDB.recipeDetails.strMeasure7}</li>
-          <li>- {mealDB.recipeDetails.strIngredient8} - {mealDB.recipeDetails.strMeasure8}</li>
-          <li>- {mealDB.recipeDetails.strIngredient9} - {mealDB.recipeDetails.strMeasure9}</li>
-          <li>- {mealDB.recipeDetails.strIngredient10} - {mealDB.recipeDetails.strMeasure10}</li>
-          <li>- {mealDB.recipeDetails.strIngredient11} - {mealDB.recipeDetails.strMeasure11}</li>
-          <li>- {mealDB.recipeDetails.strIngredient12} - {mealDB.recipeDetails.strMeasure12}</li>
-          <li>- {mealDB.recipeDetails.strIngredient13} - {mealDB.recipeDetails.strMeasure13}</li>
-          <li>- {mealDB.recipeDetails.strIngredient14} - {mealDB.recipeDetails.strMeasure14}</li>
-          <li>- {mealDB.recipeDetails.strIngredient15} - {mealDB.recipeDetails.strMeasure15}</li>
-          <li>- {mealDB.recipeDetails.strIngredient16} - {mealDB.recipeDetails.strMeasure16}</li>
-          <li>- {mealDB.recipeDetails.strIngredient17} - {mealDB.recipeDetails.strMeasure17}</li>
-          <li>- {mealDB.recipeDetails.strIngredient18} - {mealDB.recipeDetails.strMeasure18}</li>
-          <li>- {mealDB.recipeDetails.strIngredient19} - {mealDB.recipeDetails.strMeasure19}</li>
-          <li>- {mealDB.recipeDetails.strIngredient20} - {mealDB.recipeDetails.strMeasure20}</li>
+        <ul>
+          {Object.entries(mealDB.recipeDetails).map((element, index) => {
+            if (element[0].includes('strIngredient') && element[1] !== "") {
+              return (
+                <li data-testid={`${index}-ingredient-name-and-measure`}>{element[1]}</li>
+              );
+            }
+          })}
+        </ul>
+      </div>
+    );
+  }
+
+  const handleStrMeasure = () => {
+    return (
+      <div>
+        <ul>
+          {Object.entries(mealDB.recipeDetails).map((element, index) => {
+            if (element[0].includes('strMeasure') && element[1] !== " ") {
+              return (
+                <li data-testid={`${index}-ingredient-name-and-measure`}>{element[1]}</li>
+              );
+            }
+          })}
         </ul>
       </div>
     );
@@ -65,8 +68,8 @@ const DetalhesComida = () => {
         <h3>Recomendadas</h3>
         {drinkDB.recommendDrinks.slice(0, 6).map((drink) => (
           <div className="drinks-card-details">
-            <img alt="drinks" src={drink.strDrinkThumb} />
-            <div>
+            <img alt="drinks" className="img-drinks" src={drink.strDrinkThumb} />
+            <div className="container">
               <p>{drink.strAlcoholic}</p>
               <h4>{drink.strDrink}</h4>
             </div>
@@ -81,6 +84,7 @@ const DetalhesComida = () => {
       <div>
         <img
           alt="detail"
+          className="recipe-photo"
           data-testid="recipe-photo"
           src={mealDB.recipeDetails.strMealThumb}
         />
@@ -93,10 +97,13 @@ const DetalhesComida = () => {
         <img alt="share button" data-testid="share-btn" src={shareIcon} />
         <img alt="favorite button" data-testid="favorite-btn" src={whiteHeartIcon} />
       </div>
-      {handleIngredients()}
-      {handleStrInstructions()}
-      {handleStrYoutube()}
-      {handleRecommendationsDrinks()}
+      <div>
+        {handleIngredients()}
+        {/* {handleStrMeasure()} */}
+      </div>
+        {handleStrInstructions()}
+        {handleStrYoutube()}
+        {handleRecommendationsDrinks()}
     </div>
   );
 };
