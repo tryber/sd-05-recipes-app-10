@@ -9,7 +9,7 @@ function handleIngredients(mealDB) {
     <div>
       <h3>Ingredients</h3>
       <ul>
-        {Object.entries(mealDB.recipeDetails).map((element, index) => {
+        {Object.entries(mealDB.recipeDetails).map(function(element, index) {
           if (element[0].includes('strIngredient') && element[1] !== '') {
             return (
               <li data-testid={`${index}-ingredient-name-and-measure`}>{element[1]}</li>
