@@ -11,6 +11,14 @@ export const fetchMealsFilterdByCategory = (category) => {
   .then((data) => data.meals)
 }
 
+const filteredDrinksUrl = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Ordinary_Drink';
+
+export const fetchDrinksFilteredByCategory = (category) => {
+  return fetch(filteredDrinksUrl)
+  .then((res) => res.json())
+  .then((data) => data.drinks)
+}
+
 const drinkCategories =
   'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
 const drinkGlasses =

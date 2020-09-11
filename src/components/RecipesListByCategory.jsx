@@ -1,7 +1,7 @@
 import React, { useContext, Fragment } from 'react';
 import { ReceitasContext } from '../Context/ReceitasContext';
 import { useEffect } from 'react';
-import { fetchMealsFilterdByCategory } from '../services/ApiRequest';
+import { fetchMealsFilterdByCategory, fetchDrinksFilteredByCategory } from '../services/ApiRequest';
 import RecipeCard from './RecipeCard';
 
 const RecipesListByCategory = () => {
@@ -10,12 +10,18 @@ const RecipesListByCategory = () => {
   );
 
   useEffect(() => {
+    if(qualPage === 'bebidas') {
+      fetchDrinksFilteredByCategory().then((e) => {
+        console.log(e);
+        setRecipesFiltered(e)
+      });
+    }
     fetchMealsFilterdByCategory(category).then((e) => setRecipesFiltered(e));
-  }, [category]);
+  }, [category, qualPage]);
 
 
   return (
-    <Fragment>
+    <div>
       {recipesFiltered.slice(0, 12).map((recipe, index) => {
         return (
           <RecipeCard
@@ -26,7 +32,7 @@ const RecipesListByCategory = () => {
           />
         );
       })}
-    </Fragment>
+    </div>
   );
 };
 

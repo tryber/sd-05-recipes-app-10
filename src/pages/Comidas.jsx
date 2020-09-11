@@ -20,7 +20,8 @@ const Comidas = () => {
       Comidas
       <Header />
       <MealCategories />
-      {(qualPage !== 'bebidas') ? <RecipesListByCategory /> : <DrinksListByCategory />}
+       <RecipesListByCategory />
+       {/* <DrinksListByCategory /> */}
       <Footer />
     </Fragment>
   );

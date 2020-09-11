@@ -2,7 +2,15 @@ import React from 'react';
 import './RecipeCard.css';
 
 const RecipeCard = (props) => {
-  const { testName, testIt, TestIdImage, recipe: {strMeal, strMealThumb}} = props;
+  const { testName, testIt, TestIdImage, recipe: {strMeal, strMealThumb, strDrink, strDrinkThumb}} = props;
+
+  if(strDrink) {
+    return ( 
+      <div className="card" data-testid={testIt} key={testIt}>
+        <img src={strDrinkThumb} data-testid={TestIdImage} style={{'width': '200px'}}alt=""/>
+        <h3 data-testid={testName}> {strDrink}</h3>
+      </div> );
+  }
 
   return ( 
   <div className="card" data-testid={testIt} key={testIt}>
@@ -11,4 +19,4 @@ const RecipeCard = (props) => {
   </div> );
 }
  
-export default RecipeCard;
+export default RecipeCard; 
