@@ -5,7 +5,7 @@ import propTypes from 'prop-types';
 export const ReceitasContext = createContext();
 
 export const ReceitasContextProvider = ({ children }) => {
-  const [qualPage, setqualPage] = useState('meal');
+  const [qualPage, setqualPage] = useState('comidas');
   const [mealDB, setMealDB] = useState({
     areas: [],
     categorias: [],
