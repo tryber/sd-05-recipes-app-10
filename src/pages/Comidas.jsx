@@ -17,9 +17,9 @@ const Comidas = () => {
   return (
     <Fragment>
       Comidas
-      <RecipesListByCategory />
       <Header />
       <MealCategories />
+      <RecipesListByCategory />
       <Footer />
     </Fragment>
   );

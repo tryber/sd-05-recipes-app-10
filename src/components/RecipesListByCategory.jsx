@@ -13,10 +13,10 @@ const RecipesListByCategory = () => {
 
   return (
   <Fragment>
-    {recipesFiltered.map(recipe => <RecipeCard recipe={recipe}/>)}
+    {recipesFiltered.slice(0,12).map((recipe, index) => <RecipeCard dataTestId={`${index}-card-img`}recipe={recipe}/>)}
   </Fragment>  );
 }
  
 export default RecipesListByCategory;
 
-// fetchMealsFilterdByCategory
+// fetchMealsFilterdByCategory data-testid=`${index}-card-img`
