@@ -1,26 +1,39 @@
 import React, { useContext, Fragment } from 'react';
 import { ReceitasContext } from '../Context/ReceitasContext';
 import { useEffect } from 'react';
-import { fetchMealsFilterdByCategory, fetchDrinksFilteredByCategory } from '../services/ApiRequest';
+import { fetchMealsFilterdByCategory, fetchDrinksFilteredByCategory, fetchAllMeals, fetchAllDrinks } from '../services/ApiRequest';
 import RecipeCard from './RecipeCard';
 
-const RecipesListByCategory = () => {
+const RecipesListByCategory = (props) => {
   const {drinkCategory, category, recipesFiltered, setRecipesFiltered, qualPage } = useContext(
     ReceitasContext,
   );
 
+  console.log(props.pathname)
+
   useEffect(() => {
-    if(qualPage === 'bebidas') {
-      // setCategory();
-      fetchDrinksFilteredByCategory(drinkCategory).then((e) => {
-        console.log(e);
+    if(props.pathname === '/bebidas') {
+      if(category === 'ALL') {
+        console.log('vou chamar fetch all drinks');
+        fetchAllDrinks().then((e) => setRecipesFiltered(e));
+      } else {
+        fetchDrinksFilteredByCategory(drinkCategory).then((e) => {
         setRecipesFiltered(e)
       }, error => console.log(error));
     }
-    if(qualPage === 'comidas') {
-    fetchMealsFilterdByCategory(category).then((e) => setRecipesFiltered(e));
     }
-  }, [category, drinkCategory, qualPage]);
+  }, [ drinkCategory]);
+
+  useEffect(() => {
+    console.log('vou fetch comidas')
+    if(props.pathname === '/comidas') {
+      if(category === 'ALL') {
+        fetchAllMeals().then((e) => setRecipesFiltered(e));
+      } else {
+    fetchMealsFilterdByCategory(category).then((e) => setRecipesFiltered(e));
+      }
+    }
+  }, [category]);
 
 
   return (

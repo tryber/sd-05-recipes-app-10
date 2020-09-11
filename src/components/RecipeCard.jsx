@@ -3,7 +3,7 @@ import './RecipeCard.css';
 
 const RecipeCard = (props) => {
   const { testName, testIt, TestIdImage, recipe: {strMeal, strMealThumb, strDrink, strDrinkThumb}} = props;
-
+  // console.log('testid image ' + TestIdImage)
   if(strDrink) {
     return ( 
       <div className="card" data-testid={testIt} key={testIt}>

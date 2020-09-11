@@ -3,10 +3,10 @@ import { useContext } from 'react';
 import './MealCategories.css';
 import { ReceitasContext } from '../Context/ReceitasContext';
 
-const MealCategories = () => {
+const MealCategories = (props) => {
   const { qualPage, mealDB, drinkDB,setDrinkCategory,  setCategory } = useContext(ReceitasContext);
 
-  if (qualPage === 'bebidas') {
+  if (props.pathname === '/bebidas') {
     return (
       <div className="all-categories">
         {drinkDB.categorias.slice(0, 6).map(({ strCategory }) => (
@@ -14,7 +14,11 @@ const MealCategories = () => {
             className="category"
             data-testid={`${strCategory}-category-filter`}
             key={strCategory}
-            onClick={() => setDrinkCategory(strCategory) }
+            onClick={() => {
+              setDrinkCategory(strCategory)
+              setCategory('')
+               } 
+            }
           >
             {strCategory}
           </div>
@@ -22,7 +26,7 @@ const MealCategories = () => {
       </div>
     );
   }
- if (qualPage === 'comidas') {
+ if (props.pathname === '/comidas') {
   return (
     <div className="all-categories">
       {mealDB.categorias.slice(0, 6).map(({ strCategory }) => (
@@ -30,7 +34,11 @@ const MealCategories = () => {
           className="category"
           data-testid={`${strCategory}-category-filter`}
           key={strCategory}
-          onClick={() => setCategory(strCategory) }
+          onClick={() => {
+            setDrinkCategory('')
+            setCategory(strCategory)
+             } 
+          }
         >
           {strCategory}
         </div>

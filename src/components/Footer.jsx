@@ -8,15 +8,16 @@ import './Footer.css';
 import { ReceitasContext } from '../Context/ReceitasContext';
 
 const Footer = () => {
-  const { setqualPage, setDrinkCategory, setCategory } = useContext(ReceitasContext);
+  const { setDrinkCategory, setCategory } = useContext(ReceitasContext);
   const [pageToRedirect, setPageToRedirect] = useState('');
   const [shouldRedirect, setShouldRedirect] = useState(false);
 
   const handleRedirect = (whereToGo) => {
     setPageToRedirect(`${whereToGo}`);
     setShouldRedirect(true);
-    setqualPage(`${whereToGo}`);
-    whereToGo === 'bebidas' ? setDrinkCategory('ordinary_drink') : setCategory('chicken'); 
+    // setqualPage(`${whereToGo}`);
+    setDrinkCategory('ALL');
+    setCategory('ALL'); 
   };
 
   useEffect(() => { setShouldRedirect(false); }, [shouldRedirect]);

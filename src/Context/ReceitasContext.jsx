@@ -5,27 +5,27 @@ import propTypes from 'prop-types';
 export const ReceitasContext = createContext();
 
 export const ReceitasContextProvider = ({ children }) => {
-  const [qualPage, setqualPage] = useState('comidas');
+  // const [qualPage, setqualPage] = useState('comidas');
   const [mealDB, setMealDB] = useState({
     areas: [],
-    categorias: [{strCategory: "all"}],
+    categorias: [],
     ingredientes: [],
   });
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [drinkDB, setDrinkDB] = useState({
     alcoholFilters: [],
-    categorias: [{strCategory: "all"}],
+    categorias: [],
     glasses: [],
     ingredientes: [],
   });
-  const [category, setCategory] = useState('chicken');
-  const [drinkCategory, setDrinkCategory] = useState('all');
+  const [category, setCategory] = useState('ALL');
+  const [drinkCategory, setDrinkCategory] = useState('ALL');
   const [recipesFiltered, setRecipesFiltered] = useState([]);
 
   const context = {
-    qualPage,
-    setqualPage,
+    // qualPage,
+    // setqualPage,
     email,
     setEmail,
     senha,
