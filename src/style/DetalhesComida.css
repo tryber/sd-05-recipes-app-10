@@ -10,9 +10,8 @@
 
 .drinks-card-details {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  max-width: 200px;
   margin: auto;
-  font-family: arial;
+  max-width: 200px;
 }
 
 .img-drinks {

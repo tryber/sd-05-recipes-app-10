@@ -9,7 +9,7 @@ const DetalhesComida = () => {
   console.log('mealDB', mealDB);
   console.log('drinks', drinkDB.recommendDrinks);
 
-  const handleIngredients = () => {
+  function handleIngredients() {
     return (
       <div>
         <h3>Ingredients</h3>
@@ -26,7 +26,7 @@ const DetalhesComida = () => {
     );
   }
 
-  const handleStrMeasure = () => {
+  function handleStrMeasure() {
     return (
       <div>
         <ul>
@@ -40,18 +40,18 @@ const DetalhesComida = () => {
         </ul>
       </div>
     );
-  }
+  };
 
-  const handleStrInstructions = () => {
+  function handleStrInstructions() {
     return (
       <div>
         <h3>Instructions</h3>
         <p>{mealDB.recipeDetails.strInstructions}</p>
       </div>
     );
-  }
+  };
 
-  const handleStrYoutube = () => {
+  function handleStrYoutube() {
     return (
       <div>
         <h3>Vídeo</h3>
@@ -60,9 +60,9 @@ const DetalhesComida = () => {
         </video>
       </div>
     );
-  }
+  };
 
-  const handleRecommendationsDrinks = () => {
+  function handleRecommendationsDrinks() {
     return (
       <div>
         <h3>Recomendadas</h3>
@@ -77,7 +77,7 @@ const DetalhesComida = () => {
         ))}
       </div>
     );
-  }
+  };
 
   return (
     <div>
@@ -101,9 +101,9 @@ const DetalhesComida = () => {
         {handleIngredients()}
         {/* {handleStrMeasure()} */}
       </div>
-        {handleStrInstructions()}
-        {handleStrYoutube()}
-        {handleRecommendationsDrinks()}
+      {handleStrInstructions()}
+      {handleStrYoutube()}
+      {handleRecommendationsDrinks()}
     </div>
   );
 };
