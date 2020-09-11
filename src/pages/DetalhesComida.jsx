@@ -8,23 +8,8 @@ const DetalhesComida = () => {
   const { mealDB } = useContext(ReceitasContext);
   console.log('aqui', mealDB.detalhamento);
 
-  return (
-    <div>
-      <div>
-        <img
-          alt="detail"
-          data-testid="recipe-photo"
-          src={mealDB.detalhamento.strMealThumb}
-        />
-      </div>
-      <div>
-        <h2 data-testid="recipe-title">{mealDB.detalhamento.strMeal}</h2>
-        <h4 data-testid="recipe-category">{mealDB.detalhamento.strCategory}</h4>
-      </div>
-      <div>
-        <img alt="share button" data-testid="share-btn" src={shareIcon} />
-        <img alt="favorite button" data-testid="favorite-btn" src={whiteHeartIcon} />
-      </div>
+  const handleIngredients = () => {
+    return (
       <div>
         <h3>Ingredients</h3>
         <ul className="list-ingredients">
@@ -50,6 +35,27 @@ const DetalhesComida = () => {
           <li>- {mealDB.detalhamento.strIngredient20} - {mealDB.detalhamento.strMeasure20}</li>
         </ul>
       </div>
+    );
+  }
+
+  return (
+    <div>
+      <div>
+        <img
+          alt="detail"
+          data-testid="recipe-photo"
+          src={mealDB.detalhamento.strMealThumb}
+        />
+      </div>
+      <div>
+        <h2 data-testid="recipe-title">{mealDB.detalhamento.strMeal}</h2>
+        <h4 data-testid="recipe-category">{mealDB.detalhamento.strCategory}</h4>
+      </div>
+      <div>
+        <img alt="share button" data-testid="share-btn" src={shareIcon} />
+        <img alt="favorite button" data-testid="favorite-btn" src={whiteHeartIcon} />
+      </div>
+      {handleIngredients()}
     </div>
   );
 };
