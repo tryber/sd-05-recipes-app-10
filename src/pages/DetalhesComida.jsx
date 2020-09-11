@@ -9,12 +9,12 @@ const DetalhesComida = () => {
     <div>
       <div>
         {mealDB.revenue.map(({ strMealThumb }) => (
-          <img src={strMealThumb} />
+          <img alt="teste" src={strMealThumb} />
         ))}
       </div>
-        <p>{console.log('aqui', mealDB.detalhamento)}</p>
+      <p>{console.log('aqui', mealDB.detalhamento)}</p>
     </div>
   );
-}
+};
 
 export default DetalhesComida;

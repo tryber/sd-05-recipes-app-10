@@ -24,15 +24,16 @@ export const fetchMealDB = async () => {
     .then((data) => data.meals);
   const revenueData = await fetch(revenue)
     .then((res) => res.json())
-    .then((data) => data.meals)
-  const detalhamento = revenueData.find((idMeal) => fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idMeal}`))
-  console.log(detalhamento)
+    .then((data) => data.meals);
+  const detalhamento = revenueData
+    .find((idMeal) => fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idMeal}`));
+
   return {
     categorias: categoriesData,
     areas: areasData,
     ingredientes: ingredientesData,
     revenue: revenueData,
-    detalhamento: detalhamento,
+    detalhamento,
   };
 };
 
