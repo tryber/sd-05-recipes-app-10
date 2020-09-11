@@ -5,7 +5,7 @@ import { fetchMealsFilterdByCategory, fetchDrinksFilteredByCategory } from '../s
 import RecipeCard from './RecipeCard';
 
 const DrinksListByCategory = () => {
-  const {drinkCategory, qualPage,category, recipesFiltered, setRecipesFiltered } = useContext(
+  const {drinkCategory, qualPage, recipesFiltered, setRecipesFiltered } = useContext(
     ReceitasContext,
   );
 
