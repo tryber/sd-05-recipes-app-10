@@ -5,6 +5,7 @@ import MealCategories from '../components/MealCategories';
 import { ReceitasContext } from '../Context/ReceitasContext';
 import { fetchMealDB, fetchDrinkDB } from '../services/ApiRequest';
 import RecipesListByCategory from '../components/RecipesListByCategory';
+import DrinksListByCategory from '../components/DrinksListByCategory';
 
 const Comidas = () => {
   const { setMealDB, setDrinkDB, qualPage } = useContext(ReceitasContext);
@@ -19,7 +20,7 @@ const Comidas = () => {
       Comidas
       <Header />
       <MealCategories />
-      <RecipesListByCategory />
+      {(qualPage !== 'bebidas') ? <RecipesListByCategory /> : <DrinksListByCategory />}
       <Footer />
     </Fragment>
   );

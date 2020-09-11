@@ -3,19 +3,21 @@ import { ReceitasContext } from '../Context/ReceitasContext';
 import { useEffect } from 'react';
 import { fetchMealsFilterdByCategory } from '../services/ApiRequest';
 import RecipeCard from './RecipeCard';
+import { findAllByDisplayValue } from '@testing-library/react';
 
-const RecipesListByCategory = () => {
-  const { qualPage,category, recipesFiltered, setRecipesFiltered } = useContext(
+const DrinksListByCategory = () => {
+  const { category, recipesFiltered, setRecipesFiltered } = useContext(
     ReceitasContext,
   );
+
+  console.log('drinklist')
 
   useEffect(() => {
     fetchMealsFilterdByCategory(category).then((e) => setRecipesFiltered(e));
   }, [category]);
 
-
   return (
-    <Fragment>
+    <div>
       {recipesFiltered.slice(0, 12).map((recipe, index) => {
         return (
           <RecipeCard
@@ -26,10 +28,9 @@ const RecipesListByCategory = () => {
           />
         );
       })}
-    </Fragment>
+      <h1>DRINKPORRA</h1>
+    </div>
   );
 };
-
-export default RecipesListByCategory;
-
-// fetchMealsFilterdByCategory data-testid=`${index}-card-img`
+ 
+export default DrinksListByCategory;
