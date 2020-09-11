@@ -10,7 +10,7 @@ const DetalhesComida = () => {
   return (
     <div>
       <div>
-        <img alt="image detail" data-testid="recipe-photo" src={mealDB.detalhamento.strMealThumb} />
+        <img alt="picture detail" data-testid="recipe-photo" src={mealDB.detalhamento.strMealThumb} />
       </div>
       <div>
         <h2 data-testid="recipe-title">{mealDB.detalhamento.strMeal}</h2>
