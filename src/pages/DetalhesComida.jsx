@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { ReceitasContext } from '../Context/ReceitasContext';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import '../style/DetalhesComida.css';
 
 const DetalhesComida = () => {
   const { mealDB } = useContext(ReceitasContext);
@@ -10,7 +11,11 @@ const DetalhesComida = () => {
   return (
     <div>
       <div>
-        <img alt="picture detail" data-testid="recipe-photo" src={mealDB.detalhamento.strMealThumb} />
+        <img
+          alt="detail"
+          data-testid="recipe-photo"
+          src={mealDB.detalhamento.strMealThumb}
+        />
       </div>
       <div>
         <h2 data-testid="recipe-title">{mealDB.detalhamento.strMeal}</h2>
@@ -22,7 +27,7 @@ const DetalhesComida = () => {
       </div>
       <div>
         <h3>Ingredients</h3>
-        <ul>
+        <ul className="list-ingredients">
           <li>- {mealDB.detalhamento.strIngredient1} - {mealDB.detalhamento.strMeasure1}</li>
           <li>- {mealDB.detalhamento.strIngredient2} - {mealDB.detalhamento.strMeasure2}</li>
           <li>- {mealDB.detalhamento.strIngredient3} - {mealDB.detalhamento.strMeasure3}</li>
