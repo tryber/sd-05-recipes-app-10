@@ -9,7 +9,7 @@ const MealCategories = () => {
   if (qualPage === 'bebidas') {
     return (
       <div className="all-categories">
-        {drinkDB.categorias.slice(0, 5).map(({ strCategory }) => (
+        {drinkDB.categorias.slice(0, 6).map(({ strCategory }) => (
           <div
             className="category"
             data-testid={`${strCategory}-category-filter`}
@@ -25,7 +25,7 @@ const MealCategories = () => {
  if (qualPage === 'comidas') {
   return (
     <div className="all-categories">
-      {mealDB.categorias.slice(0, 5).map(({ strCategory }) => (
+      {mealDB.categorias.slice(0, 6).map(({ strCategory }) => (
         <div
           className="category"
           data-testid={`${strCategory}-category-filter`}

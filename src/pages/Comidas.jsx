@@ -8,11 +8,18 @@ import RecipesListByCategory from '../components/RecipesListByCategory';
 import DrinksListByCategory from '../components/DrinksListByCategory';
 
 const Comidas = () => {
-  const { setMealDB, setDrinkDB, qualPage } = useContext(ReceitasContext);
+  const {mealDB, setMealDB, setDrinkDB, qualPage } = useContext(ReceitasContext);
 
   useEffect(() => {
-    fetchMealDB().then((e) => setMealDB(e));
-    fetchDrinkDB().then((e) => setDrinkDB(e));
+    console.log(mealDB.categorias)
+    fetchMealDB().then((e) => setMealDB(() => ({
+      ...e,
+      categorias: [mealDB.categorias[0], ...e.categorias]
+    })));
+    fetchDrinkDB().then((e) => setDrinkDB((drinkDB) => ({
+      ...e,
+      categorias: [drinkDB.categorias[0], ...e.categorias]
+    })));
   }, [setMealDB, setDrinkDB, qualPage]);
 
   return (
