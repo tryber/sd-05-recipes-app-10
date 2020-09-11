@@ -15,7 +15,7 @@ const DetalhesComida = () => {
         <h3>Ingredients</h3>
         <ul>
           {Object.entries(mealDB.recipeDetails).map((element, index) => {
-            if (element[0].includes('strIngredient') && element[1] !== "") {
+            if (element[0].includes('strIngredient') && element[1] !== '') {
               return (
                 <li data-testid={`${index}-ingredient-name-and-measure`}>{element[1]}</li>
               );
@@ -26,21 +26,21 @@ const DetalhesComida = () => {
     );
   }
 
-  function handleStrMeasure() {
-    return (
-      <div>
-        <ul>
-          {Object.entries(mealDB.recipeDetails).map((element, index) => {
-            if (element[0].includes('strMeasure') && element[1] !== " ") {
-              return (
-                <li data-testid={`${index}-ingredient-name-and-measure`}>{element[1]}</li>
-              );
-            }
-          })}
-        </ul>
-      </div>
-    );
-  };
+  // function handleStrMeasure() {
+  //   return (
+  //     <div>
+  //       <ul>
+  //         {Object.entries(mealDB.recipeDetails).map((element, index) => {
+  //           if (element[0].includes('strMeasure') && element[1] !== ' ') {
+  //             return (
+  //               <li data-testid={`${index}-ingredient-name-and-measure`}>{element[1]}</li>
+  //             );
+  //           }
+  //         })}
+  //       </ul>
+  //     </div>
+  //   );
+  // }
 
   function handleStrInstructions() {
     return (
@@ -60,7 +60,7 @@ const DetalhesComida = () => {
         </video>
       </div>
     );
-  };
+  }
 
   function handleRecommendationsDrinks() {
     return (
@@ -77,7 +77,7 @@ const DetalhesComida = () => {
         ))}
       </div>
     );
-  };
+  }
 
   return (
     <div>
