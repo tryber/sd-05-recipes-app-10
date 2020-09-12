@@ -37,15 +37,14 @@ const RecipeCard = (props) => {
 };
 
 RecipeCard.propTypes = {
+  TestIdImage: propTypes.string.isRequired,
+  testIt: propTypes.string.isRequired,
+  testName: propTypes.string.isRequired,
   recipe: propTypes.shape({
     strMeal: propTypes.string.isRequired,
     strMealThumb: propTypes.string.isRequired,
-    TestIdImage: propTypes.string.isRequired,
     strDrink: propTypes.string.isRequired,
     strDrinkThumb: propTypes.string.isRequired,
-    TestIdImage: propTypes.string.isRequired,
-    testIt: propTypes.string.isRequired,
-    testName: propTypes.string.isRequired,
   }).isRequired,
 };
 export default RecipeCard;

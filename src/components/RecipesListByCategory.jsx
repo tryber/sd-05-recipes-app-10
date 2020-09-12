@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import propTypes from 'prop-types';
+// import propTypes from 'prop-types';
 import { useEffect } from 'react';
 import { ReceitasContext } from '../Context/ReceitasContext';
 import {
