@@ -17,10 +17,12 @@ const Footer = () => {
     setShouldRedirect(true);
     // setqualPage(`${whereToGo}`);
     setDrinkCategory('ALL');
-    setCategory('ALL'); 
+    setCategory('ALL');
   };
 
-  useEffect(() => { setShouldRedirect(false); }, [shouldRedirect]);
+  useEffect(() => {
+    setShouldRedirect(false);
+  }, [shouldRedirect]);
 
   if (shouldRedirect) {
     return (

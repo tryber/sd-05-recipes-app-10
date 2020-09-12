@@ -1,6 +1,9 @@
-.category {
+.all-categories {
+  display: flex;
+  flex-wrap: wrap;
+}
 
-  /* position: absolute; */
+.category {
   align-items: flex-end;
   background: #c4c4c4;
   display: flex;
@@ -11,9 +14,4 @@
   margin: 3px;
   top: 75px;
   width: 105px;
-}
-
-.all-categories {
-  display: flex;
-  flex-wrap: wrap;
 }

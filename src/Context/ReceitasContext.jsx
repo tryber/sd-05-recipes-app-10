@@ -39,7 +39,7 @@ export const ReceitasContextProvider = ({ children }) => {
     recipesFiltered,
     setRecipesFiltered,
     drinkCategory,
-    setDrinkCategory
+    setDrinkCategory,
   };
 
   return (

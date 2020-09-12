@@ -1,18 +1,17 @@
 import React, { Fragment } from 'react';
-import { useContext } from 'react';
+// import { useContext } from 'react';
 import propTypes from 'prop-types';
 import Footer from '../components/Footer';
-import { ReceitasContext } from '../Context/ReceitasContext';
+// import { ReceitasContext } from '../Context/ReceitasContext';
 
 const Explore = (props) => {
-  const { setqualPage } = useContext(ReceitasContext);
   return (
     <Fragment>
       Explorar
       <button
         onClick={() => {
           props.history.push('/explorar/comidas');
-          setqualPage('/explorar/comidas');
+          // setqualPage('/explorar/comidas');
         }}
         type="button"
         data-testid="explore-food"
@@ -22,7 +21,7 @@ const Explore = (props) => {
       <button
         onClick={() => {
           props.history.push('/explorar/bebidas');
-          setqualPage('/explorar/bebidas');
+          // setqualPage('/explorar/bebidas');
         }}
         type="button"
         data-testid="explore-drinks"

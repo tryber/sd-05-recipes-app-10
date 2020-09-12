@@ -1,19 +1,15 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import Footer from '../components/Footer';
-import { ReceitasContext } from '../Context/ReceitasContext';
 
 const ExplorarBebidas = () => {
-  const { setqualPage } = useContext(ReceitasContext);
-  // const [comidasOuBebidas, SetComidasOuBebidas] = useState('');
   const [pageToRedirect, setPageToRedirect] = useState('');
   const [shouldRedirect, setShouldRedirect] = useState(false);
 
   const handleRedirect = (whereToExplore) => {
     setPageToRedirect(`explorar/bebidas/${whereToExplore}`);
     setShouldRedirect(true);
-    setqualPage(`explorar/bebidas/${whereToExplore}`);
   };
 
   useEffect(() => {
