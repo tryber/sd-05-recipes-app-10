@@ -5,6 +5,7 @@ import Footer from '../components/Footer';
 // import { ReceitasContext } from '../Context/ReceitasContext';
 
 const Explore = (props) => {
+  console.log('entra no component Explore');
   return (
     <Fragment>
       Explorar

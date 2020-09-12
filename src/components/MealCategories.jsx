@@ -1,5 +1,6 @@
 import React from 'react';
 import { useContext } from 'react';
+import propTypes from 'prop-types';
 import './MealCategories.css';
 import { ReceitasContext } from '../Context/ReceitasContext';
 
@@ -12,7 +13,7 @@ const MealCategories = (props) => {
     return (
       <div className="all-categories">
         {drinkDB.categorias.slice(0, 6).map(({ strCategory }) => (
-          <div
+          <button
             className="category"
             data-testid={`${strCategory}-category-filter`}
             key={strCategory}
@@ -22,16 +23,16 @@ const MealCategories = (props) => {
             }}
           >
             {strCategory}
-          </div>
+          </button>
         ))}
       </div>
     );
   }
-  if (props.pathname === '/comidas') {
+  // if (props.pathname === '/comidas') {
     return (
       <div className="all-categories">
         {mealDB.categorias.slice(0, 6).map(({ strCategory }) => (
-          <div
+          <button
             className="category"
             data-testid={`${strCategory}-category-filter`}
             key={strCategory}
@@ -41,11 +42,14 @@ const MealCategories = (props) => {
             }}
           >
             {strCategory}
-          </div>
+          </button>
         ))}
       </div>
     );
-  }
+  // }
 };
 
+MealCategories.propTypes = {
+  pathname: propTypes.string.isRequired,
+}
 export default MealCategories;

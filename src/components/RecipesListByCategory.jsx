@@ -1,6 +1,7 @@
-import React, { useContext, Fragment } from 'react';
-import { ReceitasContext } from '../Context/ReceitasContext';
+import React, { useContext } from 'react';
+import propTypes from 'prop-types';
 import { useEffect } from 'react';
+import { ReceitasContext } from '../Context/ReceitasContext';
 import {
   fetchMealsFilterdByCategory,
   fetchDrinksFilteredByCategory,
@@ -10,19 +11,11 @@ import {
 import RecipeCard from './RecipeCard';
 
 const RecipesListByCategory = (props) => {
-  const {
-    drinkCategory,
-    category,
-    recipesFiltered,
-    setRecipesFiltered,
-    qualPage,
-  } = useContext(ReceitasContext);
-
-  console.log(props.pathname);
+  const { drinkCategory, category, recipesFiltered, setRecipesFiltered } = useContext(ReceitasContext);
 
   useEffect(() => {
     if (props.pathname === '/bebidas') {
-      if (category === 'ALL') {
+      if (drinkCategory === 'ALL') {
         console.log('vou chamar fetch all drinks');
         fetchAllDrinks().then((e) => setRecipesFiltered(e));
       } else {
@@ -52,6 +45,7 @@ const RecipesListByCategory = (props) => {
   return (
     <div>
       {recipesFiltered.slice(0, 12).map((recipe, index) => {
+        console.log('entrou no map de todas receitas');
         return (
           <RecipeCard
             testIt={`${index}-recipe-card`}
@@ -65,6 +59,8 @@ const RecipesListByCategory = (props) => {
   );
 };
 
-export default RecipesListByCategory;
+RecipesListByCategory.propTypes = {
+  pathname: propTypes.string.isRequired,
+}
 
-// fetchMealsFilterdByCategory data-testid=`${index}-card-img`
+export default RecipesListByCategory;

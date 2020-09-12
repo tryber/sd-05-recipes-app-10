@@ -1,4 +1,5 @@
 import React from 'react';
+import propTypes from 'prop-types'
 import './RecipeCard.css';
 
 const RecipeCard = (props) => {
@@ -8,7 +9,6 @@ const RecipeCard = (props) => {
     TestIdImage,
     recipe: { strMeal, strMealThumb, strDrink, strDrinkThumb },
   } = props;
-  // console.log('testid image ' + TestIdImage)
   if (strDrink) {
     return (
       <div className="card" data-testid={testIt} key={testIt}>
@@ -36,4 +36,16 @@ const RecipeCard = (props) => {
   );
 };
 
+RecipeCard.propTypes = {
+  recipe: propTypes.shape({
+    strMeal: propTypes.string.isRequired,
+    strMealThumb: propTypes.string.isRequired,
+    strMealThumb: propTypes.string.isRequired,
+    strDrink: propTypes.string.isRequired,
+    strDrinkThumb: propTypes.string.isRequired,
+    TestIdImage: propTypes.string.isRequired,
+    testIt: propTypes.string.isRequired,
+    testName: propTypes.string.isRequired,
+  })
+}
 export default RecipeCard;

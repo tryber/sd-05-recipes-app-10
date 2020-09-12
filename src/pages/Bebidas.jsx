@@ -1,18 +1,19 @@
 import React, { Fragment, useEffect } from 'react';
+import propTypes from 'prop-types';
+import { useContext } from 'react';
 import Footer from '../components/Footer';
 import MealCategories from '../components/MealCategories';
 import Header from '../components/header';
 import RecipesListByCategory from '../components/RecipesListByCategory';
-import { useContext } from 'react';
 import { ReceitasContext } from '../Context/ReceitasContext';
-import { fetchMealDB, fetchDrinkDB } from '../services/ApiRequest';
+import { fetchDrinkDB } from '../services/ApiRequest';
 
 const Bebidas = (props) => {
   const { setDrinkDB } = useContext(ReceitasContext);
 
   useEffect(() => {
     fetchDrinkDB().then((e) =>
-      setDrinkDB((drinkDB) => ({
+      setDrinkDB(() => ({
         ...e,
         categorias: [{ strCategory: 'ALL' }, ...e.categorias],
       })),
@@ -28,6 +29,14 @@ const Bebidas = (props) => {
       <Footer />
     </Fragment>
   );
+};
+
+Bebidas.propTypes = {
+  history: propTypes.shape({
+    location: propTypes.shape({
+      pathname: propTypes.string.isRequired,
+    }),
+  }).isRequired,
 };
 
 export default Bebidas;
