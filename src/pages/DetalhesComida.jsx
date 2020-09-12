@@ -6,6 +6,11 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import '../style/DetalhesComida.css';
 import { useState } from 'react';
 
+const btnStyle = {
+  'background-color':' #E5E5E5',
+  'position':'fixed', 
+  'bottom': 0}
+
 function handleIngredients(mealDB) {
   const quantities = [];
   const ingredients = [];
@@ -146,6 +151,7 @@ const DetalhesComida = (props) => {
         <div>{handleStrInstructions(recipe)}</div>
         <div>{handleStrYoutube(recipe)}</div>
         <div>{handleRecommendationsDrinks(recommendations)}</div>
+        <Link><button style={btnStyle} data-testid="start-recipe-btn">Iniciar Receita</button></Link>
       </div>
     </div>
   );
