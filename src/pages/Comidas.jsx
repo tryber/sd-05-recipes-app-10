@@ -13,7 +13,7 @@ const Comidas = (props) => {
     fetchMealDB().then((e) =>
       setMealDB(() => ({
         ...e,
-        categorias: [{ strCategory: 'ALL' }, ...e.categorias],
+        categorias: [{ strCategory: 'All' }, ...e.categorias],
       })),
     );
   }, [setMealDB]);

@@ -15,7 +15,7 @@ const Bebidas = (props) => {
     fetchDrinkDB().then((e) =>
       setDrinkDB(() => ({
         ...e,
-        categorias: [{ strCategory: 'ALL' }, ...e.categorias],
+        categorias: [{ strCategory: 'All' }, ...e.categorias],
       })),
     );
   }, [setDrinkDB]);

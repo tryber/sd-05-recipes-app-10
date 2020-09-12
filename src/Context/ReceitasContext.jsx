@@ -19,8 +19,8 @@ export const ReceitasContextProvider = ({ children }) => {
     glasses: [],
     ingredientes: [],
   });
-  const [category, setCategory] = useState('ALL');
-  const [drinkCategory, setDrinkCategory] = useState('ALL');
+  const [category, setCategory] = useState('All');
+  const [drinkCategory, setDrinkCategory] = useState('All');
   const [recipesFiltered, setRecipesFiltered] = useState([]);
 
   const context = {

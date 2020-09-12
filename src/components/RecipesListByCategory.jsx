@@ -16,7 +16,7 @@ const RecipesListByCategory = (props) => {
 
   useEffect(() => {
     if (props.pathname === '/bebidas') {
-      if (drinkCategory === 'ALL') {
+      if (drinkCategory === 'All') {
         console.log('vou chamar fetch all drinks');
         fetchAllDrinks().then((e) => setRecipesFiltered(e));
       } else {
@@ -33,7 +33,7 @@ const RecipesListByCategory = (props) => {
   useEffect(() => {
     console.log('vou fetch comidas');
     if (props.pathname === '/comidas') {
-      if (category === 'ALL') {
+      if (category === 'All') {
         fetchAllMeals().then((e) => setRecipesFiltered(e));
       } else {
         fetchMealsFilterdByCategory(category).then((e) =>

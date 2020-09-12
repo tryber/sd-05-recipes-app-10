@@ -16,8 +16,8 @@ const Footer = () => {
     setPageToRedirect(`${whereToGo}`);
     setShouldRedirect(true);
     // setqualPage(`${whereToGo}`);
-    setDrinkCategory('ALL');
-    setCategory('ALL');
+    setDrinkCategory('All');
+    setCategory('All');
   };
 
   useEffect(() => {

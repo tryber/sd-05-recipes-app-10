@@ -5,9 +5,14 @@ import './MealCategories.css';
 import { ReceitasContext } from '../Context/ReceitasContext';
 
 const MealCategories = (props) => {
-  const { mealDB, drinkDB, setDrinkCategory, setCategory } = useContext(
-    ReceitasContext,
-  );
+  const {
+    category,
+    drinkCategory,
+    mealDB,
+    drinkDB,
+    setDrinkCategory,
+    setCategory,
+  } = useContext(ReceitasContext);
 
   if (props.pathname === '/bebidas') {
     return (
@@ -18,8 +23,11 @@ const MealCategories = (props) => {
             data-testid={`${strCategory}-category-filter`}
             key={strCategory}
             onClick={() => {
-              setDrinkCategory(strCategory);
-              setCategory('');
+              if (drinkCategory !== strCategory) {
+                setDrinkCategory(strCategory);
+              } else {
+                setDrinkCategory('All');
+              }
             }}
           >
             {strCategory}
@@ -37,8 +45,11 @@ const MealCategories = (props) => {
           data-testid={`${strCategory}-category-filter`}
           key={strCategory}
           onClick={() => {
-            setDrinkCategory('');
-            setCategory(strCategory);
+            if (category !== strCategory) {
+              setCategory(strCategory);
+            } else {
+              setCategory('All');
+            }
           }}
         >
           {strCategory}
