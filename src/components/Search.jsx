@@ -7,59 +7,89 @@ import {
   fetchDrinkFirstLetter,
 } from '../services/ApiRequest';
 import { ReceitasContext } from '../Context/ReceitasContext';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
-const filterMealAPI = (tipo, input, resultados) => {
+const filterMealAPI = (tipo, input, setFood) => {
   switch (tipo) {
-    case 'name':
-      return fetchMealName(input).then((data) => resultados(data.meals));
+    case 'nome':
+      return fetchMealName(input).then((data) => setFood(data.meals.slice(0, 12)));
     case 'ingredient':
-      return fetchMealIngredient(input).then((data) => resultados(data.meals));
-    case 'firstLetter':
-      return fetchMealFirstLetter(input).then((data) => resultados(data.meals));
+      return fetchMealIngredient(input).then((data) => setFood(data.meals.slice(0, 12)));
+    case 'letter':
+      return fetchMealFirstLetter(input).then((data) => setFood(data.meals.slice(0, 12)));
     default:
       return null;
   }
 };
 
-const filterDrinkAPI = (tipo, input, resultados) => {
+const filterDrinkAPI = (tipo, input, setDrink) => {
   switch (tipo) {
-    case 'name':
-      return fetchDrinkName(input).then((data) => resultados(data.drinks));
+    case 'nome':
+      return fetchDrinkName(input).then((data) => setDrink(data.drinks.slice(0, 12)));
     case 'ingredient':
-      return fetchDrinkIngredient(input).then((data) => resultados(data.drinks));
-    case 'firstLetter':
-      return fetchDrinkFirstLetter(input).then((data) => resultados(data.drinks));
+      return fetchDrinkIngredient(input).then((data) => setDrink(data.drinks.slice(0, 12)));
+    case 'letter':
+      return fetchDrinkFirstLetter(input).then((data) => setDrink(data.drinks.slice(0, 12)));
     default:
       return null;
   }
 };
-
-
-
-
-
 
 function Search() {
   const { setFoodData, setDrinkData, chooseAPI } = useContext(ReceitasContext);
+  const [tipo, setTipo] = useState('nome');
+  const [input, setInput] = useState('');
   return (
     <div>
       <div>
-        <input type="text" placeholder="Buscar Receitas" data-testid="search-input" />
+        <input
+          type="text"
+          placeholder="Buscar Receitas"
+          data-testid="search-input"
+          onChange={(e) => setInput(e.target.value)}
+        />
       </div>
-      <label htmlFor="ingredient-field">
-        <input type="radio" name="ingredient-field" data-testid="ingredient-search-radio" />
+      <label htmlFor="ingredient">
+        <input
+          type="radio"
+          name="input"
+          id="ingredient"
+          data-testid="ingredient-search-radio"
+          onChange={(e) => setTipo(e.target.id)}
+        />
         Ingrediente
       </label>
-      <label htmlFor="name-field">
-        <input type="radio" name="name-field" data-testid="name-search-radio" />
+      <label htmlFor="nome">
+        <input
+          type="radio"
+          name="input"
+          id="nome"
+          data-testid="name-search-radio"
+          onChange={(e) => setTipo(e.target.id)}
+        />
         Nome
       </label>
-      <label htmlFor="first-letter-field">
-        <input type="radio" name="first-letter-field" data-testid="first-letter-search-radio" />
+      <label htmlFor="letter">
+        <input
+          type="radio"
+          name="input"
+          id="letter"
+          data-testid="first-letter-search-radio"
+          onChange={(e) => setTipo(e.target.id)}
+        />
         Primeira letra
       </label>
       <div>
-        <button data-testid="exec-search-btn" onClick={}>Buscar</button>
+        <button
+          data-testid="exec-search-btn"
+          onClick={() => {
+            if (chooseAPI === 'comidas') filterMealAPI(tipo, input, setFoodData);
+            else filterDrinkAPI(tipo, input, setDrinkData);
+          }}
+        >
+          Buscar
+        </button>
       </div>
     </div>
   );

@@ -48,43 +48,39 @@ export const fetchDrinkDB = async () => {
 };
 
 // Requisição API Meal por ingrediente
-export const fetchMealIngredient = (ingredient) => {
+export const fetchMealIngredient = (ingredient) =>
   fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`).then((response) =>
     response.json().then((data) => (response.ok ? Promise.resolve(data) : Promise.reject(data))),
   );
-};
 
 // Requisição API Meal por nome
-export const fetchMealName = (name) => {
+export const fetchMealName = (name) =>
   fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`).then((response) =>
     response.json().then((data) => (response.ok ? Promise.resolve(data) : Promise.reject(data))),
   );
-};
 
 // Requisição API Meal por primeira letra
-export const fetchMealFirstLetter = (firstLetter) => {
+export const fetchMealFirstLetter = (firstLetter) =>
   fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${firstLetter}`).then((response) =>
     response.json().then((data) => (response.ok ? Promise.resolve(data) : Promise.reject(data))),
   );
-};
 
 // Requisição API Drink por ingrediente
-export const fetchDrinkIngredient = (ingredient) => {
+export const fetchDrinkIngredient = (ingredient) =>
   fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`).then((response) =>
     response.json().then((data) => (response.ok ? Promise.resolve(data) : Promise.reject(data))),
   );
-};
 
 // Requisição API Drink por nome
-export const fetchDrinkName = (name) => {
+export const fetchDrinkName = (name) =>
   fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${name}`).then((response) =>
     response.json().then((data) => (response.ok ? Promise.resolve(data) : Promise.reject(data))),
   );
-};
 
 // Requisição API Drink por primeira letra
-export const fetchDrinkFirstLetter = (firstLetter) => {
-  fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${firstLetter}`).then((response) =>
+export const fetchDrinkFirstLetter = (firstLetter) =>
+  fetch(
+    `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${firstLetter}`,
+  ).then((response) =>
     response.json().then((data) => (response.ok ? Promise.resolve(data) : Promise.reject(data))),
   );
-};
