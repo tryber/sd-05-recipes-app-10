@@ -29,27 +29,28 @@ const MealCategories = (props) => {
     );
   }
   // if (props.pathname === '/comidas') {
-    return (
-      <div className="all-categories">
-        {mealDB.categorias.slice(0, 6).map(({ strCategory }) => (
-          <button
-            className="category"
-            data-testid={`${strCategory}-category-filter`}
-            key={strCategory}
-            onClick={() => {
-              setDrinkCategory('');
-              setCategory(strCategory);
-            }}
-          >
-            {strCategory}
-          </button>
-        ))}
-      </div>
-    );
+  return (
+    <div className="all-categories">
+      {mealDB.categorias.slice(0, 6).map(({ strCategory }) => (
+        <button
+          className="category"
+          data-testid={`${strCategory}-category-filter`}
+          key={strCategory}
+          onClick={() => {
+            setDrinkCategory('');
+            setCategory(strCategory);
+          }}
+        >
+          {strCategory}
+        </button>
+      ))}
+    </div>
+  );
   // }
 };
 
 MealCategories.propTypes = {
   pathname: propTypes.string.isRequired,
-}
+};
+
 export default MealCategories;

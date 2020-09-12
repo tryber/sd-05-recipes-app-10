@@ -59,8 +59,8 @@ const RecipesListByCategory = (props) => {
   );
 };
 
-RecipesListByCategory.propTypes = {
-  pathname: propTypes.string.isRequired,
-}
+// RecipesListByCategory.propTypes = {
+//   pathname: propTypes.string.isRequired,
+// }
 
 export default RecipesListByCategory;

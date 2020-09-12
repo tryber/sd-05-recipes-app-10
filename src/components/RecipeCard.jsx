@@ -1,5 +1,5 @@
 import React from 'react';
-import propTypes from 'prop-types'
+import propTypes from 'prop-types';
 import './RecipeCard.css';
 
 const RecipeCard = (props) => {
@@ -40,12 +40,12 @@ RecipeCard.propTypes = {
   recipe: propTypes.shape({
     strMeal: propTypes.string.isRequired,
     strMealThumb: propTypes.string.isRequired,
-    strMealThumb: propTypes.string.isRequired,
+    TestIdImage: propTypes.string.isRequired,
     strDrink: propTypes.string.isRequired,
     strDrinkThumb: propTypes.string.isRequired,
     TestIdImage: propTypes.string.isRequired,
     testIt: propTypes.string.isRequired,
     testName: propTypes.string.isRequired,
-  })
-}
+  }).isRequired,
+};
 export default RecipeCard;

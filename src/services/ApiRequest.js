@@ -25,7 +25,7 @@ const filterByIngredientUrl =
   'https://www.themealdb.com/api/json/v1/1/filter.php?c=';
 
 export const fetchMealsFilterdByCategory = (category) => {
-  console.log('fetchMealsFilterdByCategory')
+  console.log('fetchMealsFilterdByCategory');
   return fetch(filterByIngredientUrl + category)
     .then((res) => res.json())
     .then((data) => data.meals);
