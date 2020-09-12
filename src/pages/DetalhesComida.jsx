@@ -69,7 +69,7 @@ function handleRecommendationsDrinks(recomendadas) {
         <div data-testid={`${index}-recomendation-card`} className="drinks-card-details">
           <img alt="drinks or meals" className="img-drinks" src={recomendada.strDrinkThumb || recomendada.strMealThumb} />
           <div className="container">
-            <p data-testid="recipe-category">{recomendada.strAlcoholic || recomendada.strCategory}</p>
+            <h4 data-testid="recipe-category">{recomendada.strAlcoholic || recomendada.strCategory}</h4>
             <h4 data-testid={`${index}-recomendation-title`}>{recomendada.strDrink || recomendada.strMeal}</h4>
           </div>
         </div>
@@ -79,7 +79,6 @@ function handleRecommendationsDrinks(recomendadas) {
 }
 
 const DetalhesComida = (props) => {
-  const { mealDB, drinkDB } = useContext(ReceitasContext);
   const [recipe, setRecipe] = useState({
     strDrinkThumb: '',
     strMeal: '',
@@ -87,9 +86,7 @@ const DetalhesComida = (props) => {
     strMealThumb: '',
   });
   const [recommendations, setRecommendations] = useState([])
-  // https://www.thecocktaildb.com/api/json/v1/1/search.php?s=
   const { params, path } = props.match;
-  console.log(params);
 
   useEffect(() => {
     if (path.includes('comida')) {
@@ -132,7 +129,7 @@ const DetalhesComida = (props) => {
       </div>
       <div>
         <h2 data-testid="recipe-title">{recipe.strMeal || recipe.strDrink}</h2>
-        <h4 data-testid="recipe-category">{recipe.strCategory}</h4>
+        <h4 data-testid="recipe-category">{recipe.strAlcoholic || recipe.strCategory}</h4>
       </div>
       <div>
         <Link>
