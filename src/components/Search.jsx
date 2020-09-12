@@ -8,16 +8,15 @@ import {
 } from '../services/ApiRequest';
 import { ReceitasContext } from '../Context/ReceitasContext';
 import { useState } from 'react';
-import { useEffect } from 'react';
 
 const filterMealAPI = (tipo, input, setFood) => {
   switch (tipo) {
     case 'nome':
-      return fetchMealName(input).then((data) => setFood(data.meals.slice(0, 12)));
+      return fetchMealName(input).then((data) => setFood(data.meals));
     case 'ingredient':
-      return fetchMealIngredient(input).then((data) => setFood(data.meals.slice(0, 12)));
+      return fetchMealIngredient(input).then((data) => setFood(data.meals));
     case 'letter':
-      return fetchMealFirstLetter(input).then((data) => setFood(data.meals.slice(0, 12)));
+      return fetchMealFirstLetter(input).then((data) => setFood(data.meals));
     default:
       return null;
   }
@@ -26,20 +25,26 @@ const filterMealAPI = (tipo, input, setFood) => {
 const filterDrinkAPI = (tipo, input, setDrink) => {
   switch (tipo) {
     case 'nome':
-      return fetchDrinkName(input).then((data) => setDrink(data.drinks.slice(0, 12)));
+      return fetchDrinkName(input).then((data) => setDrink(data.drinks));
     case 'ingredient':
-      return fetchDrinkIngredient(input).then((data) => setDrink(data.drinks.slice(0, 12)));
+      return fetchDrinkIngredient(input).then((data) => setDrink(data.drinks));
     case 'letter':
-      return fetchDrinkFirstLetter(input).then((data) => setDrink(data.drinks.slice(0, 12)));
+      return fetchDrinkFirstLetter(input).then((data) => setDrink(data.drinks));
     default:
       return null;
   }
 };
 
+
 function Search() {
-  const { setFoodData, setDrinkData, chooseAPI } = useContext(ReceitasContext);
+  const { foodData, drinkData, setFoodData, setDrinkData, chooseAPI } = useContext(ReceitasContext);
   const [tipo, setTipo] = useState('nome');
   const [input, setInput] = useState('');
+
+  function showAlert() {
+    if(foodData === null || drinkData === null)
+    return alert("Sinto muito, não encontramos nenhuma receita para esses filtros.");
+  }
   return (
     <div>
       <div>
@@ -85,7 +90,7 @@ function Search() {
           data-testid="exec-search-btn"
           onClick={() => {
             if (chooseAPI === 'comidas') filterMealAPI(tipo, input, setFoodData);
-            else filterDrinkAPI(tipo, input, setDrinkData);
+            else filterDrinkAPI(tipo, input, setDrinkData); showAlert();
           }}
         >
           Buscar
