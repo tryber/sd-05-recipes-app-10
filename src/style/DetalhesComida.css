@@ -1,0 +1,32 @@
+.list-ingredients {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.recipe-photo {
+  width: 200px;
+}
+
+.drinks-card-details {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  margin: auto;
+  max-width: 200px;
+}
+
+.img-drinks {
+  border-radius: 5px 5px 0 0;
+  width: 100%;
+}
+
+.container {
+  padding: 2px 16px;
+}
+
+.ingredientes {
+  list-style-type: none;
+}
+
+.quantidades {
+  list-style-type: none;
+}

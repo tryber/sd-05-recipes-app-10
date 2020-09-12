@@ -10,6 +10,8 @@ export const ReceitasContextProvider = ({ children }) => {
     areas: [],
     categorias: [],
     ingredientes: [],
+    revenue: [],
+    recipeDetails: [],
   });
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
@@ -18,6 +20,7 @@ export const ReceitasContextProvider = ({ children }) => {
     categorias: [],
     glasses: [],
     ingredientes: [],
+    recommendDrinks: [],
   });
   const [category, setCategory] = useState('All');
   const [drinkCategory, setDrinkCategory] = useState('All');
