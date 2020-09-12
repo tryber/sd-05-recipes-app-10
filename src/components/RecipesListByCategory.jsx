@@ -11,7 +11,8 @@ import {
 import RecipeCard from './RecipeCard';
 
 const RecipesListByCategory = (props) => {
-  const { drinkCategory, category, recipesFiltered, setRecipesFiltered } = useContext(ReceitasContext);
+  const { drinkCategory, category } = useContext(ReceitasContext);
+  const { recipesFiltered, setRecipesFiltered } = useContext(ReceitasContext);
 
   useEffect(() => {
     if (props.pathname === '/bebidas') {
