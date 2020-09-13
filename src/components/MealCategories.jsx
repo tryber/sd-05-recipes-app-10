@@ -5,15 +5,9 @@ import './MealCategories.css';
 import { ReceitasContext } from '../Context/ReceitasContext';
 
 const MealCategories = (props) => {
-  const {
-    category,
-    drinkCategory,
-    mealDB,
-    drinkDB,
-    setDrinkCategory,
-    setCategory,
-  } = useContext(ReceitasContext);
-
+  const { category, drinkCategory,  mealDB } = useContext(ReceitasContext);
+  const { drinkDB, setDrinkCategory, setCategory } = useContext(ReceitasContext);
+// FALTA DIMINUIR LINHAS DE CODIGO
   if (props.pathname === '/bebidas') {
     return (
       <div className="all-categories">
@@ -25,9 +19,7 @@ const MealCategories = (props) => {
             onClick={() => {
               if (drinkCategory !== strCategory) {
                 setDrinkCategory(strCategory);
-              } else {
-                setDrinkCategory('All');
-              }
+              } else { setDrinkCategory('All'); }
             }}
           >
             {strCategory}
@@ -36,7 +28,6 @@ const MealCategories = (props) => {
       </div>
     );
   }
-  // if (props.pathname === '/comidas') {
   return (
     <div className="all-categories">
       {mealDB.categorias.slice(0, 6).map(({ strCategory }) => (
@@ -47,9 +38,7 @@ const MealCategories = (props) => {
           onClick={() => {
             if (category !== strCategory) {
               setCategory(strCategory);
-            } else {
-              setCategory('All');
-            }
+            } else {setCategory('All');}
           }}
         >
           {strCategory}
@@ -57,7 +46,6 @@ const MealCategories = (props) => {
       ))}
     </div>
   );
-  // }
 };
 
 MealCategories.propTypes = {

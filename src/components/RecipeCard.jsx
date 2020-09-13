@@ -1,7 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
 import './RecipeCard.css';
-import { Link } from 'react-router-dom';
 
 const RecipeCard = (props) => {
   const {
@@ -12,23 +12,19 @@ const RecipeCard = (props) => {
     recipe: { strMeal, strMealThumb, strDrink, strDrinkThumb },
   } = props;
 
-  console.log('reciper card teste ' + recipe);
-
-  // to={{
-  //   pathname: '/tylermcginnis',
-  //   state: {
-  //     fromNotifications: true
-  //   }
-  // }}
-  
   if (strDrink) {
     return (
-      <Link to={{
-        pathname: `/bebidas/${recipe.idDrink}`,
-        state: {
-          recipe,
-        }        
-      }}className="card" data-testid={testIt} key={testIt} >
+      <Link
+        to={{
+          pathname: `/bebidas/${recipe.idDrink}`,
+          state: {
+            recipe,
+          },
+        }}
+        className="card"
+        data-testid={testIt}
+        key={testIt}
+      >
         <img
           src={strDrinkThumb}
           data-testid={TestIdImage}
@@ -41,12 +37,17 @@ const RecipeCard = (props) => {
   }
 
   return (
-    <Link to={{
-      pathname: `/comidas/${recipe.idMeal}`,
-      state: {
-        recipe,
-      }     
-    }}className="card" data-testid={testIt} key={testIt}>
+    <Link
+      to={{
+        pathname: `/comidas/${recipe.idMeal}`,
+        state: {
+          recipe,
+        },
+      }}
+      className="card"
+      data-testid={testIt}
+      key={testIt}
+    >
       <img
         src={strMealThumb}
         data-testid={TestIdImage}

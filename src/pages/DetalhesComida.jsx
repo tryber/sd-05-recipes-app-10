@@ -1,15 +1,16 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ReceitasContext } from '../Context/ReceitasContext';
+import { useState } from 'react';
+// import { ReceitasContext } from '../Context/ReceitasContext';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import '../style/DetalhesComida.css';
-import { useState } from 'react';
 
 const btnStyle = {
-  'background-color':' #E5E5E5',
-  'position':'fixed', 
-  'bottom': 0}
+  'background-color': '#E5E5E5',
+  position: 'fixed',
+  bottom: 0,
+}
 
 function handleIngredients(mealDB) {
   const quantities = [];
@@ -66,11 +67,22 @@ function handleRecommendationsDrinks(recomendadas) {
     <div>
       <h3>Recomendadas</h3>
       {recomendadas.slice(0, 6).map((recomendada, index) => (
-        <div data-testid={`${index}-recomendation-card`} className="drinks-card-details">
-          <img alt="drinks or meals" className="img-drinks" src={recomendada.strDrinkThumb || recomendada.strMealThumb} />
+        <div
+          data-testid={`${index}-recomendation-card`}
+          className="drinks-card-details"
+        >
+          <img
+            alt="drinks or meals"
+            className="img-drinks"
+            src={recomendada.strDrinkThumb || recomendada.strMealThumb}
+          />
           <div className="container">
-            <h4 data-testid="recipe-category">{recomendada.strAlcoholic || recomendada.strCategory}</h4>
-            <h4 data-testid={`${index}-recomendation-title`}>{recomendada.strDrink || recomendada.strMeal}</h4>
+            <h4 data-testid="recipe-category">
+              {recomendada.strAlcoholic || recomendada.strCategory}
+            </h4>
+            <h4 data-testid={`${index}-recomendation-title`}>
+              {recomendada.strDrink || recomendada.strMeal}
+            </h4>
           </div>
         </div>
       ))}
@@ -85,7 +97,7 @@ const DetalhesComida = (props) => {
     strCategory: '',
     strMealThumb: '',
   });
-  const [recommendations, setRecommendations] = useState([])
+  const [recommendations, setRecommendations] = useState([]);
   const { params, path } = props.match;
 
   useEffect(() => {
@@ -96,7 +108,7 @@ const DetalhesComida = (props) => {
         .then((res) => res.json())
         .then((data) => setRecipe(data.meals[0]));
       fetch(
-        `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=`,
+        'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=',
       )
         .then((res) => res.json())
         .then((data) => setRecommendations(data.drinks));
@@ -110,7 +122,7 @@ const DetalhesComida = (props) => {
         .then((res) => res.json())
         .then((data) => setRecipe(data.drinks[0]));
       fetch(
-        `https://www.themealdb.com/api/json/v1/1/search.php?s=`,
+        'https://www.themealdb.com/api/json/v1/1/search.php?s=',
       )
         .then((res) => res.json())
         .then((data) => setRecommendations(data.meals));
@@ -129,7 +141,9 @@ const DetalhesComida = (props) => {
       </div>
       <div>
         <h2 data-testid="recipe-title">{recipe.strMeal || recipe.strDrink}</h2>
-        <h4 data-testid="recipe-category">{recipe.strAlcoholic || recipe.strCategory}</h4>
+        <h4 data-testid="recipe-category">
+          {recipe.strAlcoholic || recipe.strCategory}
+        </h4>
       </div>
       <div>
         <Link>
@@ -148,7 +162,11 @@ const DetalhesComida = (props) => {
         <div>{handleStrInstructions(recipe)}</div>
         <div>{handleStrYoutube(recipe)}</div>
         <div>{handleRecommendationsDrinks(recommendations)}</div>
-        <Link><button style={btnStyle} data-testid="start-recipe-btn">Iniciar Receita</button></Link>
+        <Link>
+          <button style={btnStyle} data-testid="start-recipe-btn">
+            Iniciar Receita
+          </button>
+        </Link>
       </div>
     </div>
   );
