@@ -4,15 +4,16 @@ const ingredientes = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list';
 const revenue = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
 
 export const fetchMealById = (id) => {
+  console.log('cc e seu lance com arrow body')
   return fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`)
     .then((res) => res.json())
     .then((data) => data.meals[0]);
 };
-export const fetchDrinkById = (id) => {
-  return fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`)
+export const fetchDrinkById = (id) => (
+  fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`)
     .then((res) => res.json())
-    .then((data) => data.drinks[0]);
-};
+    .then((data) => data.drinks[0])
+);
 
 const filterAllMeal = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
 
