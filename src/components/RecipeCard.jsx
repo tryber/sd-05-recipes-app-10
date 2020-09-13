@@ -5,23 +5,20 @@ import './RecipeCard.css';
 
 const RecipeCard = (props) => {
   const { testName, testIt, TestIdImage, recipe } = props;
-  const { recipe: { strMeal, strMealThumb, strDrink, strDrinkThumb }} = props;
+  const { recipe: { strMeal, strMealThumb, strDrink, strDrinkThumb } } = props;
 
   if (strDrink) {
     return (
       <Link
         to={{
           pathname: `/bebidas/${recipe.idDrink}`,
-          state: { recipe, },
+          state: { recipe },
         }}
-        className="card"
-        data-testid={testIt}
-        key={testIt}
+        className="card" data-testid={testIt} key={testIt}
       >
         <img
-          src={strDrinkThumb}
-          data-testid={TestIdImage}
-          style={{ width: '200px' }}
+          src={strDrinkThumb} data-testid={TestIdImage}
+          style={{ width: '200px' }} alt=''
         />
         <h3 data-testid={testName}> {strDrink}</h3>
       </Link>
@@ -32,15 +29,13 @@ const RecipeCard = (props) => {
     <Link
       to={{
         pathname: `/comidas/${recipe.idMeal}`,
-        state: { recipe, },}}
-      className="card"
-      data-testid={testIt}
-      key={testIt}
+        state: { recipe } } }
+      className="card" data-testid={testIt}
+      key={testIt} alt=''
     >
       <img
-        src={strMealThumb}
-        data-testid={TestIdImage}
-        style={{ width: '200px' }}
+        src={strMealThumb} data-testid={TestIdImage}
+        style={{ width: '200px' }} alt=''
       />
       <h3 data-testid={testName}> {strMeal}</h3>
     </Link>
