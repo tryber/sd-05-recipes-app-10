@@ -11,7 +11,7 @@ const btnStyle = {
   'background-color': '#E5E5E5',
   position: 'fixed',
   bottom: 0,
-}
+};
 
 function handleIngredients(mealDB) {
   const quantities = [];
@@ -174,13 +174,12 @@ const DetalhesComida = (props) => {
 };
 
 DetalhesComida.propTypes = {
-  path: propTypes.string.isRequired,
-    match: propTypes.shape({
-      params: propTypes.shape({
-        id: propTypes.string,
-          idMeal: propTypes.string,
-      }),
-  })
+  match: propTypes.shape({
+    params: propTypes.shape({
+      id: propTypes.string,
+      idMeal: propTypes.string,
+    }),
+  }),
 };
 
 

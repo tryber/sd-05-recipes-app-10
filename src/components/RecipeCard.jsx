@@ -4,22 +4,15 @@ import propTypes from 'prop-types';
 import './RecipeCard.css';
 
 const RecipeCard = (props) => {
-  const {
-    testName,
-    testIt,
-    TestIdImage,
-    recipe,
-    recipe: { strMeal, strMealThumb, strDrink, strDrinkThumb },
-  } = props;
+  const { testName, testIt, TestIdImage, recipe } = props;
+  const { recipe: { strMeal, strMealThumb, strDrink, strDrinkThumb }} = props;
 
   if (strDrink) {
     return (
       <Link
         to={{
           pathname: `/bebidas/${recipe.idDrink}`,
-          state: {
-            recipe,
-          },
+          state: { recipe, },
         }}
         className="card"
         data-testid={testIt}
@@ -29,7 +22,6 @@ const RecipeCard = (props) => {
           src={strDrinkThumb}
           data-testid={TestIdImage}
           style={{ width: '200px' }}
-          alt=""
         />
         <h3 data-testid={testName}> {strDrink}</h3>
       </Link>
@@ -40,10 +32,7 @@ const RecipeCard = (props) => {
     <Link
       to={{
         pathname: `/comidas/${recipe.idMeal}`,
-        state: {
-          recipe,
-        },
-      }}
+        state: { recipe, },}}
       className="card"
       data-testid={testIt}
       key={testIt}
@@ -52,7 +41,6 @@ const RecipeCard = (props) => {
         src={strMealThumb}
         data-testid={TestIdImage}
         style={{ width: '200px' }}
-        alt=""
       />
       <h3 data-testid={testName}> {strMeal}</h3>
     </Link>
