@@ -116,21 +116,21 @@ const DetalhesComida = (props) => {
 
   return (
     <div>
-        <img
-          alt="detail" className="recipe-photo" data-testid="recipe-photo"
-          src={recipe.strMealThumb || recipe.strDrinkThumb}
-        />
-        <h2 data-testid="recipe-title">{recipe.strMeal || recipe.strDrink}</h2>
-        <h4 data-testid="recipe-category">{recipe.strAlcoholic || recipe.strCategory}</h4>
-        <Link><img alt="share button" data-testid="share-btn" src={shareIcon} /></Link>
-        <Link><img alt="favorite button" data-testid="favorite-btn" src={whiteHeartIcon} /></Link>
-        <div>{handleIngredients(recipe)}</div>
-        <div>{handleStrInstructions(recipe)}</div>
-        <div>{handleStrYoutube(recipe)}</div>
-        <div>{handleRecommendationsDrinks(recommendations)}</div>
-        <Link>
-          <button style={btnStyle} data-testid="start-recipe-btn"> Iniciar Receita </button>
-        </Link>
+      <img
+        alt="detail" className="recipe-photo" data-testid="recipe-photo"
+        src={recipe.strMealThumb || recipe.strDrinkThumb}
+      />
+      <h2 data-testid="recipe-title">{recipe.strMeal || recipe.strDrink}</h2>
+      <h4 data-testid="recipe-category">{recipe.strAlcoholic || recipe.strCategory}</h4>
+      <Link><img alt="share button" data-testid="share-btn" src={shareIcon} /></Link>
+      <Link><img alt="favorite button" data-testid="favorite-btn" src={whiteHeartIcon} /></Link>
+      <div>{handleIngredients(recipe)}</div>
+      <div>{handleStrInstructions(recipe)}</div>
+      <div>{handleStrYoutube(recipe)}</div>
+      <div>{handleRecommendationsDrinks(recommendations)}</div>
+      <Link>
+        <button style={btnStyle} data-testid="start-recipe-btn"> Iniciar Receita </button>
+      </Link>
     </div>
   );
 };

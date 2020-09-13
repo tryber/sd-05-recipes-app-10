@@ -4,19 +4,15 @@ const ingredientes = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list';
 const revenue = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
 
 export const fetchMealById = (id) => {
-  return fetch(
-    `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`,
-  )
+  return fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`)
     .then((res) => res.json())
     .then((data) => data.meals[0]);
-}
+};
 export const fetchDrinkById = (id) => {
-  return fetch(
-    `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`,
-  )
+  return fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`)
     .then((res) => res.json())
     .then((data) => data.drinks[0]);
-}
+};
 
 const filterAllMeal = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
 
@@ -81,8 +77,9 @@ export const fetchMealDB = async () => {
   const revenueData = await fetch(revenue)
     .then((res) => res.json())
     .then((data) => data.meals);
-  const recipeDetailsData = revenueData
-    .find((idMeal) => fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idMeal}`));
+  const recipeDetailsData = revenueData.find((idMeal) =>
+    fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idMeal}`),
+  );
 
   return {
     categorias: categoriesData,
