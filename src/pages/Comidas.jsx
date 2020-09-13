@@ -20,8 +20,7 @@ const Comidas = (props) => {
 
   return (
     <Fragment>
-      Comidas
-      <Header />
+      <Header pathname={props.history.location.pathname} />
       <MealCategories pathname={props.history.location.pathname} />
       <RecipesListByCategory pathname={props.history.location.pathname} />
       <Footer />

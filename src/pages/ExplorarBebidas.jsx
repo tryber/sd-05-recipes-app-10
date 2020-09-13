@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import Footer from '../components/Footer';
+import profileIcon from '../images/profileIcon.svg';
+import Header from '../components/header';
 
-const ExplorarBebidas = () => {
+
+const ExplorarBebidas = (props) => {
   const [pageToRedirect, setPageToRedirect] = useState('');
   const [shouldRedirect, setShouldRedirect] = useState(false);
 
@@ -26,7 +29,7 @@ const ExplorarBebidas = () => {
 
   return (
     <div>
-      <h1>Explorar Bebidas</h1>
+       <Header pathname={props.history.location.pathname} />
       <button
         onClick={() => handleRedirect('ingredientes')}
         data-testid="explore-by-ingredient"
