@@ -6,6 +6,7 @@ import propTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import '../style/DetalhesComida.css';
+import { fetchMealById, fetchAllMeals, fetchAllDrinks, fetchDrinkById } from '../services/ApiRequest';
 
 const btnStyle = {
   'background-color': '#E5E5E5',
@@ -103,72 +104,33 @@ const DetalhesComida = (props) => {
 
   useEffect(() => {
     if (path.includes('comida')) {
-      fetch(
-        `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${params.idMeal}`,
-      )
-        .then((res) => res.json())
-        .then((data) => setRecipe(data.meals[0]));
-      fetch(
-        'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=',
-      )
-        .then((res) => res.json())
-        .then((data) => setRecommendations(data.drinks));
+      fetchMealById(params.idMeal).then((e) => setRecipe(e));
+      fetchAllDrinks().then((e) => setRecommendations(e));
     }
 
     if (path.includes('bebida')) {
-      console.log(params.id);
-      fetch(
-        `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${params.id}`,
-      )
-        .then((res) => res.json())
-        .then((data) => setRecipe(data.drinks[0]));
-      fetch(
-        'https://www.themealdb.com/api/json/v1/1/search.php?s=',
-      )
-        .then((res) => res.json())
-        .then((data) => setRecommendations(data.meals));
+      fetchDrinkById(params.id).then((e) => setRecipe(e));
+      fetchAllMeals().then((e) => setRecommendations(e));
     }
   }, []);
 
   return (
     <div>
-      <div>
         <img
-          alt="detail"
-          className="recipe-photo"
-          data-testid="recipe-photo"
+          alt="detail" className="recipe-photo" data-testid="recipe-photo"
           src={recipe.strMealThumb || recipe.strDrinkThumb}
         />
-      </div>
-      <div>
         <h2 data-testid="recipe-title">{recipe.strMeal || recipe.strDrink}</h2>
-        <h4 data-testid="recipe-category">
-          {recipe.strAlcoholic || recipe.strCategory}
-        </h4>
-      </div>
-      <div>
-        <Link>
-          <img alt="share button" data-testid="share-btn" src={shareIcon} />
-        </Link>
-        <Link>
-          <img
-            alt="favorite button"
-            data-testid="favorite-btn"
-            src={whiteHeartIcon}
-          />
-        </Link>
-      </div>
-      <div>
+        <h4 data-testid="recipe-category">{recipe.strAlcoholic || recipe.strCategory}</h4>
+        <Link><img alt="share button" data-testid="share-btn" src={shareIcon} /></Link>
+        <Link><img alt="favorite button" data-testid="favorite-btn" src={whiteHeartIcon} /></Link>
         <div>{handleIngredients(recipe)}</div>
         <div>{handleStrInstructions(recipe)}</div>
         <div>{handleStrYoutube(recipe)}</div>
         <div>{handleRecommendationsDrinks(recommendations)}</div>
         <Link>
-          <button style={btnStyle} data-testid="start-recipe-btn">
-            Iniciar Receita
-          </button>
+          <button style={btnStyle} data-testid="start-recipe-btn"> Iniciar Receita </button>
         </Link>
-      </div>
     </div>
   );
 };
