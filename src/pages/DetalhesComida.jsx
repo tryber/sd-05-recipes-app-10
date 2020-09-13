@@ -175,10 +175,13 @@ const DetalhesComida = (props) => {
 
 DetalhesComida.propTypes = {
   path: propTypes.string.isRequired,
-  params: propTypes.shape({
-    id: propTypes.string,
-    idMeal: propTypes.string,
+    match: propTypes.shape({
+      params: propTypes.shape({
+        id: propTypes.string,
+          idMeal: propTypes.string,
+      }),
   })
-}
+};
+
 
 export default DetalhesComida;
