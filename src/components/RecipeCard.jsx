@@ -12,13 +12,12 @@ const RecipeCard = (props) => {
       <Link
         to={{
           pathname: `/bebidas/${recipe.idDrink}`,
-          state: { recipe },
-        }}
+          state: { recipe } }}
         className="card" data-testid={testIt} key={testIt}
       >
         <img
           src={strDrinkThumb} data-testid={TestIdImage}
-          style={{ width: '200px' }} alt=''
+          style={{ width: '200px' }} alt=""
         />
         <h3 data-testid={testName}> {strDrink}</h3>
       </Link>
@@ -29,13 +28,13 @@ const RecipeCard = (props) => {
     <Link
       to={{
         pathname: `/comidas/${recipe.idMeal}`,
-        state: { recipe } } }
+        state: { recipe } }}
       className="card" data-testid={testIt}
-      key={testIt} alt=''
+      key={testIt} alt=""
     >
       <img
         src={strMealThumb} data-testid={TestIdImage}
-        style={{ width: '200px' }} alt=''
+        style={{ width: '200px' }} alt=""
       />
       <h3 data-testid={testName}> {strMeal}</h3>
     </Link>
