@@ -17,7 +17,7 @@ const Explore = (props) => {
         type="button"
         data-testid="explore-food"
       >
-        Explore Comidas
+        Explorar Comidas
       </button>
       <button
         onClick={() => {
@@ -27,7 +27,7 @@ const Explore = (props) => {
         type="button"
         data-testid="explore-drinks"
       >
-        Explore Bebidas
+        Explorar Bebidas
       </button>
       <Footer />
     </Fragment>

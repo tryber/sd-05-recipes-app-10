@@ -3,11 +3,14 @@ import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 
 function Perfil() {
+  if(!JSON.parse(localStorage.getItem('user'))) {
+    localStorage.setItem('user', JSON.stringify({email: 'email@mail.com'}))
+  }
   return (
     <div>
       Perfil
       <h1 data-testid="profile-email">
-        {JSON.parse(localStorage.getItem('user')).email}
+        {JSON.parse(localStorage.getItem('user')).email && JSON.parse(localStorage.getItem('user')).email}
       </h1>
       <Link to="/receitas-feitas">
         <button data-testid="profile-done-btn">Receitas Feitas</button>
