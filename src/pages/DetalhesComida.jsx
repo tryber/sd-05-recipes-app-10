@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import propTypes from 'prop-types';
 // import { ReceitasContext } from '../Context/ReceitasContext';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
@@ -171,5 +172,13 @@ const DetalhesComida = (props) => {
     </div>
   );
 };
+
+DetalhesComida.propTypes = {
+  path: propTypes.string.isRequired,
+  params: propTypes.shape({
+    id: propTypes.string,
+    idMeal: propTypes.string,
+  })
+}
 
 export default DetalhesComida;
