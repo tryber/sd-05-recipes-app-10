@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+import propTypes from 'prop-types';
 import Footer from '../components/Footer';
-import profileIcon from '../images/profileIcon.svg';
 import Header from '../components/header';
 
 
@@ -47,5 +47,14 @@ const ExplorarBebidas = (props) => {
     </div>
   );
 };
+
+ExplorarBebidas.propTypes = {
+  history: propTypes.shape({
+    location: propTypes.shape({
+      pathname: propTypes.shape.isRequired,
+    }).isRequired,
+  }).isRequired,
+};
+
 
 export default ExplorarBebidas;

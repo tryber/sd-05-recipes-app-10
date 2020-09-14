@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import propTypes from 'prop-types';
 import Footer from '../components/Footer';
 import Header from '../components/header';
 
@@ -27,5 +28,13 @@ function Perfil(props) {
     </div>
   );
 }
+
+Perfil.propTypes = {
+  history: propTypes.shape({
+    location: propTypes.shape({
+      pathname: propTypes.shape.isRequired,
+    }).isRequired,
+  }).isRequired,
+};
 
 export default Perfil;

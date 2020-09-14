@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { useState } from 'react';
+import propTypes from 'prop-types';
 import Footer from '../components/Footer';
-import profileIcon from '../images/profileIcon.svg';
 import Header from '../components/header';
 
 
@@ -46,6 +46,14 @@ const ExplorarComidas = (props) => {
       <Footer />
     </div>
   );
+};
+
+ExplorarComidas.propTypes = {
+  history: propTypes.shape({
+    location: propTypes.shape({
+      pathname: propTypes.shape.isRequired,
+    }).isRequired,
+  }).isRequired,
 };
 
 export default ExplorarComidas;
