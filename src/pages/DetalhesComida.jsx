@@ -1,4 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import Carousel from 'react-elastic-carousel';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import propTypes from 'prop-types';
@@ -64,30 +66,39 @@ function handleStrYoutube(mealDB) {
   );
 }
 
+const breakPoints = [
+  { width: 2, itemsToShow: 2 },
+  { width: 550, itemsToShow: 2 },
+  { width: 768, itemsToShow: 3 },
+  { width: 1200, itemsToShow: 4 },
+];
+
 function handleRecommendationsDrinks(recomendadas) {
   return (
     <div>
       <h3>Recomendadas</h3>
-      {recomendadas.slice(0, 6).map((recomendada, index) => (
-        <div
-          data-testid={`${index}-recomendation-card`}
-          className="drinks-card-details"
-        >
-          <img
-            alt="drinks or meals"
-            className="img-drinks"
-            src={recomendada.strDrinkThumb || recomendada.strMealThumb}
-          />
-          <div className="container">
-            <h4 data-testid="recipe-category">
-              {recomendada.strAlcoholic || recomendada.strCategory}
-            </h4>
-            <h4 data-testid={`${index}-recomendation-title`}>
-              {recomendada.strDrink || recomendada.strMeal}
-            </h4>
+      <Carousel breakPoints={breakPoints}>
+        {recomendadas.slice(0, 6).map((recomendada, index) => (
+          <div
+            data-testid={`${index}-recomendation-card`}
+            className="drinks-card-details"
+          >
+            <img
+              alt="drinks or meals"
+              className="img-drinks"
+              src={recomendada.strDrinkThumb || recomendada.strMealThumb}
+            />
+            <div className="container">
+              <h4 data-testid="recipe-category">
+                {recomendada.strAlcoholic || recomendada.strCategory}
+              </h4>
+              <h4 data-testid={`${index}-recomendation-title`}>
+                {recomendada.strDrink || recomendada.strMeal}
+              </h4>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </Carousel>
     </div>
   );
 }
