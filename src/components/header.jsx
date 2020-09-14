@@ -27,8 +27,8 @@ const Header = (props) => {
     <div>
       <header
         style={{
-          'background': 'lightgrey',
-          'display': 'flex',
+          background: 'lightgrey',
+          display: 'flex',
           'flex-direction': 'row',
         }}
       >
