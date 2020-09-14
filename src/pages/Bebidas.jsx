@@ -22,7 +22,7 @@ const Bebidas = (props) => {
 
   return (
     <Fragment>
-      <Header pathname={props.history.location.pathname} />
+      <Header pathname={props.history.location.pathname} /> 
       <MealCategories pathname={props.history.location.pathname} />
       <RecipesListByCategory pathname={props.history.location.pathname} />
       {/* <Route */}

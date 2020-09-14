@@ -4,9 +4,10 @@ import { useState } from 'react';
 import propTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 import '../style/DetalhesComida.css';
 import { fetchMealById, fetchAllMeals, fetchAllDrinks, fetchDrinkById } from '../services/ApiRequest';
-
+// o botão tem que ser bottom com posição fixa o resto pode estilizar
 const btnStyle = {
   'background-color': '#E5E5E5',
   position: 'fixed',
@@ -18,10 +19,10 @@ function handleIngredients(mealDB) {
   const ingredients = [];
 
   Object.entries(mealDB).forEach((element) => {
-    if (element[0].includes('strMeasure') && element[1] !== ' ') {
+    if (element[0].includes('strMeasure') && element[1] !== ' ' && element[1] !== '') {
       quantities.push(element[1]);
     }
-    if (element[0].includes('strIngredient') && element[1] !== '') {
+    if (element[0].includes('strIngredient') && element[1] !== ' ' && element[1] !== '') {
       ingredients.push(element[1]);
     }
   });
@@ -100,6 +101,7 @@ const DetalhesComida = (props) => {
   });
   const [recommendations, setRecommendations] = useState([]);
   const { params, path } = props.match;
+  const [favorite, setFavorite] = useState(false);
 
   useEffect(() => {
     if (path.includes('comida')) {
@@ -121,8 +123,10 @@ const DetalhesComida = (props) => {
       />
       <h2 data-testid="recipe-title">{recipe.strMeal || recipe.strDrink}</h2>
       <h4 data-testid="recipe-category">{recipe.strAlcoholic || recipe.strCategory}</h4>
-      <Link><img alt="share button" data-testid="share-btn" src={shareIcon} /></Link>
-      <Link><img alt="favorite button" data-testid="favorite-btn" src={whiteHeartIcon} /></Link>
+      <button><img alt="share button" data-testid="share-btn" src={shareIcon} /></button>
+      <button onClick={() => setFavorite(!favorite)}>
+        <img alt="favorite button" data-testid="favorite-btn" src={favorite ? blackHeartIcon : whiteHeartIcon} />
+      </button>
       <div>{handleIngredients(recipe)}</div>
       <div>{handleStrInstructions(recipe)}</div>
       <div>{handleStrYoutube(recipe)}</div>
