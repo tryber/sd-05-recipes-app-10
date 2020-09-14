@@ -5,7 +5,7 @@ import propTypes from 'prop-types';
 export const ReceitasContext = createContext();
 
 export const ReceitasContextProvider = ({ children }) => {
-  const [qualPage, setqualPage] = useState('meal');
+  // const [qualPage, setqualPage] = useState('comidas');
   const [mealDB, setMealDB] = useState({
     areas: [],
     categorias: [],
@@ -22,10 +22,13 @@ export const ReceitasContextProvider = ({ children }) => {
     ingredientes: [],
     recommendDrinks: [],
   });
+  const [category, setCategory] = useState('All');
+  const [drinkCategory, setDrinkCategory] = useState('All');
+  const [recipesFiltered, setRecipesFiltered] = useState([]);
 
   const context = {
-    qualPage,
-    setqualPage,
+    // qualPage,
+    // setqualPage,
     email,
     setEmail,
     senha,
@@ -34,6 +37,12 @@ export const ReceitasContextProvider = ({ children }) => {
     setMealDB,
     drinkDB,
     setDrinkDB,
+    category,
+    setCategory,
+    recipesFiltered,
+    setRecipesFiltered,
+    drinkCategory,
+    setDrinkCategory,
   };
 
   return (

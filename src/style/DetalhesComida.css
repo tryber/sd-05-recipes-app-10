@@ -1,4 +1,4 @@
-/* .list-ingredients {
+.list-ingredients {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -30,14 +30,3 @@
 .quantidades {
   list-style-type: none;
 }
-
-.drinks-card-details {
-  display: flex;
-  background-color: aqua;
-  padding: 20px;
-}
-
-.btn {
-  background-color: red;
-  width: 200px;
-} */

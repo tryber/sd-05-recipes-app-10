@@ -1,16 +1,26 @@
+
 import React, { useContext } from 'react';
 import Carousel from 'react-elastic-carousel';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ReceitasContext } from '../Context/ReceitasContext';
+import { useState } from 'react';
+import propTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-// import '../style/DetalhesComida.css';
+import '../style/DetalhesComida.css';
+import { fetchMealById, fetchAllMeals, fetchAllDrinks, fetchDrinkById } from '../services/ApiRequest';
+
+const btnStyle = {
+  'background-color': '#E5E5E5',
+  position: 'fixed',
+  bottom: 0,
+};
 
 function handleIngredients(mealDB) {
   const quantities = [];
   const ingredients = [];
 
-  Object.entries(mealDB.recipeDetails).forEach((element) => {
+  Object.entries(mealDB).forEach((element) => {
     if (element[0].includes('strMeasure') && element[1] !== ' ') {
       quantities.push(element[1]);
     }
@@ -23,14 +33,14 @@ function handleIngredients(mealDB) {
     <div>
       <h3>Ingredients</h3>
       <ul>
-        {quantities
-          .map((element, index) =>
-            <li
-              className="quantidades"
-              data-testid={`${index}-ingredient-name-and-measure`}
-            >- {ingredients[index]} - {element}</li>,
-          )
-        }
+        {quantities.map((element, index) => (
+          <li
+            className="quantidades"
+            data-testid={`${index}-ingredient-name-and-measure`}
+          >
+            - {ingredients[index]} - {element}
+          </li>
+        ))}
       </ul>
     </div>
   );
@@ -40,7 +50,7 @@ function handleStrInstructions(mealDB) {
   return (
     <div>
       <h3>Instructions</h3>
-      <p>{mealDB.recipeDetails.strInstructions}</p>
+      <p data-testid="instructions">{mealDB.strInstructions}</p>
     </div>
   );
 }
@@ -50,77 +60,91 @@ function handleStrYoutube(mealDB) {
     <div>
       <h3>Vídeo</h3>
       <video width="320" height="240" controls>
-        <source data-testid="video" src={mealDB.recipeDetails.strYoutube} type="video/mp4" />
+        <source data-testid="video" src={mealDB.strYoutube} type="video/mp4" />
       </video>
     </div>
   );
 }
 
-function handleRecommendationsDrinks(drinkDB) {
+function handleRecommendationsDrinks(recomendadas) {
   return (
-    <Carousel>
-      <div>
-        <h3>Recomendadas</h3>
-        {drinkDB.recommendDrinks.slice(0, 6).map((drink) => (
-          <div className="drinks-card-details">
-            <img alt="drinks" className="img-drinks" src={drink.strDrinkThumb} />
-            <div className="container">
-              <p>{drink.strAlcoholic}</p>
-              <h4>{drink.strDrink}</h4>
-            </div>
+    <div>
+      <h3>Recomendadas</h3>
+      {recomendadas.slice(0, 6).map((recomendada, index) => (
+        <div
+          data-testid={`${index}-recomendation-card`}
+          className="drinks-card-details"
+        >
+          <img
+            alt="drinks or meals"
+            className="img-drinks"
+            src={recomendada.strDrinkThumb || recomendada.strMealThumb}
+          />
+          <div className="container">
+            <h4 data-testid="recipe-category">
+              {recomendada.strAlcoholic || recomendada.strCategory}
+            </h4>
+            <h4 data-testid={`${index}-recomendation-title`}>
+              {recomendada.strDrink || recomendada.strMeal}
+            </h4>
           </div>
-        ))}
-      </div>
-    </Carousel>
+        </div>
+      ))}
+    </div>
   );
 }
 
-const DetalhesComida = () => {
-  const { mealDB, drinkDB } = useContext(ReceitasContext);
-  console.log('mealDB', mealDB);
-  console.log('drinks', drinkDB.recommendDrinks);
+const DetalhesComida = (props) => {
+  const [recipe, setRecipe] = useState({
+        strDrinkThumb: '',
+    strMeal: '',
+    strCategory: '',
+    strMealThumb: '',
+  });
+  const [recommendations, setRecommendations] = useState([]);
+  const { params, path} = props.match;
+
+  useEffect(() => {
+    if (path.includes('comida')) {
+        fetchMealById(params.idMeal).then((e) => setRecipe(e));
+      fetchAllDrinks().then((e) => setRecommendations(e));
+    }
+
+    if (path.includes('bebida')) {
+        fetchDrinkById(params.id).then((e) => setRecipe(e));
+      fetchAllMeals().then((e) => setRecommendations(e));
+    }
+  }, []);
 
   return (
-    <div>
       <div>
-        <img
-          alt="detail"
-          className="recipe-photo"
-          data-testid="recipe-photo"
-          src={mealDB.recipeDetails.strMealThumb}
-        />
-      </div>
-      <div>
-        <h2 data-testid="recipe-title">{mealDB.recipeDetails.strMeal}</h2>
-        <h4 data-testid="recipe-category">{mealDB.recipeDetails.strCategory}</h4>
-      </div>
-      <div>
-        <Link>
-          <img alt="share button" data-testid="share-btn" src={shareIcon} />
-        </Link>
-        <Link>
-          <img alt="favorite button" data-testid="favorite-btn" src={whiteHeartIcon} />
-        </Link>
-      </div>
-      <div>
-        <div>
-          {handleIngredients(mealDB)}
-        </div>
-        <div>
-          {handleStrInstructions(mealDB)}
-        </div>
-        <div>
-          {handleStrYoutube(mealDB)}
-        </div>
-        <div>
-          {handleRecommendationsDrinks(drinkDB)}
-        </div>
-      </div>
-      <div>
-        <button data-testid="start-recipe-btn" className="btn">Iniciar Receita</button>
-      </div>
+      <img
+        alt="detail" className="recipe-photo" data-testid="recipe-photo"
+        src={recipe.strMealThumb || recipe.strDrinkThumb}
+      />
+      <h2 data-testid="recipe-title">{recipe.strMeal || recipe.strDrink}</h2>
+      <h4 data-testid="recipe-category">{recipe.strAlcoholic || recipe.strCategory}</h4>
+      <Link><img alt="share button" data-testid="share-btn" src={shareIcon} /></Link>
+      <Link><img alt="favorite button" data-testid="favorite-btn" src={whiteHeartIcon} /></Link>
+      <div>{handleIngredients(recipe)}</div>
+      <div>{handleStrInstructions(recipe)}</div>
+      <div>{handleStrYoutube(recipe)}</div>
+      <div>{handleRecommendationsDrinks(recommendations)}</div>
+      <Link>
+        <button style={btnStyle} data-testid="start-recipe-btn"> Iniciar Receita </button>
+      </Link>
     </div>
   );
 };
+
+DetalhesComida.propTypes = {
+  match: propTypes.shape({
+    params: propTypes.shape({
+      id: propTypes.string,
+      idMeal: propTypes.string,
+    }),
+  }),
+};
+
 
 export default DetalhesComida;
