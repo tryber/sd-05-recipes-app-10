@@ -43,6 +43,11 @@ const RecipesListByCategory = (props) => {
     }
   }, [category]);
 
+  if (!Array.isArray(recipesFiltered)) {
+    recipesFiltered=[];
+    alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+  }
+
   return (
     <div>
       {recipesFiltered.slice(0, 12).map((recipe, index) => {

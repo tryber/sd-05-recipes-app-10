@@ -34,13 +34,13 @@ const Footer = () => {
 
   return (
     <div className="footer" data-testid="footer">
-      <button onClick={() => {handleRedirect('bebidas'); setChooseAPI('bebidas')}}>
+      <button onClick={() => { handleRedirect('bebidas'); setChooseAPI('bebidas'); }}>
         <img data-testid="drinks-bottom-btn" alt="drink" src={drinkIcon} />
       </button>
       <button onClick={() => handleRedirect('explorar')}>
         <img data-testid="explore-bottom-btn" alt="explore" src={exploreIcon} />
       </button>
-      <button onClick={() => {handleRedirect('comidas'); setChooseAPI('comidas')}}>
+      <button onClick={() => { handleRedirect('comidas'); setChooseAPI('comidas'); }}>
         <img data-testid="food-bottom-btn" alt="meal" src={mealIcon} />
       </button>
     </div>
