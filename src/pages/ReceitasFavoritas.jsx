@@ -1,19 +1,17 @@
 import React, { Fragment } from 'react';
 import propTypes from 'prop-types';
-import Footer from '../components/Footer';
 import Header from '../components/header';
 
-const ExplorarComidasOuBebidasPorIngrediente = (props) => {
-  console.log('justificando o return ficar');
+const ReceitasFavoritas = (props) => {
+  console.log('code climate, eu vou por return aqui logo menos, me deix');
   return (
     <Fragment>
       <Header pathname={props.history.location.pathname} />
-      <Footer />
     </Fragment>
   );
 };
 
-ExplorarComidasOuBebidasPorIngrediente.propTypes = {
+ReceitasFavoritas.propTypes = {
   history: propTypes.shape({
     location: propTypes.shape({
       pathname: propTypes.shape.isRequired,
@@ -21,4 +19,4 @@ ExplorarComidasOuBebidasPorIngrediente.propTypes = {
   }).isRequired,
 };
 
-export default ExplorarComidasOuBebidasPorIngrediente;
+export default ReceitasFavoritas;

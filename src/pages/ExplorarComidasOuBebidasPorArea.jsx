@@ -3,8 +3,10 @@ import propTypes from 'prop-types';
 import Footer from '../components/Footer';
 import Header from '../components/header';
 
-const ExplorarComidasOuBebidasPorIngrediente = (props) => {
-  console.log('justificando o return ficar');
+const ExplorarComidasOuBebidasPorArea = (props) => {
+  console.log(
+    'nao quero ter que por o return de novo quando tiver mais coisas',
+  );
   return (
     <Fragment>
       <Header pathname={props.history.location.pathname} />
@@ -13,7 +15,7 @@ const ExplorarComidasOuBebidasPorIngrediente = (props) => {
   );
 };
 
-ExplorarComidasOuBebidasPorIngrediente.propTypes = {
+ExplorarComidasOuBebidasPorArea.propTypes = {
   history: propTypes.shape({
     location: propTypes.shape({
       pathname: propTypes.shape.isRequired,
@@ -21,4 +23,4 @@ ExplorarComidasOuBebidasPorIngrediente.propTypes = {
   }).isRequired,
 };
 
-export default ExplorarComidasOuBebidasPorIngrediente;
+export default ExplorarComidasOuBebidasPorArea;

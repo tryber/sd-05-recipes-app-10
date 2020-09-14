@@ -13,11 +13,11 @@ import { Redirect } from 'react-router-dom';
 const filterMealAPI = (tipo, input, setFood) => {
   switch (tipo) {
     case 'nome':
-      return fetchMealName(input).then((data) => setFood(data.meals.slice(0,12)));
+      return fetchMealName(input).then((data) => setFood(data.meals));
     case 'ingredient':
-      return fetchMealIngredient(input).then((data) => setFood(data.meals.slice(0,12)));
+      return fetchMealIngredient(input).then((data) => setFood(data.meals));
     case 'letter':
-      return fetchMealFirstLetter(input).then((data) => setFood(data.meals.slice(0,12)));
+      return fetchMealFirstLetter(input).then((data) => setFood(data.meals));
     default:
       return null;
   }
@@ -26,16 +26,15 @@ const filterMealAPI = (tipo, input, setFood) => {
 const filterDrinkAPI = (tipo, input, setDrink) => {
   switch (tipo) {
     case 'nome':
-      return fetchDrinkName(input).then((data) => setDrink(data.drinks.slice(0,12)));
+      return fetchDrinkName(input).then((data) => setDrink(data.drinks));
     case 'ingredient':
-      return fetchDrinkIngredient(input).then((data) => setDrink(data.drinks.slice(0,12)));
+      return fetchDrinkIngredient(input).then((data) => setDrink(data.drinks));
     case 'letter':
-      return fetchDrinkFirstLetter(input).then((data) => setDrink(data.drinks.slice(0,12)));
+      return fetchDrinkFirstLetter(input).then((data) => setDrink(data.drinks));
     default:
       return null;
   }
 };
-
 
 export default function Search() {
   const { foodData, drinkData, setFoodData, setDrinkData, chooseAPI } = useContext(ReceitasContext);
@@ -43,16 +42,14 @@ export default function Search() {
   const [input, setInput] = useState('');
 
   function showAlert() {
-    if(foodData === null || drinkData === null) {
+    if (foodData === null || drinkData === null) {
       alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
-    } if(tipo.length > 1){
-      alert('Sua busca deve conter somente 1 (um) caracter');
+    } if (foodData.length === 1 ) {
+      return <Redirect to="/comidas/detalhes" />;
+    } if (drinkData.length === 1 ) {
+      return <Redirect to="/bebidas/detalhes" />;
     }
   }
-
-  // if (foodData === 1 || drinkData === 1) {
-  //   return <Redirect to="/comidas/:idMeal" />
-  // }
 
   return (
     <div>
@@ -99,7 +96,8 @@ export default function Search() {
           data-testid="exec-search-btn"
           onClick={() => {
             if (chooseAPI === 'comidas') filterMealAPI(tipo, input, setFoodData);
-            else filterDrinkAPI(tipo, input, setDrinkData); showAlert();
+            else filterDrinkAPI(tipo, input, setDrinkData);
+            showAlert();
           }}
         >
           Buscar
