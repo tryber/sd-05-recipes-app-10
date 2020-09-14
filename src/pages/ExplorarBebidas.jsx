@@ -5,7 +5,6 @@ import propTypes from 'prop-types';
 import Footer from '../components/Footer';
 import Header from '../components/header';
 
-
 const ExplorarBebidas = (props) => {
   const [pageToRedirect, setPageToRedirect] = useState('');
   const [shouldRedirect, setShouldRedirect] = useState(false);
@@ -29,7 +28,7 @@ const ExplorarBebidas = (props) => {
 
   return (
     <div>
-       <Header pathname={props.history.location.pathname} />
+      <Header pathname={props.history.location.pathname} />
       <button
         onClick={() => handleRedirect('ingredientes')}
         data-testid="explore-by-ingredient"
@@ -55,6 +54,5 @@ ExplorarBebidas.propTypes = {
     }).isRequired,
   }).isRequired,
 };
-
 
 export default ExplorarBebidas;
