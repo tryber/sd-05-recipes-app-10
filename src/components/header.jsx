@@ -4,7 +4,10 @@ import propTypes from 'prop-types';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import Search from '../components/Search';
-import { isSearchBtnOnTheCurrentPageAllowed, titleForCurrentUrl } from '../services/helpers';
+import {
+  isSearchBtnOnTheCurrentPageAllowed,
+  titleForCurrentUrl,
+} from '../services/helpers';
 
 const Header = (props) => {
   const [showMenu, setShowMenu] = useState(false);
@@ -19,13 +22,13 @@ const Header = (props) => {
   title = titleForCurrentUrl(props.pathname);
 
   pageSearchAllowed = isSearchBtnOnTheCurrentPageAllowed(props.pathname);
-  
+
   return (
     <div>
       <header
         style={{
-          background: 'lightgrey',
-          display: 'flex',
+          'background': 'lightgrey',
+          'display': 'flex',
           'flex-direction': 'row',
         }}
       >
@@ -50,7 +53,7 @@ const Header = (props) => {
 };
 
 Header.propTypes = {
-  pathname: propTypes.string,
-}
+  pathname: propTypes.string.isRequired,
+};
 
 export default Header;

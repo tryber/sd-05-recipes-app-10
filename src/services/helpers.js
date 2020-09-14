@@ -23,7 +23,6 @@ export const isSearchBtnOnTheCurrentPageAllowed = (pathname) => {
     pathname === '/explorar/bebidas/area'
   ) {
     return true;
-  } else {
-    return false;
   }
+  return false;
 };
