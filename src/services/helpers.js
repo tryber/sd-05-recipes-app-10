@@ -1,54 +1,29 @@
-export const titleAndIsPageSearchBtnAllowed = (pathname) => {
-  let title = '';
-  let pageSearchAllowed = false;
+// https://medium.com/chrisburgin/rewriting-javascript-replacing-the-switch-statement-cfff707cf045
+export const titleForCurrentUrl = (pathname) =>
+  ({
+    '/bebidas': 'Bebidas',
+    '/comidas': 'Comidas',
+    '/explorar': 'Explorar',
+    '/explorar/comidas': 'Explorar Comidas',
+    '/explorar/bebidas': 'Explorar Bebidas',
+    '/receitas-favoritas': 'Receitas Favoritas',
+    '/perfil': 'Perfil',
+    '/receitas-feitas': 'Receitas Feitas',
+    '/explorar/bebidas/area': 'Explorar Origem',
+    '/explorar/comidas/area': 'Explorar Origem',
+    '/explorar/bebidas/ingredientes': 'Explorar Ingredientes',
+    '/explorar/comidas/ingredientes': 'Explorar Ingredientes',
+  }[pathname]);
 
-  switch (pathname) {
-    case '/bebidas':
-      title = 'Bebidas';
-      pageSearchAllowed = true;
-      break;
-    case '/comidas':
-      title = 'Comidas';
-      pageSearchAllowed = true;
-      break;
-    case '/explorar':
-      title = 'Explorar';
-      break;
-    case '/explorar/comidas':
-      title = 'Explorar Comidas';
-      break;
-    case '/explorar/bebidas':
-      title = 'Explorar Bebidas';
-      break;
-    case '/receitas-favoritas':
-      title = 'Receitas Favoritas';
-      break;
-    case '/perfil':
-      title = 'Perfil';
-      break;
-    case '/receitas-feitas':
-      title = 'Receitas Feitas';
-      break;
-    case '/explorar/bebidas/area':
-      title = 'Explorar Origem';
-      pageSearchAllowed = true;
-      break;
-    case '/explorar/comidas/area':
-      title = 'Explorar Origem';
-      pageSearchAllowed = true;
-      break;
-    case '/explorar/bebidas/ingredientes':
-      title = 'Explorar Ingredientes';
-      break;
-    case '/explorar/comidas/ingredientes':
-      title = 'Explorar Ingredientes';
-      break;
-    default:
-      return null;
+export const isSearchBtnOnTheCurrentPageAllowed = (pathname) => {
+  if (
+    pathname === '/bebidas' ||
+    pathname === '/comidas' ||
+    pathname === '/explorar/comidas/area' ||
+    pathname === '/explorar/bebidas/area'
+  ) {
+    return true;
+  } else {
+    return false;
   }
-
-  return {
-    title,
-    pageSearchAllowed,
-  }
-}
+};

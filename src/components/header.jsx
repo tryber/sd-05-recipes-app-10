@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import propTypes from 'prop-types';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import Search from '../components/Search';
-import { titleAndIsPageSearchBtnAllowed } from '../services/helpers';
+import { isSearchBtnOnTheCurrentPageAllowed, titleForCurrentUrl } from '../services/helpers';
 
 const Header = (props) => {
   const [showMenu, setShowMenu] = useState(false);
@@ -15,16 +16,16 @@ const Header = (props) => {
   let title = '';
   let pageSearchAllowed = false;
   // Usando função que retorna o Título da página e se o botão de Search pode ser usado
-  title = titleAndIsPageSearchBtnAllowed(props.pathname).title;
+  title = titleForCurrentUrl(props.pathname);
 
-  pageSearchAllowed = titleAndIsPageSearchBtnAllowed(props.pathname)
-    .pageSearchAllowed;
+  pageSearchAllowed = isSearchBtnOnTheCurrentPageAllowed(props.pathname);
+  
   return (
     <div>
       <header
         style={{
-          'background': 'lightgrey',
-          'display': 'flex',
+          background: 'lightgrey',
+          display: 'flex',
           'flex-direction': 'row',
         }}
       >
@@ -47,5 +48,9 @@ const Header = (props) => {
     </div>
   );
 };
+
+Header.propTypes = {
+  pathname: propTypes.string,
+}
 
 export default Header;
