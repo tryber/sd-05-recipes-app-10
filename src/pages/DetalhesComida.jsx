@@ -1,5 +1,4 @@
-
-import React, { useContext } from 'react';
+import React from 'react';
 import Carousel from 'react-elastic-carousel';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
