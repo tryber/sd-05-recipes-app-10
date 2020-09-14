@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
+import Carousel from 'react-elastic-carousel';
 import { Link } from 'react-router-dom';
 import { ReceitasContext } from '../Context/ReceitasContext';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import '../style/DetalhesComida.css';
+// import '../style/DetalhesComida.css';
 
 function handleIngredients(mealDB) {
   const quantities = [];
@@ -57,18 +58,20 @@ function handleStrYoutube(mealDB) {
 
 function handleRecommendationsDrinks(drinkDB) {
   return (
-    <div>
-      <h3>Recomendadas</h3>
-      {drinkDB.recommendDrinks.slice(0, 6).map((drink) => (
-        <div className="drinks-card-details">
-          <img alt="drinks" className="img-drinks" src={drink.strDrinkThumb} />
-          <div className="container">
-            <p>{drink.strAlcoholic}</p>
-            <h4>{drink.strDrink}</h4>
+    <Carousel>
+      <div>
+        <h3>Recomendadas</h3>
+        {drinkDB.recommendDrinks.slice(0, 6).map((drink) => (
+          <div className="drinks-card-details">
+            <img alt="drinks" className="img-drinks" src={drink.strDrinkThumb} />
+            <div className="container">
+              <p>{drink.strAlcoholic}</p>
+              <h4>{drink.strDrink}</h4>
+            </div>
           </div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+    </Carousel>
   );
 }
 
@@ -112,6 +115,9 @@ const DetalhesComida = () => {
         <div>
           {handleRecommendationsDrinks(drinkDB)}
         </div>
+      </div>
+      <div>
+        <button data-testid="start-recipe-btn" className="btn">Iniciar Receita</button>
       </div>
     </div>
   );
