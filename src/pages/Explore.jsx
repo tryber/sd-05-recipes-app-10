@@ -1,33 +1,32 @@
 import React, { Fragment } from 'react';
-import { useContext } from 'react';
 import propTypes from 'prop-types';
 import Footer from '../components/Footer';
-import { ReceitasContext } from '../Context/ReceitasContext';
+import Header from '../components/header';
 
 const Explore = (props) => {
-  const { setqualPage } = useContext(ReceitasContext);
+  console.log('entra no component Explore');
   return (
     <Fragment>
-      Explorar
+      <Header pathname={props.history.location.pathname} />
       <button
         onClick={() => {
           props.history.push('/explorar/comidas');
-          setqualPage('/explorar/comidas');
+          // setqualPage('/explorar/comidas');
         }}
         type="button"
         data-testid="explore-food"
       >
-        Explore Comidas
+        Explorar Comidas
       </button>
       <button
         onClick={() => {
           props.history.push('/explorar/bebidas');
-          setqualPage('/explorar/bebidas');
+          // setqualPage('/explorar/bebidas');
         }}
         type="button"
         data-testid="explore-drinks"
       >
-        Explore Bebidas
+        Explorar Bebidas
       </button>
       <Footer />
     </Fragment>
@@ -37,6 +36,9 @@ const Explore = (props) => {
 Explore.propTypes = {
   history: propTypes.shape({
     push: propTypes.func.isRequired,
+    location: propTypes.shape({
+      pathname: propTypes.shape.isRequired,
+    }).isRequired,
   }).isRequired,
 };
 

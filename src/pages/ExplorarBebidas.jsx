@@ -1,19 +1,17 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { Redirect } from 'react-router-dom';
+import propTypes from 'prop-types';
 import Footer from '../components/Footer';
-import { ReceitasContext } from '../Context/ReceitasContext';
+import Header from '../components/header';
 
-const ExplorarBebidas = () => {
-  const { setqualPage } = useContext(ReceitasContext);
-  // const [comidasOuBebidas, SetComidasOuBebidas] = useState('');
+const ExplorarBebidas = (props) => {
   const [pageToRedirect, setPageToRedirect] = useState('');
   const [shouldRedirect, setShouldRedirect] = useState(false);
 
   const handleRedirect = (whereToExplore) => {
     setPageToRedirect(`explorar/bebidas/${whereToExplore}`);
     setShouldRedirect(true);
-    setqualPage(`explorar/bebidas/${whereToExplore}`);
   };
 
   useEffect(() => {
@@ -30,7 +28,7 @@ const ExplorarBebidas = () => {
 
   return (
     <div>
-      <h1>Explorar Bebidas</h1>
+      <Header pathname={props.history.location.pathname} />
       <button
         onClick={() => handleRedirect('ingredientes')}
         data-testid="explore-by-ingredient"
@@ -47,6 +45,14 @@ const ExplorarBebidas = () => {
       <Footer />
     </div>
   );
+};
+
+ExplorarBebidas.propTypes = {
+  history: propTypes.shape({
+    location: propTypes.shape({
+      pathname: propTypes.shape.isRequired,
+    }).isRequired,
+  }).isRequired,
 };
 
 export default ExplorarBebidas;
