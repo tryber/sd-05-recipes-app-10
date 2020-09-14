@@ -66,58 +66,67 @@ function handleStrYoutube(mealDB) {
   );
 }
 
+const breakPoints = [
+  { width: 2, itemsToShow: 2 },
+  { width: 550, itemsToShow: 2 },
+  { width: 768, itemsToShow: 3 },
+  { width: 1200, itemsToShow: 4 },
+];
+
 function handleRecommendationsDrinks(recomendadas) {
   return (
     <div>
       <h3>Recomendadas</h3>
-      {recomendadas.slice(0, 6).map((recomendada, index) => (
-        <div
-          data-testid={`${index}-recomendation-card`}
-          className="drinks-card-details"
-        >
-          <img
-            alt="drinks or meals"
-            className="img-drinks"
-            src={recomendada.strDrinkThumb || recomendada.strMealThumb}
-          />
-          <div className="container">
-            <h4 data-testid="recipe-category">
-              {recomendada.strAlcoholic || recomendada.strCategory}
-            </h4>
-            <h4 data-testid={`${index}-recomendation-title`}>
-              {recomendada.strDrink || recomendada.strMeal}
-            </h4>
+      <Carousel breakPoints={breakPoints}>
+        {recomendadas.slice(0, 6).map((recomendada, index) => (
+          <div
+            data-testid={`${index}-recomendation-card`}
+            className="drinks-card-details"
+          >
+            <img
+              alt="drinks or meals"
+              className="img-drinks"
+              src={recomendada.strDrinkThumb || recomendada.strMealThumb}
+            />
+            <div className="container">
+              <h4 data-testid="recipe-category">
+                {recomendada.strAlcoholic || recomendada.strCategory}
+              </h4>
+              <h4 data-testid={`${index}-recomendation-title`}>
+                {recomendada.strDrink || recomendada.strMeal}
+              </h4>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </Carousel>
     </div>
   );
 }
 
 const DetalhesComida = (props) => {
   const [recipe, setRecipe] = useState({
-        strDrinkThumb: '',
+    strDrinkThumb: '',
     strMeal: '',
     strCategory: '',
     strMealThumb: '',
   });
   const [recommendations, setRecommendations] = useState([]);
-  const { params, path} = props.match;
+  const { params, path } = props.match;
 
   useEffect(() => {
     if (path.includes('comida')) {
-        fetchMealById(params.idMeal).then((e) => setRecipe(e));
+      fetchMealById(params.idMeal).then((e) => setRecipe(e));
       fetchAllDrinks().then((e) => setRecommendations(e));
     }
 
     if (path.includes('bebida')) {
-        fetchDrinkById(params.id).then((e) => setRecipe(e));
+      fetchDrinkById(params.id).then((e) => setRecipe(e));
       fetchAllMeals().then((e) => setRecommendations(e));
     }
   }, []);
 
   return (
-      <div>
+    <div>
       <img
         alt="detail" className="recipe-photo" data-testid="recipe-photo"
         src={recipe.strMealThumb || recipe.strDrinkThumb}
