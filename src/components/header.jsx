@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import Search from '../components/Search';
+import { titleAndIsPageSearchBtnAllowed } from '../services/helpers';
 
 const Header = (props) => {
   const [showMenu, setShowMenu] = useState(false);
@@ -10,56 +11,14 @@ const Header = (props) => {
   const changeStyle = () => {
     setShowMenu(!showMenu);
   };
-  console.log('Header');
-  console.log(props.pathname);
 
   let title = '';
   let pageSearchAllowed = false;
+  // Usando função que retorna o Título da página e se o botão de Search pode ser usado
+  title = titleAndIsPageSearchBtnAllowed(props.pathname).title;
 
-  switch (props.pathname) {
-    case '/bebidas':
-      title = 'Bebidas';
-      pageSearchAllowed = true;
-      break;
-    case '/comidas':
-      title = 'Comidas';
-      pageSearchAllowed = true;
-      break;
-    case '/explorar':
-      title = 'Explorar';
-      break;
-    case '/explorar/comidas':
-      title = 'Explorar Comidas';
-      break;
-    case '/explorar/bebidas':
-      title = 'Explorar Bebidas';
-      break;
-    case '/receitas-favoritas':
-      title = 'Receitas Favoritas';
-      break;
-    case '/perfil':
-      title = 'Perfil';
-      break;
-    case '/receitas-feitas':
-      title = 'Receitas Feitas';
-      break;
-    case '/explorar/bebidas/area':
-      title = 'Explorar Origem';
-      pageSearchAllowed = true;
-      break;
-    case '/explorar/comidas/area':
-      title = 'Explorar Origem';
-      pageSearchAllowed = true;
-      break;
-    case '/explorar/bebidas/ingredientes':
-      title = 'Explorar Ingredientes';
-      break;
-    case '/explorar/comidas/ingredientes':
-      title = 'Explorar Ingredientes';
-      break;
-    default:
-      return null;
-  }
+  pageSearchAllowed = titleAndIsPageSearchBtnAllowed(props.pathname)
+    .pageSearchAllowed;
   return (
     <div>
       <header
@@ -69,7 +28,6 @@ const Header = (props) => {
           'flex-direction': 'row',
         }}
       >
-        {/* <div> */}
         <Link to="/perfil">
           <img alt="profile" data-testid="profile-top-btn" src={profileIcon} />
         </Link>
@@ -84,8 +42,6 @@ const Header = (props) => {
             />
           </Link>
         )}
-
-        {/* </div> */}
       </header>
       {showMenu && <Search />}
     </div>
