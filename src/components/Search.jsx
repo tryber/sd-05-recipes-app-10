@@ -8,15 +8,16 @@ import {
 } from '../services/ApiRequest';
 import { ReceitasContext } from '../Context/ReceitasContext';
 import { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 
 const filterMealAPI = (tipo, input, setFood) => {
   switch (tipo) {
     case 'nome':
-      return fetchMealName(input).then((data) => setFood(data.meals));
+      return fetchMealName(input).then((data) => setFood(data.meals.slice(0,12)));
     case 'ingredient':
-      return fetchMealIngredient(input).then((data) => setFood(data.meals));
+      return fetchMealIngredient(input).then((data) => setFood(data.meals.slice(0,12)));
     case 'letter':
-      return fetchMealFirstLetter(input).then((data) => setFood(data.meals));
+      return fetchMealFirstLetter(input).then((data) => setFood(data.meals.slice(0,12)));
     default:
       return null;
   }
@@ -25,26 +26,34 @@ const filterMealAPI = (tipo, input, setFood) => {
 const filterDrinkAPI = (tipo, input, setDrink) => {
   switch (tipo) {
     case 'nome':
-      return fetchDrinkName(input).then((data) => setDrink(data.drinks));
+      return fetchDrinkName(input).then((data) => setDrink(data.drinks.slice(0,12)));
     case 'ingredient':
-      return fetchDrinkIngredient(input).then((data) => setDrink(data.drinks));
+      return fetchDrinkIngredient(input).then((data) => setDrink(data.drinks.slice(0,12)));
     case 'letter':
-      return fetchDrinkFirstLetter(input).then((data) => setDrink(data.drinks));
+      return fetchDrinkFirstLetter(input).then((data) => setDrink(data.drinks.slice(0,12)));
     default:
       return null;
   }
 };
 
 
-function Search() {
+export default function Search() {
   const { foodData, drinkData, setFoodData, setDrinkData, chooseAPI } = useContext(ReceitasContext);
   const [tipo, setTipo] = useState('nome');
   const [input, setInput] = useState('');
 
   function showAlert() {
-    if(foodData === null || drinkData === null)
-    return alert("Sinto muito, não encontramos nenhuma receita para esses filtros.");
+    if(foodData === null || drinkData === null) {
+      alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+    } if(tipo.length > 1){
+      alert('Sua busca deve conter somente 1 (um) caracter');
+    }
   }
+
+  // if (foodData === 1 || drinkData === 1) {
+  //   return <Redirect to="/comidas/:idMeal" />
+  // }
+
   return (
     <div>
       <div>
@@ -99,5 +108,3 @@ function Search() {
     </div>
   );
 }
-
-export default Search;
