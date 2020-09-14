@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import propTypes from 'prop-types'
 import Header from '../components/header';
 
 const ReceitasFeitas = (props) => {
@@ -6,5 +7,13 @@ const ReceitasFeitas = (props) => {
   return <Fragment><Header pathname={props.history.location.pathname} />
   </Fragment>;
 };
+
+ReceitasFeitas.propTypes = {
+  history: propTypes.shape({
+    location: propTypes.shape({
+      pathname: propTypes.shape.isRequired
+    }).isRequired,
+  }).isRequired,
+}
 
 export default ReceitasFeitas;
