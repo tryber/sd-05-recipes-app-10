@@ -185,13 +185,13 @@ const DetalhesComida = (props) => {
 
   return (
     <div>
-      <RecipeImage recipe={recipe}/>
+      <RecipeImage recipe={recipe} />
       <h2 data-testid="recipe-title">{recipe.strMeal || recipe.strDrink}</h2>
       <h4 data-testid="recipe-category">{recipe.strAlcoholic || recipe.strCategory}</h4>
       <button onClick={() => faveFunc(setFavorite, favorite, recipe)} >
         <img
-         alt="favorite button" data-testid="favorite-btn"
-         src={favorite ? blackHeartIcon : whiteHeartIcon}
+          alt="favorite button" data-testid="favorite-btn"
+          src={favorite ? blackHeartIcon : whiteHeartIcon}
         />
       </button>
       <button
