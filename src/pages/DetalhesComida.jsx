@@ -64,7 +64,7 @@ function IngredientsList(props) {
 }
 
 IngredientsList.propTypes = {
-  recipe: propTypes.objectOf(propTypes.string)
+  recipe: propTypes.objectOf(propTypes.string).isRequired,
 }
 
 function Instructions(props) {
@@ -75,6 +75,10 @@ function Instructions(props) {
       <p data-testid="instructions">{recipe.strInstructions}</p>
     </div>
   );
+}
+
+Instructions.propTypes = {
+  recipe: propTypes.objectOf(propTypes.string).isRequired,
 }
 
 function StrYoutube(props) {
@@ -88,6 +92,11 @@ function StrYoutube(props) {
     </div>
   );
 }
+
+StrYoutube.propTypes = {
+  recipe: propTypes.objectOf(propTypes.string).isRequired,
+}
+
 
 // const breakPoints = [
 //   { width: 2, itemsToShow: 2 },
@@ -126,6 +135,10 @@ function RecommendationsList(props) {
       {/* </Carousel> */}
     </div>
   );
+}
+
+StrYoutube.propTypes = {
+  recomendadas: propTypes.arrayOf(propTypes.string).isRequired,
 }
 
 const DetalhesComida = (props) => {
