@@ -22,7 +22,8 @@ const btnStyle = {
   bottom: 0,
 };
 
-function handleIngredients(mealDB) {
+function IngredientsList(props) {
+  const { mealDB } = props;
   const quantities = [];
   const ingredients = [];
 
@@ -61,21 +62,23 @@ function handleIngredients(mealDB) {
   );
 }
 
-function handleStrInstructions(mealDB) {
+function Instructions(props) {
+  const { recipe } = props;
   return (
     <div>
       <h3>Instructions</h3>
-      <p data-testid="instructions">{mealDB.strInstructions}</p>
+      <p data-testid="instructions">{recipe.strInstructions}</p>
     </div>
   );
 }
 
-function handleStrYoutube(mealDB) {
+function StrYoutube(props) {
+  const { recipe } = props;
   return (
     <div>
       <h3>Vídeo</h3>
       <video width="320" height="240" controls>
-        <source data-testid="video" src={mealDB.strYoutube} type="video/mp4" />
+        <source data-testid="video" src={recipe.strYoutube} type="video/mp4" />
       </video>
     </div>
   );
@@ -88,11 +91,12 @@ const breakPoints = [
   { width: 1200, itemsToShow: 4 },
 ];
 
-function handleRecommendationsDrinks(recomendadas) {
+function RecommendationsList(props) {
+  const { recomendadas } = props;
   return (
     <div>
       <h3>Recomendadas</h3>
-      <Carousel breakPoints={breakPoints}>
+      {/* <Carousel breakPoints={breakPoints}> */}
         {recomendadas.slice(0, 6).map((recomendada, index) => (
           <div
             key={Math.random()}
@@ -114,7 +118,7 @@ function handleRecommendationsDrinks(recomendadas) {
             </div>
           </div>
         ))}
-      </Carousel>
+      {/* </Carousel> */}
     </div>
   );
 }
@@ -162,10 +166,14 @@ const DetalhesComida = (props) => {
           src={favorite ? blackHeartIcon : whiteHeartIcon}
         />
       </button>
-      <div>{handleIngredients(recipe)}</div>
+      <IngredientsList mealDB={recipe} />
+      <Instructions recipe={recipe} />
+      <StrYoutube recipe={recipe} />
+      <RecommendationsList recomendadas={recommendations} />
+      {/* <div>{handleIngredients(recipe)}</div>
       <div>{handleStrInstructions(recipe)}</div>
       <div>{handleStrYoutube(recipe)}</div>
-      <div>{handleRecommendationsDrinks(recommendations)}</div>
+      <div>{handleRecommendationsDrinks(recommendations)}</div> */}
       <Link><button style={btnStyle} data-testid="start-recipe-btn">Iniciar Receita</button></Link>
     </div>
   );
