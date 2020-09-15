@@ -65,7 +65,7 @@ function IngredientsList(props) {
 
 IngredientsList.propTypes = {
   recipe: propTypes.objectOf(propTypes.string).isRequired,
-}
+};
 
 function Instructions(props) {
   const { recipe } = props;
@@ -95,7 +95,7 @@ function StrYoutube(props) {
 
 StrYoutube.propTypes = {
   recipe: propTypes.objectOf(propTypes.string).isRequired,
-}
+};
 
 
 // const breakPoints = [
@@ -137,9 +137,9 @@ function RecommendationsList(props) {
   );
 }
 
-StrYoutube.propTypes = {
+RecommendationsList.propTypes = {
   recomendadas: propTypes.arrayOf(propTypes.string).isRequired,
-}
+};
 
 const DetalhesComida = (props) => {
   const [recipe, setRecipe] = useState({
