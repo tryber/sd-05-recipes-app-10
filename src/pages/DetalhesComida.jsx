@@ -64,13 +64,6 @@ function handleStrYoutube(mealDB) {
   );
 }
 
-const breakPoints = [
-  { width: 2, itemsToShow: 2 },
-  { width: 550, itemsToShow: 2 },
-  { width: 768, itemsToShow: 3 },
-  { width: 1200, itemsToShow: 4 },
-];
-
 function handleRecommendationsDrinks(recomendadas) {
   return (
     <div>
