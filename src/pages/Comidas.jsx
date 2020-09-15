@@ -9,7 +9,7 @@ import RecipesListByCategory from '../components/RecipesListByCategory';
 
 const Comidas = (props) => {
   const { setMealDB, setChooseAPI } = useContext(ReceitasContext);
-  
+
   useEffect(() => {
     fetchMealDB().then((e) =>
       setMealDB(() => ({
@@ -21,9 +21,7 @@ const Comidas = (props) => {
 
   useEffect(() => {
     setChooseAPI('comidas');
-  }, [setChooseAPI])
-
-
+  }, [setChooseAPI]);
 
   return (
     <Fragment>
