@@ -1,9 +1,9 @@
 .food-container {
- align-items: center;
+  align-items: center;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   height: 31em;
+  justify-content: space-between;
   width: 100%;
 }
 

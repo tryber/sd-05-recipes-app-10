@@ -1,8 +1,3 @@
-@font-face {
-  font-family: Roboto;
-  src: url('../style/font/Roboto-Regular.ttf')
-}
-
 .list-ingredients {
   list-style-type: none;
   margin: 0;
@@ -27,37 +22,36 @@
 }
 
 .recipe-photo:hover {
-  border: 3px yellow solid
+  border: 3px yellow solid;
 }
-.img-drinks:hover  {
-  border: 3px yellow solid
+.img-drinks:hover {
+  border: 3px yellow solid;
 }
 
 .container {
   align-items: center;
   display: flex;
   flex-direction: column;
-  font-family: 'Roboto';
-  text-align: center;
+  font-family: "Roboto";
   justify-content: center;
+  text-align: center;
 }
 
-
 .container button {
-  background-color: #4F9F36;
+  background-color: #4f9f36;
   border: 3px solid green;
   border-radius: 20px;
   font-weight: 600;
   height: 5em;
-  width: 30%;
   margin-left: -80px;
+  width: 30%;
 }
 .container button:hover {
   color: aliceblue;
 }
 .container button:focus {
-box-shadow: 0 0 0 0;
-outline: 0;
+  box-shadow: 0 0 0 0;
+  outline: 0;
 }
 .ingredientes {
   list-style-type: none;

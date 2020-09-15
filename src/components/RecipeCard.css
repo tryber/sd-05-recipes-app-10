@@ -15,10 +15,6 @@
   border-radius: 7px;
 }
 
-a {
-  text-decoration: none;
-}
-
 .card:hover {
   color: lightyellow;
 }
