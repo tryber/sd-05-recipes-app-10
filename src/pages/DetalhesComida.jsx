@@ -8,7 +8,12 @@ import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import '../style/DetalhesComida.css';
-import { fetchMealById, fetchAllMeals, fetchAllDrinks, fetchDrinkById } from '../services/ApiRequest';
+import {
+  fetchMealById,
+  fetchAllMeals,
+  fetchAllDrinks,
+  fetchDrinkById,
+} from '../services/ApiRequest';
 import { faveFunc, ifIsFavoriteFunc } from '../services/helpers';
 // o botão tem que ser bottom com posição fixa o resto pode estilizar
 const btnStyle = {
@@ -22,10 +27,18 @@ function handleIngredients(mealDB) {
   const ingredients = [];
 
   Object.entries(mealDB).forEach((element) => {
-    if (element[0].includes('strMeasure') && element[1] !== ' ' && element[1] !== '') {
+    if (
+      element[0].includes('strMeasure') &&
+      element[1] !== ' ' &&
+      element[1] !== ''
+    ) {
       quantities.push(element[1]);
     }
-    if (element[0].includes('strIngredient') && element[1] !== ' ' && element[1] !== '') {
+    if (
+      element[0].includes('strIngredient') &&
+      element[1] !== ' ' &&
+      element[1] !== ''
+    ) {
       ingredients.push(element[1]);
     }
   });
@@ -106,7 +119,6 @@ function handleRecommendationsDrinks(recomendadas) {
   );
 }
 
-
 const DetalhesComida = (props) => {
   const [recipe, setRecipe] = useState({
     strDrinkThumb: '',
@@ -129,31 +141,41 @@ const DetalhesComida = (props) => {
       fetchAllMeals().then((e) => setRecommendations(e));
     }
   }, [params.id, params.idMeal, path]);
-    // Ao rodar, checar se esta receita já esta favoritada
+  // Ao rodar, checar se esta receita já esta favoritada
   ifIsFavoriteFunc(recipe, setFavorite);
 
   return (
     <div>
       <img
-        alt="detail" className="recipe-photo" data-testid="recipe-photo"
+        alt="detail"
+        className="recipe-photo"
+        data-testid="recipe-photo"
         src={recipe.strMealThumb || recipe.strDrinkThumb}
       />
       <h2 data-testid="recipe-title">{recipe.strMeal || recipe.strDrink}</h2>
-      <h4 data-testid="recipe-category">{recipe.strAlcoholic || recipe.strCategory}</h4>
-      <button><img alt="share button" data-testid="share-btn" src={shareIcon} /></button>
+      <h4 data-testid="recipe-category">
+        {recipe.strAlcoholic || recipe.strCategory}
+      </h4>
+      <button>
+        <img alt="share button" data-testid="share-btn" src={shareIcon} />
+      </button>
       {/* OnClick - favorite or unfavorite - localstorage */}
       <button onClick={() => faveFunc(setFavorite, favorite, recipe)}>
-          <img 
+        <img
           alt="favorite button"
-          data-testid="favorite-btn" src={favorite ? blackHeartIcon : whiteHeartIcon} 
-          />
+          data-testid="favorite-btn"
+          src={favorite ? blackHeartIcon : whiteHeartIcon}
+        />
       </button>
       <div>{handleIngredients(recipe)}</div>
       <div>{handleStrInstructions(recipe)}</div>
       <div>{handleStrYoutube(recipe)}</div>
       <div>{handleRecommendationsDrinks(recommendations)}</div>
       <Link>
-        <button style={btnStyle} data-testid="start-recipe-btn"> Iniciar Receita </button>
+        <button style={btnStyle} data-testid="start-recipe-btn">
+          {' '}
+          Iniciar Receita{' '}
+        </button>
       </Link>
     </div>
   );
@@ -167,6 +189,5 @@ DetalhesComida.propTypes = {
     }),
   }),
 };
-
 
 export default DetalhesComida;
