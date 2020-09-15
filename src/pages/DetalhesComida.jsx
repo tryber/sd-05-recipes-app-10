@@ -9,9 +9,10 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import '../style/DetalhesComida.css';
 import { fetchMealById, fetchAllMeals, fetchAllDrinks, fetchDrinkById } from '../services/ApiRequest';
+import { faveFunc , ifIsFavoriteFunc} from '../services/helpers';
 // o botão tem que ser bottom com posição fixa o resto pode estilizar
 const btnStyle = {
-  'background-color': '#E5E5E5',
+  backgroundColor: '#E5E5E5',
   position: 'fixed',
   bottom: 0,
 };
@@ -35,6 +36,7 @@ function handleIngredients(mealDB) {
       <ul>
         {quantities.map((element, index) => (
           <li
+            key={`qnt ${index}`}
             className="quantidades"
             data-testid={`${index}-ingredient-name-and-measure`}
           >
@@ -80,6 +82,7 @@ function handleRecommendationsDrinks(recomendadas) {
       <Carousel breakPoints={breakPoints}>
         {recomendadas.slice(0, 6).map((recomendada, index) => (
           <div
+            key={`recomend ${index}`}
             data-testid={`${index}-recomendation-card`}
             className="drinks-card-details"
           >
@@ -103,6 +106,7 @@ function handleRecommendationsDrinks(recomendadas) {
   );
 }
 
+
 const DetalhesComida = (props) => {
   const [recipe, setRecipe] = useState({
     strDrinkThumb: '',
@@ -124,39 +128,9 @@ const DetalhesComida = (props) => {
       fetchDrinkById(params.id).then((e) => setRecipe(e));
       fetchAllMeals().then((e) => setRecommendations(e));
     }
-  }, []);
-
-  const ifIsFavoriteFunc = async () => {
-    const ehFavoritaNoLocal = await ((JSON.parse(localStorage.getItem('favoriteRecipes')) || []).some(e => (e.id === recipe.idMeal || e.id === recipe.idDrink)))
-    
-    console.log('dentro do useeffect' + ehFavoritaNoLocal);
-  setFavorite(ehFavoritaNoLocal)
-  }
-    ifIsFavoriteFunc()
-
-  const faveFunc = () => {
-    setFavorite(!favorite);
-
-    const favoritesArr = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
-    const isAlreadyFavorited = favoritesArr.some(e => e.id === recipe.idMeal || e.id === recipe.idDrink )
-
-    if (!isAlreadyFavorited) {
-      const favoriteRecipe =  [...favoritesArr, {
-        id: recipe.idMeal || recipe.idDrink,
-        type: recipe.idMeal ? 'comida' : 'bebida',
-        area: recipe.strArea || '',
-        category: recipe.strCategory || '',
-        alcoholicOrNot: recipe.strAlcoholic || '',
-        name: recipe.strMeal || recipe.strDrink,
-        image: recipe.strMealThumb || recipe.strDrinkThumb
-    }]
-    localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipe));
-    } else {
-     const favoritesArraywithOneLess = favoritesArr.filter(e => !(e.id === recipe.idMeal || e.id === recipe.idDrink))
-     localStorage.clear();
-     localStorage.setItem('favoriteRecipes', JSON.stringify(favoritesArraywithOneLess))
-    }
-  }
+  }, [params.id, params.idMeal, path ]);
+    // Ao rodar, checar se esta receita já esta favoritada
+  ifIsFavoriteFunc(recipe, setFavorite)
 
   return (
     <div>
@@ -167,7 +141,8 @@ const DetalhesComida = (props) => {
       <h2 data-testid="recipe-title">{recipe.strMeal || recipe.strDrink}</h2>
       <h4 data-testid="recipe-category">{recipe.strAlcoholic || recipe.strCategory}</h4>
       <button><img alt="share button" data-testid="share-btn" src={shareIcon} /></button>
-      <button onClick={() => faveFunc()}>
+      {/* OnClick - favorite or unfavorite - localstorage */}
+      <button onClick={() => faveFunc(setFavorite, favorite, recipe)}>
         <img alt="favorite button" data-testid="favorite-btn" src={favorite ? blackHeartIcon : whiteHeartIcon} />
       </button>
       <div>{handleIngredients(recipe)}</div>

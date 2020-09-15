@@ -28,7 +28,7 @@ const RecipesListByCategory = (props) => {
         );
       }
     }
-  }, [drinkCategory]);
+  }, [props.pathname, drinkCategory, setRecipesFiltered]);
 
   useEffect(() => {
     console.log('vou fetch comidas');
@@ -41,7 +41,7 @@ const RecipesListByCategory = (props) => {
         );
       }
     }
-  }, [category]);
+  }, [props.pathname, category, setRecipesFiltered]);
 
   return (
     <div>
