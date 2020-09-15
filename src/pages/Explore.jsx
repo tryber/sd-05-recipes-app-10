@@ -2,13 +2,15 @@ import React, { Fragment } from 'react';
 import propTypes from 'prop-types';
 import Footer from '../components/Footer';
 import Header from '../components/header';
+import '../style/explore.css'
 
 const Explore = (props) => {
   console.log('entra no component Explore');
   return (
     <Fragment>
+      <div className="explore-container">
       <Header pathname={props.history.location.pathname} />
-      <button
+      <button className="explore-btn"
         onClick={() => {
           props.history.push('/explorar/comidas');
           // setqualPage('/explorar/comidas');
@@ -18,7 +20,7 @@ const Explore = (props) => {
       >
         Explorar Comidas
       </button>
-      <button
+      <button className="explore-btn"
         onClick={() => {
           props.history.push('/explorar/bebidas');
           // setqualPage('/explorar/bebidas');
@@ -29,6 +31,7 @@ const Explore = (props) => {
         Explorar Bebidas
       </button>
       <Footer />
+      </div>
     </Fragment>
   );
 };

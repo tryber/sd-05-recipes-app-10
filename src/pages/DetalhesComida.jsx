@@ -8,7 +8,6 @@ import '../style/DetalhesComida.css';
 import { fetchMealById, fetchAllMeals, fetchAllDrinks, fetchDrinkById } from '../services/ApiRequest';
 
 const btnStyle = {
-  'background-color': '#E5E5E5',
   position: 'fixed',
   bottom: 0,
 };
@@ -28,7 +27,7 @@ function handleIngredients(mealDB) {
 
   return (
     <div>
-      <h3>Ingredients</h3>
+      <h3 className="title">Ingredients</h3>
       <ul>
         {quantities.map((element, index) => (
           <li
@@ -46,7 +45,7 @@ function handleIngredients(mealDB) {
 function handleStrInstructions(mealDB) {
   return (
     <div>
-      <h3>Instructions</h3>
+      <h3 className="title">Instructions</h3>
       <p data-testid="instructions">{mealDB.strInstructions}</p>
     </div>
   );
@@ -55,7 +54,7 @@ function handleStrInstructions(mealDB) {
 function handleStrYoutube(mealDB) {
   return (
     <div>
-      <h3>Vídeo</h3>
+      <h3 className="title">Vídeo</h3>
       <video width="320" height="240" controls>
         <source data-testid="video" src={mealDB.strYoutube} type="video/mp4" />
       </video>
@@ -65,8 +64,8 @@ function handleStrYoutube(mealDB) {
 
 function handleRecommendationsDrinks(recomendadas) {
   return (
-    <div>
-      <h3>Recomendadas</h3>
+    <div className="container">
+      <h3 className="title">Recomendadas</h3>
       {recomendadas.slice(0, 6).map((recomendada, index) => (
         <div
           data-testid={`${index}-recomendation-card`}
@@ -77,7 +76,7 @@ function handleRecommendationsDrinks(recomendadas) {
             className="img-drinks"
             src={recomendada.strDrinkThumb || recomendada.strMealThumb}
           />
-          <div className="container">
+          <div>
             <h4 data-testid="recipe-category">
               {recomendada.strAlcoholic || recomendada.strCategory}
             </h4>
@@ -114,7 +113,7 @@ const DetalhesComida = (props) => {
   }, []);
 
   return (
-    <div>
+    <div className="container">
       <img
         alt="detail" className="recipe-photo" data-testid="recipe-photo"
         src={recipe.strMealThumb || recipe.strDrinkThumb}

@@ -1,0 +1,21 @@
+.food-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 31em;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.food-button {
+  background-color: #fc7700;
+  border: 1px black solid;
+  border-radius: 30px;
+  font-weight: 600;
+  height: 5em;
+  width: 30%;
+}
+
+.food-container button:hover {
+  color: yellow;
+}

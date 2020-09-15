@@ -1,0 +1,50 @@
+@font-face {
+  font-family: Roboto;
+  src: url("../style/font/Roboto-Regular.ttf");
+}
+
+.login-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  font-family: "Roboto";
+  justify-content: center;
+  width: 100%;
+}
+
+.login-btn:focus {
+  box-shadow: 0 0 0 0;
+  outline: 0;
+}
+
+.login-container input {
+  border: 1px solid #6e4e36;
+  border-radius: 20px;
+  height: 40px;
+  margin: 2%;
+  width: 60%;
+}
+
+.login-container button {
+  background-color: #f47731;
+  border: 1px solid black;
+  border-radius: 20px;
+  color: black;
+  font-weight: bold;
+  height: 40px;
+  width: 7em;
+}
+.entrar-btn {
+  margin-left: 15em;
+}
+.entrar-btn:hover {
+  color: yellow;
+}
+
+.top {
+  background-color: red;
+  color: red;
+  height: 50px;
+  width: 100%;
+}
+

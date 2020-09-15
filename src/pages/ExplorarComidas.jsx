@@ -4,6 +4,7 @@ import { useState } from 'react';
 import propTypes from 'prop-types';
 import Footer from '../components/Footer';
 import Header from '../components/header';
+import '../style/exploreFood.css';
 
 
 const ExplorarComidas = (props) => {
@@ -28,21 +29,21 @@ const ExplorarComidas = (props) => {
   }
 
   return (
-    <div>
+    <div className="food-container">
       <Header pathname={props.history.location.pathname} />
-      <button
+      <button className="food-button"
         onClick={() => handleRedirect('ingredientes')}
         data-testid="explore-by-ingredient"
       >
         Por Ingrediente
       </button>
-      <button
+      <button className="food-button"
         onClick={() => handleRedirect('area')}
         data-testid="explore-by-area"
       >
         Por Local de Origem
       </button>
-      <button data-testid="explore-surprise">Me surpreenda!</button>
+      <button className="food-button" data-testid="explore-surprise">Me surpreenda!</button>
       <Footer />
     </div>
   );

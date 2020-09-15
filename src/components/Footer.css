@@ -1,7 +1,25 @@
+body {
+  margin: 0;
+  width: 100%;
+}
 .footer {
-  align-items: center;
+  background-color: orange;
   bottom: 0;
   display: flex;
-  justify-content: space-around;
+  flex-direction: row;
+  justify-content: space-between;
   position: fixed;
+  width: 100%;
+}
+
+.footer button {
+  background-color: #ffd05b;
+  border: 1px solid black;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  height: 65px;
+  justify-content: space-around;
+  margin: 20px;
+  width: 20%
 }

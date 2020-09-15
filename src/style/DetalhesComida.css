@@ -5,6 +5,8 @@
 }
 
 .recipe-photo {
+  border: 2px solid pink;
+  border-radius: 20px;
   width: 200px;
 }
 
@@ -15,14 +17,42 @@
 }
 
 .img-drinks {
-  border-radius: 5px 5px 0 0;
+  border-radius: 20px;
   width: 100%;
 }
 
-.container {
-  padding: 2px 16px;
+.recipe-photo:hover {
+  border: 3px yellow solid;
+}
+.img-drinks:hover {
+  border: 3px yellow solid;
 }
 
+.container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  font-family: "Roboto";
+  justify-content: center;
+  text-align: center;
+}
+
+.container button {
+  background-color: #4f9f36;
+  border: 3px solid green;
+  border-radius: 20px;
+  font-weight: 600;
+  height: 5em;
+  margin-left: -80px;
+  width: 30%;
+}
+.container button:hover {
+  color: aliceblue;
+}
+.container button:focus {
+  box-shadow: 0 0 0 0;
+  outline: 0;
+}
 .ingredientes {
   list-style-type: none;
 }

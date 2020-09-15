@@ -3,10 +3,18 @@
   background-color: #ffca7a;
   border-radius: 5px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  color: #f56038;
+  color: red;
   display: flex;
   flex-direction: column;
   margin: 10px;
   padding-top: 20px;
-  width: 70%;
+  width: 100%;
+}
+
+.card img {
+  border-radius: 7px;
+}
+
+.card:hover {
+  color: lightyellow;
 }

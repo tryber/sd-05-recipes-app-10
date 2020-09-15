@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { ReceitasContext } from '../Context/ReceitasContext';
+import '../style/login.css';
 
 // Fonte regex https://www.devmedia.com.br/iniciando-expressoes-regulares/6557
 
@@ -30,19 +31,24 @@ export default function Login() {
   }, [email, senha]);
 
   return (
-    <div>
+    <div className="login-container">
+      <div className="top">
+        <h1>
+          .
+        </h1>
+      </div>
       <h1>Login</h1>
-      <input
+      <input className="login-btn"
         type="email" value={email} placeholder="Email" data-testid="email-input"
         onChange={(e) => setEmail(e.target.value)}
       />
-      <input
+      <input className="login-btn"
         type="text" placeholder="Senha" value={senha} data-testid="password-input" minLength="6"
         onChange={(e) => setSenha(e.target.value)}
       />
       <Link to="/comidas">corte caminho aqui</Link>
       <Link to="/comidas">
-        <button
+        <button className="entrar-btn"
           type="submit" data-testid="login-submit-btn" disabled={isDisabled}
           onClick={() => saveStorage()}
         >
