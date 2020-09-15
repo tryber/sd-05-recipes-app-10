@@ -145,11 +145,13 @@ function RecommendationsList(props) {
 RecommendationsList.propTypes = {
   recomendadas: propTypes.arrayOf(propTypes.string).isRequired,
 };
+
 function Success() {
   return (' Link copiado!');
 }
 
-function recipeImage(recipe) {
+function RecipeImage(props) {
+  const { recipe } = props;
   return (
     <div>
       <img
@@ -160,13 +162,12 @@ function recipeImage(recipe) {
   );
 }
 
+RecipeImage.propTypes = {
+  recomendadas: propTypes.arrayOf(propTypes.string).isRequired,
+};
+
 const DetalhesComida = (props) => {
-  const [recipe, setRecipe] = useState({
-    strDrinkThumb: '',
-    strMeal: '',
-    strCategory: '',
-    strMealThumb: '',
-  });
+  const [recipe, setRecipe] = useState({});
   const [recommendations, setRecommendations] = useState([]);
   const { params, path } = props.match;
   const [favorite, setFavorite] = useState(false);
@@ -177,65 +178,38 @@ const DetalhesComida = (props) => {
       fetchMealById(params.idMeal).then((e) => setRecipe(e));
       fetchAllDrinks().then((e) => setRecommendations(e));
     }
-
     if (path.includes('bebida')) {
       fetchDrinkById(params.id).then((e) => setRecipe(e));
       fetchAllMeals().then((e) => setRecommendations(e));
     }
   }, [params.id, params.idMeal, path]);
+
   // Ao rodar, checar se esta receita já esta favoritada,
   ifIsFavoriteFunc(recipe, setFavorite);
-  let pathToBeCopied = params.idMeal ? `http://localhost:3000/comidas/${params.idMeal}` : `http://localhost:3000/bebidas/${params.id}`
+  let pathToBeCopied = params.idMeal ? `http://localhost:3000/comidas/${params.idMeal}` : `http://localhost:3000/bebidas/${params.id}`;
 
   return (
     <div>
-      <img
-        alt="detail"
-        className="recipe-photo"
-        data-testid="recipe-photo"
-        src={recipe.strMealThumb || recipe.strDrinkThumb}
-      />
+      <RecipeImage recipe={recipe}/>
       <h2 data-testid="recipe-title">{recipe.strMeal || recipe.strDrink}</h2>
       <h4 data-testid="recipe-category">{recipe.strAlcoholic || recipe.strCategory}</h4>
-      {/* <button><img alt="share button" data-testid="share-btn" src={shareIcon} /></button> */}
       <button onClick={() => faveFunc(setFavorite, favorite, recipe)}>
-        <img
-          alt="favorite button"
-          data-testid="favorite-btn"
+        <img alt="favorite button" data-testid="favorite-btn"
           src={favorite ? blackHeartIcon : whiteHeartIcon}
-          />
+        />
       </button>
-       <button
-          data-testid="share-btn"
-          onClick={() => setCopyToClipboard(pathToBeCopied)}
-          >
-          <img alt="share button"  src={shareIcon} />
-          {isClipboard ? <Success /> : null}
-        </button >
-          
+      <button
+        data-testid="share-btn"
+        onClick={() => setCopyToClipboard(pathToBeCopied)}
+        >
+        <img alt="share button"  src={shareIcon} />
+         {isClipboard ? <Success /> : null}
+      </button >
       <IngredientsList recipe={recipe} />
       <Instructions recipe={recipe} />
       <StrYoutube recipe={recipe} />
       <RecommendationsList recomendadas={recommendations} />
       <Link><button style={btnStyle} data-testid="start-recipe-btn">Iniciar Receita</button></Link>
-{/* ======= */}
-      {/* {recipeImage(recipe)}
-      <h2 data-testid="recipe-title">{recipe.strMeal || recipe.strDrink}</h2>
-      <h4 data-testid="recipe-category">{recipe.strAlcoholic || recipe.strCategory}</h4>
-      <div> */}
-       
-      {/* </div>
-      <div>
-        <Link><img alt="favorite button" data-testid="favorite-btn" src={whiteHeartIcon} /></Link>
-      </div>
-      <div>{handleIngredients(recipe)}</div>
-      <div>{handleStrInstructions(recipe)}</div>
-      <div>{handleStrYoutube(recipe)}</div>
-      <div>{handleRecommendationsDrinks(recommendations)}</div>
-      <Link>
-        <button style={btnStyle} data-testid="start-recipe-btn"> Iniciar Receita </button>
-      </Link>
->>>>>>> c958d81172705cef9747409c503ede4460396c17 */}
     </div>
   );
 };
