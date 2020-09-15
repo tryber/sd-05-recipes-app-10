@@ -1,5 +1,5 @@
 import React from 'react';
-import Carousel from 'react-elastic-carousel';
+// import Carousel from 'react-elastic-carousel';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
@@ -23,11 +23,12 @@ const btnStyle = {
 };
 
 function IngredientsList(props) {
-  const { mealDB } = props;
+  const { recipe } = props;
+  console.log(recipe);
   const quantities = [];
   const ingredients = [];
 
-  Object.entries(mealDB).forEach((element) => {
+  Object.entries(recipe).forEach((element) => {
     if (
       element[0].includes('strMeasure') &&
       element[1] !== ' ' &&
@@ -62,6 +63,10 @@ function IngredientsList(props) {
   );
 }
 
+IngredientsList.propTypes = {
+  recipe: propTypes.objectOf(propTypes.string)
+}
+
 function Instructions(props) {
   const { recipe } = props;
   return (
@@ -84,12 +89,12 @@ function StrYoutube(props) {
   );
 }
 
-const breakPoints = [
-  { width: 2, itemsToShow: 2 },
-  { width: 550, itemsToShow: 2 },
-  { width: 768, itemsToShow: 3 },
-  { width: 1200, itemsToShow: 4 },
-];
+// const breakPoints = [
+//   { width: 2, itemsToShow: 2 },
+//   { width: 550, itemsToShow: 2 },
+//   { width: 768, itemsToShow: 3 },
+//   { width: 1200, itemsToShow: 4 },
+// ];
 
 function RecommendationsList(props) {
   const { recomendadas } = props;
@@ -97,27 +102,27 @@ function RecommendationsList(props) {
     <div>
       <h3>Recomendadas</h3>
       {/* <Carousel breakPoints={breakPoints}> */}
-        {recomendadas.slice(0, 6).map((recomendada, index) => (
-          <div
-            key={Math.random()}
-            data-testid={`${index}-recomendation-card`}
-            className="drinks-card-details"
-          >
-            <img
-              alt="drinks or meals"
-              className="img-drinks"
-              src={recomendada.strDrinkThumb || recomendada.strMealThumb}
-            />
-            <div className="container">
-              <h4 data-testid="recipe-category">
-                {recomendada.strAlcoholic || recomendada.strCategory}
-              </h4>
-              <h4 data-testid={`${index}-recomendation-title`}>
-                {recomendada.strDrink || recomendada.strMeal}
-              </h4>
-            </div>
+      {recomendadas.slice(0, 6).map((recomendada, index) => (
+        <div
+          key={Math.random()}
+          data-testid={`${index}-recomendation-card`}
+          className="drinks-card-details"
+        >
+          <img
+            alt="drinks or meals"
+            className="img-drinks"
+            src={recomendada.strDrinkThumb || recomendada.strMealThumb}
+          />
+          <div className="container">
+            <h4 data-testid="recipe-category">
+              {recomendada.strAlcoholic || recomendada.strCategory}
+            </h4>
+            <h4 data-testid={`${index}-recomendation-title`}>
+              {recomendada.strDrink || recomendada.strMeal}
+            </h4>
           </div>
-        ))}
+        </div>
+      ))}
       {/* </Carousel> */}
     </div>
   );
@@ -166,14 +171,10 @@ const DetalhesComida = (props) => {
           src={favorite ? blackHeartIcon : whiteHeartIcon}
         />
       </button>
-      <IngredientsList mealDB={recipe} />
+      <IngredientsList recipe={recipe} />
       <Instructions recipe={recipe} />
       <StrYoutube recipe={recipe} />
       <RecommendationsList recomendadas={recommendations} />
-      {/* <div>{handleIngredients(recipe)}</div>
-      <div>{handleStrInstructions(recipe)}</div>
-      <div>{handleStrYoutube(recipe)}</div>
-      <div>{handleRecommendationsDrinks(recommendations)}</div> */}
       <Link><button style={btnStyle} data-testid="start-recipe-btn">Iniciar Receita</button></Link>
     </div>
   );
