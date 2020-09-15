@@ -79,7 +79,7 @@ function Instructions(props) {
 
 Instructions.propTypes = {
   recipe: propTypes.objectOf(propTypes.string).isRequired,
-}
+};
 
 function StrYoutube(props) {
   const { recipe } = props;
@@ -198,8 +198,8 @@ DetalhesComida.propTypes = {
     params: propTypes.shape({
       id: propTypes.string,
       idMeal: propTypes.string,
-    }),
-  }),
+    }).is,
+  }).isRequired,
 };
 
 export default DetalhesComida;
