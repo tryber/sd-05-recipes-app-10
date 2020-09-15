@@ -37,6 +37,10 @@ export const faveFunc = (setFavorite, favorite, recipe) => {
   );
   // Se não já estiver favoritada,
   // juntar a nova receita no array da storage
+  isAlreadyFavoritedFunc(isAlreadyFavorited, recipe, favoritesArr);
+};
+// Funcao de cima chama a de baixo
+const isAlreadyFavoritedFunc = (isAlreadyFavorited, recipe, favoritesArr) => {
   if (isAlreadyFavorited === false) {
     localStorage.setItem('favoriteRecipes', JSON.stringify([
       ...favoritesArr,
@@ -63,7 +67,7 @@ export const faveFunc = (setFavorite, favorite, recipe) => {
       JSON.stringify(favoritesArraywithOneLess),
     );
   }
-};
+}
 
 // Ao caregar a página, esta função checa se a receita já
 // é fave localmente, se for, favorited = true / heart = black
