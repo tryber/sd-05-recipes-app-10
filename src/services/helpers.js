@@ -36,7 +36,8 @@ export const faveFunc = (setFavorite, favorite, recipe) => {
   const isAlreadyFavorited = favoritesArr.some(
     (e) => e.id === recipe.idMeal || e.id === recipe.idDrink,
   );
-  // Se não já estiver favoritada, juntar a nova receita no array da storage
+  // Se não já estiver favoritada,
+  // juntar a nova receita no array da storage
   if (!isAlreadyFavorited) {
     const favoriteRecipe = [
       ...favoritesArr,

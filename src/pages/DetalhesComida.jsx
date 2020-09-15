@@ -9,7 +9,7 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import '../style/DetalhesComida.css';
 import { fetchMealById, fetchAllMeals, fetchAllDrinks, fetchDrinkById } from '../services/ApiRequest';
-import { faveFunc , ifIsFavoriteFunc} from '../services/helpers';
+import { faveFunc, ifIsFavoriteFunc } from '../services/helpers';
 // o botão tem que ser bottom com posição fixa o resto pode estilizar
 const btnStyle = {
   backgroundColor: '#E5E5E5',
@@ -36,7 +36,7 @@ function handleIngredients(mealDB) {
       <ul>
         {quantities.map((element, index) => (
           <li
-            key={`qnt ${index}`}
+          key={Math.random() * index}
             className="quantidades"
             data-testid={`${index}-ingredient-name-and-measure`}
           >
@@ -82,7 +82,7 @@ function handleRecommendationsDrinks(recomendadas) {
       <Carousel breakPoints={breakPoints}>
         {recomendadas.slice(0, 6).map((recomendada, index) => (
           <div
-            key={`recomend ${index}`}
+            key={Math.random() * index}
             data-testid={`${index}-recomendation-card`}
             className="drinks-card-details"
           >
@@ -128,9 +128,9 @@ const DetalhesComida = (props) => {
       fetchDrinkById(params.id).then((e) => setRecipe(e));
       fetchAllMeals().then((e) => setRecommendations(e));
     }
-  }, [params.id, params.idMeal, path ]);
+  }, [params.id, params.idMeal, path]);
     // Ao rodar, checar se esta receita já esta favoritada
-  ifIsFavoriteFunc(recipe, setFavorite)
+  ifIsFavoriteFunc(recipe, setFavorite);
 
   return (
     <div>
@@ -143,7 +143,8 @@ const DetalhesComida = (props) => {
       <button><img alt="share button" data-testid="share-btn" src={shareIcon} /></button>
       {/* OnClick - favorite or unfavorite - localstorage */}
       <button onClick={() => faveFunc(setFavorite, favorite, recipe)}>
-        <img alt="favorite button" data-testid="favorite-btn" src={favorite ? blackHeartIcon : whiteHeartIcon} />
+        <img alt="favorite button" 
+        data-testid="favorite-btn" src={favorite ? blackHeartIcon : whiteHeartIcon} />
       </button>
       <div>{handleIngredients(recipe)}</div>
       <div>{handleStrInstructions(recipe)}</div>
