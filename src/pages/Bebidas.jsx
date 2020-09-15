@@ -9,7 +9,7 @@ import { ReceitasContext } from '../Context/ReceitasContext';
 import { fetchDrinkDB } from '../services/ApiRequest';
 
 const Bebidas = (props) => {
-  const { setDrinkDB } = useContext(ReceitasContext);
+  const { setDrinkDB, setChooseAPI } = useContext(ReceitasContext);
 
   useEffect(() => {
     fetchDrinkDB().then((e) =>
@@ -19,6 +19,10 @@ const Bebidas = (props) => {
       })),
     );
   }, [setDrinkDB]);
+
+  useEffect(() => {
+    setChooseAPI('bebidas');
+  }, [setChooseAPI]);
 
   return (
     <Fragment>
