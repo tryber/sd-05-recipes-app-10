@@ -53,7 +53,9 @@ export const faveFunc = (setFavorite, favorite, recipe) => {
     ];
     localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipe));
   } else {
-    // Se já estiver favoritada, por no local storage o array SEM a receita que ja estava favoritada
+    // Se já estiver favoritada,
+    // por no local storage o array SEM a 
+    // receita que ja estava favoritada
     const favoritesArraywithOneLess = favoritesArr.filter(
       (e) => !(e.id === recipe.idMeal || e.id === recipe.idDrink),
     );

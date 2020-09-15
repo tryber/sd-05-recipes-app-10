@@ -36,7 +36,7 @@ function handleIngredients(mealDB) {
       <ul>
         {quantities.map((element, index) => (
           <li
-          key={Math.random() * index}
+            key={Math.random()}
             className="quantidades"
             data-testid={`${index}-ingredient-name-and-measure`}
           >
@@ -82,7 +82,7 @@ function handleRecommendationsDrinks(recomendadas) {
       <Carousel breakPoints={breakPoints}>
         {recomendadas.slice(0, 6).map((recomendada, index) => (
           <div
-            key={Math.random() * index}
+            key={Math.random()}
             data-testid={`${index}-recomendation-card`}
             className="drinks-card-details"
           >
@@ -143,8 +143,10 @@ const DetalhesComida = (props) => {
       <button><img alt="share button" data-testid="share-btn" src={shareIcon} /></button>
       {/* OnClick - favorite or unfavorite - localstorage */}
       <button onClick={() => faveFunc(setFavorite, favorite, recipe)}>
-        <img alt="favorite button" 
-        data-testid="favorite-btn" src={favorite ? blackHeartIcon : whiteHeartIcon} />
+          <img 
+          alt="favorite button"
+          data-testid="favorite-btn" src={favorite ? blackHeartIcon : whiteHeartIcon} 
+          />
       </button>
       <div>{handleIngredients(recipe)}</div>
       <div>{handleStrInstructions(recipe)}</div>
