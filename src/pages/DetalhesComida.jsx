@@ -1,8 +1,8 @@
 import React from 'react';
 import Carousel from 'react-elastic-carousel';
-import { useEffect } from 'react';
+import useClipboard from 'react-hook-clipboard';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
 import propTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
@@ -102,6 +102,10 @@ function handleRecommendationsDrinks(recomendadas) {
   );
 }
 
+function Success() {
+  return (' Link copiado!');
+}
+
 const DetalhesComida = (props) => {
   const [recipe, setRecipe] = useState({
     strDrinkThumb: '',
@@ -111,6 +115,7 @@ const DetalhesComida = (props) => {
   });
   const [recommendations, setRecommendations] = useState([]);
   const { params, path } = props.match;
+  const [isClipboard, setCopyToClipboard] = useClipboard();
 
   useEffect(() => {
     if (path.includes('comida')) {
@@ -132,8 +137,13 @@ const DetalhesComida = (props) => {
       />
       <h2 data-testid="recipe-title">{recipe.strMeal || recipe.strDrink}</h2>
       <h4 data-testid="recipe-category">{recipe.strAlcoholic || recipe.strCategory}</h4>
-      <Link><img alt="share button" data-testid="share-btn" src={shareIcon} /></Link>
-      <Link><img alt="favorite button" data-testid="favorite-btn" src={whiteHeartIcon} /></Link>
+      <div>
+        <Link key={isClipboard} onClick={() => setCopyToClipboard(recipe.strSource)}><img alt="share button" data-testid="share-btn" src={shareIcon}/></Link>
+        {isClipboard ? <Success /> : null}
+      </div>
+      <div>
+        <Link><img alt="favorite button" data-testid="favorite-btn" src={whiteHeartIcon} /></Link>
+      </div>
       <div>{handleIngredients(recipe)}</div>
       <div>{handleStrInstructions(recipe)}</div>
       <div>{handleStrYoutube(recipe)}</div>
