@@ -22,6 +22,9 @@ export const ReceitasContextProvider = ({ children }) => {
     ingredientes: [],
     recommendDrinks: [],
   });
+
+  const [chooseAPI, setChooseAPI] = useState('comidas');
+
   const [category, setCategory] = useState('All');
   const [drinkCategory, setDrinkCategory] = useState('All');
   const [recipesFiltered, setRecipesFiltered] = useState([]);
@@ -37,6 +40,8 @@ export const ReceitasContextProvider = ({ children }) => {
     setMealDB,
     drinkDB,
     setDrinkDB,
+    chooseAPI,
+    setChooseAPI,
     category,
     setCategory,
     recipesFiltered,
