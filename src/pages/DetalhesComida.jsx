@@ -106,6 +106,17 @@ function Success() {
   return (' Link copiado!');
 }
 
+function recipeImage(recipe) {
+  return (
+    <div>
+      <img
+        alt="detail" className="recipe-photo" data-testid="recipe-photo"
+        src={recipe.strMealThumb || recipe.strDrinkThumb}
+      />
+    </div>
+  );
+}
+
 const DetalhesComida = (props) => {
   const [recipe, setRecipe] = useState({
     strDrinkThumb: '',
@@ -131,10 +142,7 @@ const DetalhesComida = (props) => {
 
   return (
     <div>
-      <img
-        alt="detail" className="recipe-photo" data-testid="recipe-photo"
-        src={recipe.strMealThumb || recipe.strDrinkThumb}
-      />
+      {recipeImage(recipe)}
       <h2 data-testid="recipe-title">{recipe.strMeal || recipe.strDrink}</h2>
       <h4 data-testid="recipe-category">{recipe.strAlcoholic || recipe.strCategory}</h4>
       <div>
