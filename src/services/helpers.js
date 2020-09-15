@@ -51,7 +51,7 @@ const isAlreadyFavoritedFunc = (isAlreadyFavorited, recipe, favoritesArr) => {
       JSON.stringify(favoritesWithOneMore),
     );
   } else {
-    localStorage.clear();
+    // localStorage.clear();
     localStorage.setItem(
       'favoriteRecipes',
       JSON.stringify(favoritesArraywithOneLess),

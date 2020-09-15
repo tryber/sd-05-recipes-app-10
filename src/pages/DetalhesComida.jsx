@@ -24,7 +24,7 @@ const btnStyle = {
 
 function IngredientsList(props) {
   const { recipe } = props;
-  console.log(recipe);
+  // console.log(recipe);
   const quantities = [];
   const ingredients = [];
 
@@ -198,7 +198,7 @@ DetalhesComida.propTypes = {
     params: propTypes.shape({
       id: propTypes.string,
       idMeal: propTypes.string,
-    }).is,
+    }).isRequired,
   }).isRequired,
 };
 
