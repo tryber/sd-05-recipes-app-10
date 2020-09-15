@@ -126,6 +126,38 @@ const DetalhesComida = (props) => {
     }
   }, []);
 
+  const ifIsFavoriteFunc = async () => {
+    const ehFavoritaNoLocal = await ((JSON.parse(localStorage.getItem('favoriteRecipes')) || []).some(e => (e.id === recipe.idMeal || e.id === recipe.idDrink)))
+    
+    console.log('dentro do useeffect' + ehFavoritaNoLocal);
+  setFavorite(ehFavoritaNoLocal)
+  }
+    ifIsFavoriteFunc()
+
+  const faveFunc = () => {
+    setFavorite(!favorite);
+
+    const favoritesArr = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+    const isAlreadyFavorited = favoritesArr.some(e => e.id === recipe.idMeal || e.id === recipe.idDrink )
+
+    if (!isAlreadyFavorited) {
+      const favoriteRecipe =  [...favoritesArr, {
+        id: recipe.idMeal || recipe.idDrink,
+        type: recipe.idMeal ? 'comida' : 'bebida',
+        area: recipe.strArea || '',
+        category: recipe.strCategory || '',
+        alcoholicOrNot: recipe.strAlcoholic || '',
+        name: recipe.strMeal || recipe.strDrink,
+        image: recipe.strMealThumb || recipe.strDrinkThumb
+    }]
+    localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipe));
+    } else {
+     const favoritesArraywithOneLess = favoritesArr.filter(e => !(e.id === recipe.idMeal || e.id === recipe.idDrink))
+     localStorage.clear();
+     localStorage.setItem('favoriteRecipes', JSON.stringify(favoritesArraywithOneLess))
+    }
+  }
+
   return (
     <div>
       <img
@@ -135,7 +167,7 @@ const DetalhesComida = (props) => {
       <h2 data-testid="recipe-title">{recipe.strMeal || recipe.strDrink}</h2>
       <h4 data-testid="recipe-category">{recipe.strAlcoholic || recipe.strCategory}</h4>
       <button><img alt="share button" data-testid="share-btn" src={shareIcon} /></button>
-      <button onClick={() => setFavorite(!favorite)}>
+      <button onClick={() => faveFunc()}>
         <img alt="favorite button" data-testid="favorite-btn" src={favorite ? blackHeartIcon : whiteHeartIcon} />
       </button>
       <div>{handleIngredients(recipe)}</div>
