@@ -153,16 +153,10 @@ const DetalhesComida = (props) => {
         src={recipe.strMealThumb || recipe.strDrinkThumb}
       />
       <h2 data-testid="recipe-title">{recipe.strMeal || recipe.strDrink}</h2>
-      <h4 data-testid="recipe-category">
-        {recipe.strAlcoholic || recipe.strCategory}
-      </h4>
-      <button>
-        <img alt="share button" data-testid="share-btn" src={shareIcon} />
-      </button>
-      {/* OnClick - favorite or unfavorite - localstorage */}
+      <h4 data-testid="recipe-category">{recipe.strAlcoholic || recipe.strCategory}</h4>
+      <button><img alt="share button" data-testid="share-btn" src={shareIcon} /></button>
       <button onClick={() => faveFunc(setFavorite, favorite, recipe)}>
-        <img
-          alt="favorite button"
+        <img alt="favorite button"
           data-testid="favorite-btn"
           src={favorite ? blackHeartIcon : whiteHeartIcon}
         />
@@ -171,12 +165,7 @@ const DetalhesComida = (props) => {
       <div>{handleStrInstructions(recipe)}</div>
       <div>{handleStrYoutube(recipe)}</div>
       <div>{handleRecommendationsDrinks(recommendations)}</div>
-      <Link>
-        <button style={btnStyle} data-testid="start-recipe-btn">
-          {' '}
-          Iniciar Receita{' '}
-        </button>
-      </Link>
+      <Link><button style={btnStyle} data-testid="start-recipe-btn">Iniciar Receita</button></Link>
     </div>
   );
 };

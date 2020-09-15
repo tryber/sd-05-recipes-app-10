@@ -39,7 +39,19 @@ export const faveFunc = (setFavorite, favorite, recipe) => {
   // Se não já estiver favoritada,
   // juntar a nova receita no array da storage
   if (!isAlreadyFavorited) {
-    const favoriteRecipe = [
+    // const favoriteRecipe = [
+    //   ...favoritesArr,
+    //   {
+    //     id: recipe.idMeal || recipe.idDrink,
+    //     type: recipe.idMeal ? 'comida' : 'bebida',
+    //     area: recipe.strArea || '',
+    //     category: recipe.strCategory || '',
+    //     alcoholicOrNot: recipe.strAlcoholic || '',
+    //     name: recipe.strMeal || recipe.strDrink,
+    //     image: recipe.strMealThumb || recipe.strDrinkThumb,
+    //   },
+    // ];
+    localStorage.setItem('favoriteRecipes', JSON.stringify([
       ...favoritesArr,
       {
         id: recipe.idMeal || recipe.idDrink,
@@ -50,8 +62,7 @@ export const faveFunc = (setFavorite, favorite, recipe) => {
         name: recipe.strMeal || recipe.strDrink,
         image: recipe.strMealThumb || recipe.strDrinkThumb,
       },
-    ];
-    localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipe));
+    ]));
   } else {
     // Se já estiver favoritada,
     // por no local storage o array SEM a
