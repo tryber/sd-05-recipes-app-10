@@ -8,6 +8,7 @@ import {
   isSearchBtnOnTheCurrentPageAllowed,
   titleForCurrentUrl,
 } from '../services/helpers';
+import './header.css';
 
 const Header = (props) => {
   const [showMenu, setShowMenu] = useState(false);
@@ -24,12 +25,10 @@ const Header = (props) => {
   pageSearchAllowed = isSearchBtnOnTheCurrentPageAllowed(props.pathname);
 
   return (
-    <div>
-      <header
+    <div className="header-container">
+      <header className="bla"
         style={{
-          background: 'lightgrey',
-          display: 'flex',
-          'flex-direction': 'row',
+          background: '#bc551e'
         }}
       >
         <Link to="/perfil">
