@@ -138,7 +138,12 @@ const DetalhesComida = (props) => {
       <h2 data-testid="recipe-title">{recipe.strMeal || recipe.strDrink}</h2>
       <h4 data-testid="recipe-category">{recipe.strAlcoholic || recipe.strCategory}</h4>
       <div>
-        <Link key={isClipboard} onClick={() => setCopyToClipboard(recipe.strSource)}><img alt="share button" data-testid="share-btn" src={shareIcon}/></Link>
+        <Link
+          key={isClipboard}
+          onClick={() => setCopyToClipboard(recipe.strSource)}
+        >
+          <img alt="share button" data-testid="share-btn" src={shareIcon} />
+        </Link>
         {isClipboard ? <Success /> : null}
       </div>
       <div>
