@@ -156,7 +156,7 @@ const DetalhesComida = (props) => {
       <h4 data-testid="recipe-category">{recipe.strAlcoholic || recipe.strCategory}</h4>
       <button><img alt="share button" data-testid="share-btn" src={shareIcon} /></button>
       <button onClick={() => faveFunc(setFavorite, favorite, recipe)}>
-        <img 
+        <img
           alt="favorite button"
           data-testid="favorite-btn"
           src={favorite ? blackHeartIcon : whiteHeartIcon}
