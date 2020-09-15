@@ -1,9 +1,4 @@
 import React from 'react';
-// <<<<<<< HEAD
-// // import Carousel from 'react-elastic-carousel';
-// import { useEffect } from 'react';
-// =======
-import Carousel from 'react-elastic-carousel';
 import useClipboard from 'react-hook-clipboard';
 import { useEffect, useState } from 'react';
 // >>>>>>> c958d81172705cef9747409c503ede4460396c17
@@ -163,7 +158,7 @@ function RecipeImage(props) {
 }
 
 RecipeImage.propTypes = {
-  recomendadas: propTypes.arrayOf(propTypes.string).isRequired,
+  recipe: propTypes.arrayOf(propTypes.string).isRequired,
 };
 
 const DetalhesComida = (props) => {
@@ -186,24 +181,25 @@ const DetalhesComida = (props) => {
 
   // Ao rodar, checar se esta receita já esta favoritada,
   ifIsFavoriteFunc(recipe, setFavorite);
-  let pathToBeCopied = params.idMeal ? `http://localhost:3000/comidas/${params.idMeal}` : `http://localhost:3000/bebidas/${params.id}`;
+  const pathToBeCopied = params.idMeal ? `http://localhost:3000/comidas/${params.idMeal}` : `http://localhost:3000/bebidas/${params.id}`;
 
   return (
     <div>
       <RecipeImage recipe={recipe}/>
       <h2 data-testid="recipe-title">{recipe.strMeal || recipe.strDrink}</h2>
       <h4 data-testid="recipe-category">{recipe.strAlcoholic || recipe.strCategory}</h4>
-      <button onClick={() => faveFunc(setFavorite, favorite, recipe)}>
-        <img alt="favorite button" data-testid="favorite-btn"
-          src={favorite ? blackHeartIcon : whiteHeartIcon}
+      <button onClick={() => faveFunc(setFavorite, favorite, recipe)} >
+        <img
+         alt="favorite button" data-testid="favorite-btn"
+         src={favorite ? blackHeartIcon : whiteHeartIcon}
         />
       </button>
       <button
         data-testid="share-btn"
         onClick={() => setCopyToClipboard(pathToBeCopied)}
-        >
-        <img alt="share button"  src={shareIcon} />
-         {isClipboard ? <Success /> : null}
+      >
+        <img alt="share button" src={shareIcon} />
+        {isClipboard ? <Success /> : null}
       </button >
       <IngredientsList recipe={recipe} />
       <Instructions recipe={recipe} />
