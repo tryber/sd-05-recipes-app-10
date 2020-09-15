@@ -1,5 +1,4 @@
 import React from 'react';
-import Carousel from 'react-elastic-carousel';
 import useClipboard from 'react-hook-clipboard';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -76,11 +75,10 @@ function handleRecommendationsDrinks(recomendadas) {
   return (
     <div>
       <h3>Recomendadas</h3>
-      <Carousel breakPoints={breakPoints}>
+      <div className="drinks-card-details">
         {recomendadas.slice(0, 6).map((recomendada, index) => (
           <div
             data-testid={`${index}-recomendation-card`}
-            className="drinks-card-details"
           >
             <img
               alt="drinks or meals"
@@ -97,7 +95,7 @@ function handleRecommendationsDrinks(recomendadas) {
             </div>
           </div>
         ))}
-      </Carousel>
+      </div>
     </div>
   );
 }
