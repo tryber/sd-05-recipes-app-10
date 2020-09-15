@@ -40,13 +40,16 @@ const isAlreadyFavoritedFunc = (isAlreadyFavorited, recipe, favoritesArr) => {
       name: recipe.strMeal || recipe.strDrink,
       image: recipe.strMealThumb || recipe.strDrinkThumb,
     },
-  ]
+  ];
   const favoritesArraywithOneLess = favoritesArr.filter(
     (e) => !(e.id === recipe.idMeal || e.id === recipe.idDrink),
   );
 
   if (isAlreadyFavorited === false) {
-    localStorage.setItem('favoriteRecipes', JSON.stringify(favoritesWithOneMore));
+    localStorage.setItem(
+      'favoriteRecipes',
+      JSON.stringify(favoritesWithOneMore),
+    );
   } else {
     localStorage.clear();
     localStorage.setItem(
@@ -54,11 +57,12 @@ const isAlreadyFavoritedFunc = (isAlreadyFavorited, recipe, favoritesArr) => {
       JSON.stringify(favoritesArraywithOneLess),
     );
   }
-}
+};
 export const faveFunc = (setFavorite, favorite, recipe) => {
   setFavorite(!favorite);
 
-  const favoritesArr = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+  const favoritesArr =
+    JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
   const isAlreadyFavorited = favoritesArr.some(
     (e) => e.id === recipe.idMeal || e.id === recipe.idDrink,
   );
@@ -66,7 +70,6 @@ export const faveFunc = (setFavorite, favorite, recipe) => {
   // juntar a nova receita no array da storage
   isAlreadyFavoritedFunc(isAlreadyFavorited, recipe, favoritesArr);
 };
-
 
 // Ao caregar a página, esta função checa se a receita já
 // é fave localmente, se for, favorited = true / heart = black
