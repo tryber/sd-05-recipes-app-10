@@ -49,13 +49,13 @@ function IngredientsList(props) {
     <div>
       <h3>Ingredients</h3>
       <ul>
-        {quantities.map((element, index) => (
+        {ingredients.map((element, index) => (
           <li
             key={Math.random()}
             className="quantidades"
             data-testid={`${index}-ingredient-name-and-measure`}
           >
-            - {ingredients[index]} - {element}
+            - {element} - {quantities[index]} 
           </li>
         ))}
       </ul>
@@ -142,7 +142,10 @@ RecommendationsList.propTypes = {
 };
 
 function Success() {
-  return (' Link copiado!');
+  // setTimeout(function(){ return 'Link copiado!'}, 3000);
+  // function(){ alert("Hello"); }, 3000
+// setTimeout(() => {<div>Link copiado!</div>}, 550 )
+  return ('Link copiado!');
 }
 
 function RecipeImage(props) {
@@ -161,12 +164,30 @@ RecipeImage.propTypes = {
   recipe: propTypes.arrayOf(propTypes.string).isRequired,
 };
 
+const copyFunc = (params, setLinkCopied, document) => {
+  const pathToBeCopied = params.idMeal
+    ? `http://localhost:3000/comidas/${params.idMeal}`
+    : `http://localhost:3000/bebidas/${params.id}`;
+
+    // dica de rodrigo batista
+    // https://stackoverflow.com/questions/39501289/in-reactjs-how-to-copy-text-to-clipboard
+  const textField = document.createElement('textarea');
+  textField.innerText = pathToBeCopied;
+  document.body.appendChild(textField);
+  textField.select();
+  document.execCommand('copy');
+  textField.remove();
+    // 
+  setLinkCopied(true);
+};
+
 const DetalhesComida = (props) => {
   const [recipe, setRecipe] = useState({});
   const [recommendations, setRecommendations] = useState([]);
   const { params, path } = props.match;
   const [favorite, setFavorite] = useState(false);
-  const [isClipboard, setCopyToClipboard] = useClipboard();
+  // const [isClipboard, setCopyToClipboard] = useClipboard();
+  const [linkCopied, setLinkCopied] = useState(false);
 
   useEffect(() => {
     if (path.includes('comida')) {
@@ -181,8 +202,25 @@ const DetalhesComida = (props) => {
 
   // Ao rodar, checar se esta receita já esta favoritada,
   ifIsFavoriteFunc(recipe, setFavorite);
-  const pathToBeCopied = params.idMeal ? `http://localhost:3000/comidas/${params.idMeal}` : `http://localhost:3000/bebidas/${params.id}`;
-
+  // const copyFunc = (params, setLinkCopied, document) => {
+  //   const pathToBeCopied = params.idMeal
+  //     ? `http://localhost:3000/comidas/${params.idMeal}`
+  //     : `http://localhost:3000/bebidas/${params.id}`;
+  
+  //     // dica de rodrigo batista
+  //     // https://stackoverflow.com/questions/39501289/in-reactjs-how-to-copy-text-to-clipboard
+  //   const textField = document.createElement('textarea');
+  //   textField.innerText = pathToBeCopied;
+  //   document.body.appendChild(textField);
+  //   textField.select();
+  //   document.execCommand('copy');
+  //   textField.remove();
+  //     // 
+  //   setLinkCopied(true);
+  // };
+  // const pathToBeCopied = params.idMeal ? `http://localhost:3000/comidas/${params.idMeal}` : `http://localhost:3000/bebidas/${params.id}`;
+  // console.log(setCopyToClipboard(pathToBeCopied));
+  // console.log(isClipboard)
   return (
     <div>
       <RecipeImage recipe={recipe} />
@@ -196,10 +234,10 @@ const DetalhesComida = (props) => {
       </button>
       <button
         data-testid="share-btn"
-        onClick={() => setCopyToClipboard(pathToBeCopied)}
+        onClick={() => copyFunc(params, setLinkCopied, document)}
       >
         <img alt="share button" src={shareIcon} />
-        {isClipboard ? <Success /> : null}
+        {linkCopied ? <Success /> : null}
       </button >
       <IngredientsList recipe={recipe} />
       <Instructions recipe={recipe} />
