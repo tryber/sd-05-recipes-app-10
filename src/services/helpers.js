@@ -26,3 +26,56 @@ export const isSearchBtnOnTheCurrentPageAllowed = (pathname) => {
   }
   return false;
 };
+
+// As duas funcoes abaixo Favoritam ou desfavoritam, junto com o localstorage
+const isAlreadyFavoritedFunc = (isAlreadyFavorited, recipe, favoritesArr) => {
+  const favoritesWithOneMore = [
+    ...favoritesArr,
+    {
+      id: recipe.idMeal || recipe.idDrink,
+      type: recipe.idMeal ? 'comida' : 'bebida',
+      area: recipe.strArea || '',
+      category: recipe.strCategory || '',
+      alcoholicOrNot: recipe.strAlcoholic || '',
+      name: recipe.strMeal || recipe.strDrink,
+      image: recipe.strMealThumb || recipe.strDrinkThumb,
+    },
+  ];
+  const favoritesArraywithOneLess = favoritesArr.filter(
+    (e) => !(e.id === recipe.idMeal || e.id === recipe.idDrink),
+  );
+
+  if (isAlreadyFavorited === false) {
+    localStorage.setItem(
+      'favoriteRecipes',
+      JSON.stringify(favoritesWithOneMore),
+    );
+  } else {
+    // localStorage.clear();
+    localStorage.setItem(
+      'favoriteRecipes',
+      JSON.stringify(favoritesArraywithOneLess),
+    );
+  }
+};
+export const faveFunc = (setFavorite, favorite, recipe) => {
+  setFavorite(!favorite);
+
+  const favoritesArr =
+    JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+  const isAlreadyFavorited = favoritesArr.some(
+    (e) => e.id === recipe.idMeal || e.id === recipe.idDrink,
+  );
+  // Se não já estiver favoritada,
+  // juntar a nova receita no array da storage
+  isAlreadyFavoritedFunc(isAlreadyFavorited, recipe, favoritesArr);
+};
+
+// Ao caregar a página, esta função checa se a receita já
+// é fave localmente, se for, favorited = true / heart = black
+export const ifIsFavoriteFunc = async (recipe, setFavorite) => {
+  const ehFavoritaNoLocal = await (
+    JSON.parse(localStorage.getItem('favoriteRecipes')) || []
+  ).some((e) => e.id === recipe.idMeal || e.id === recipe.idDrink);
+  setFavorite(ehFavoritaNoLocal);
+};
