@@ -97,6 +97,10 @@ function Success() {
   return (' Link copiado!');
 }
 
+function l() {
+  
+}
+
 function recipeImage(recipe) {
   return (
     <div>
