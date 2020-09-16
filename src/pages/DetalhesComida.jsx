@@ -1,7 +1,5 @@
 import React from 'react';
-import useClipboard from 'react-hook-clipboard';
 import { useEffect, useState } from 'react';
-// >>>>>>> c958d81172705cef9747409c503ede4460396c17
 import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
@@ -179,6 +177,10 @@ const copyFunc = (params, setLinkCopied, document) => {
   textField.remove();
     // 
   setLinkCopied(true);
+
+  setTimeout(() => {
+    setLinkCopied(false);
+  }, 5000);
 };
 
 const DetalhesComida = (props) => {
@@ -186,7 +188,6 @@ const DetalhesComida = (props) => {
   const [recommendations, setRecommendations] = useState([]);
   const { params, path } = props.match;
   const [favorite, setFavorite] = useState(false);
-  // const [isClipboard, setCopyToClipboard] = useClipboard();
   const [linkCopied, setLinkCopied] = useState(false);
 
   useEffect(() => {
@@ -200,27 +201,8 @@ const DetalhesComida = (props) => {
     }
   }, [params.id, params.idMeal, path]);
 
-  // Ao rodar, checar se esta receita já esta favoritada,
   ifIsFavoriteFunc(recipe, setFavorite);
-  // const copyFunc = (params, setLinkCopied, document) => {
-  //   const pathToBeCopied = params.idMeal
-  //     ? `http://localhost:3000/comidas/${params.idMeal}`
-  //     : `http://localhost:3000/bebidas/${params.id}`;
-  
-  //     // dica de rodrigo batista
-  //     // https://stackoverflow.com/questions/39501289/in-reactjs-how-to-copy-text-to-clipboard
-  //   const textField = document.createElement('textarea');
-  //   textField.innerText = pathToBeCopied;
-  //   document.body.appendChild(textField);
-  //   textField.select();
-  //   document.execCommand('copy');
-  //   textField.remove();
-  //     // 
-  //   setLinkCopied(true);
-  // };
-  // const pathToBeCopied = params.idMeal ? `http://localhost:3000/comidas/${params.idMeal}` : `http://localhost:3000/bebidas/${params.id}`;
-  // console.log(setCopyToClipboard(pathToBeCopied));
-  // console.log(isClipboard)
+
   return (
     <div>
       <RecipeImage recipe={recipe} />
