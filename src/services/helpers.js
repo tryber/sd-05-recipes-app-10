@@ -79,3 +79,28 @@ export const ifIsFavoriteFunc = async (recipe, setFavorite) => {
   ).some((e) => e.id === recipe.idMeal || e.id === recipe.idDrink);
   setFavorite(ehFavoritaNoLocal);
 };
+
+export const faveFuncFavePage = (setFavorite, favorite, recipe, setFavoriteRecipes) => {
+  setFavorite(!favorite);
+
+  const favoritesArr =
+    JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+  // const isAlreadyFavorited = favoritesArr.some(
+  //   (e) => e.id === recipe.idMeal || e.id === recipe.idDrink,
+  // );
+  
+  const favoritesArraywithOneLess = favoritesArr.filter(
+    (e) => !(e.id === recipe.id),
+  );
+  console.log(favoritesArraywithOneLess)
+
+  localStorage.setItem(
+    'favoriteRecipes',
+    JSON.stringify(favoritesArraywithOneLess),
+  );
+
+  setFavoriteRecipes(JSON.parse(localStorage.getItem('favoriteRecipes')) || []);
+  // Se não já estiver favoritada,
+  // juntar a nova receita no array da storage
+  // isAlreadyFavoritedFunc(isAlreadyFavorited, recipe, favoritesArr);
+};

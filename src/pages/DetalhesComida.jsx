@@ -130,7 +130,7 @@ RecommendationsList.propTypes = {
   recomendadas: propTypes.arrayOf(propTypes.string).isRequired,
 };
 
-function Success() {
+export function Success() {
   return ('Link copiado!');
 }
 
@@ -150,7 +150,7 @@ RecipeImage.propTypes = {
   recipe: propTypes.arrayOf(propTypes.string).isRequired,
 };
 
-const copyFunc = (params, setLinkCopied, document) => {
+const copyFunc = (params, setLinkCopied) => {
   const pathToBeCopied = params.idMeal
     ? `http://localhost:3000/comidas/${params.idMeal}`
     : `http://localhost:3000/bebidas/${params.id}`;
@@ -206,7 +206,7 @@ const DetalhesComida = (props) => {
       </button>
       <button
         data-testid="share-btn"
-        onClick={() => copyFunc(params, setLinkCopied, document)}
+        onClick={() => copyFunc(params, setLinkCopied)}
       >
         <img alt="share button" src={shareIcon} />
         {linkCopied ? <Success /> : null}
