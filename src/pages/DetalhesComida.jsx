@@ -95,42 +95,33 @@ StrYoutube.propTypes = {
   recipe: propTypes.objectOf(propTypes.string).isRequired,
 };
 
-
-// const breakPoints = [
-//   { width: 2, itemsToShow: 2 },
-//   { width: 550, itemsToShow: 2 },
-//   { width: 768, itemsToShow: 3 },
-//   { width: 1200, itemsToShow: 4 },
-// ];
-
 function RecommendationsList(props) {
   const { recomendadas } = props;
   return (
     <div>
       <h3>Recomendadas</h3>
-      {/* <Carousel breakPoints={breakPoints}> */}
-      {recomendadas.slice(0, 6).map((recomendada, index) => (
-        <div
-          key={Math.random()}
-          data-testid={`${index}-recomendation-card`}
-          className="drinks-card-details"
-        >
-          <img
-            alt="drinks or meals"
-            className="img-drinks"
-            src={recomendada.strDrinkThumb || recomendada.strMealThumb}
-          />
-          <div className="container">
-            <h4 data-testid="recipe-category">
-              {recomendada.strAlcoholic || recomendada.strCategory}
-            </h4>
-            <h4 data-testid={`${index}-recomendation-title`}>
-              {recomendada.strDrink || recomendada.strMeal}
-            </h4>
+      <div className="drinks-card-details">
+        {recomendadas.slice(0, 6).map((recomendada, index) => (
+          <div
+            key={Math.random()}
+            data-testid={`${index}-recomendation-card`}
+          >
+            <img
+              alt="drinks or meals"
+              className="img-drinks"
+              src={recomendada.strDrinkThumb || recomendada.strMealThumb}
+            />
+            <div className="container">
+              <h4 data-testid="recipe-category">
+                {recomendada.strAlcoholic || recomendada.strCategory}
+              </h4>
+              <h4 data-testid={`${index}-recomendation-title`}>
+                {recomendada.strDrink || recomendada.strMeal}
+              </h4>
+            </div>
           </div>
-        </div>
-      ))}
-      {/* </Carousel> */}
+        ))}
+      </div>
     </div>
   );
 }
@@ -140,9 +131,6 @@ RecommendationsList.propTypes = {
 };
 
 function Success() {
-  // setTimeout(function(){ return 'Link copiado!'}, 3000);
-  // function(){ alert("Hello"); }, 3000
-// setTimeout(() => {<div>Link copiado!</div>}, 550 )
   return ('Link copiado!');
 }
 
@@ -176,13 +164,13 @@ const copyFunc = (params, setLinkCopied, document) => {
   document.execCommand('copy');
   textField.remove();
 
-  setTimeout(() => {
-    setLinkCopied(true);
-  }, 1500);
+  // setTimeout(() => {
+  //   setLinkCopied(true);
+  // }, 1000);
 
   setTimeout(() => {
     setLinkCopied(false);
-  }, 3000);
+  }, 2000);
 };
 
 const DetalhesComida = (props) => {
