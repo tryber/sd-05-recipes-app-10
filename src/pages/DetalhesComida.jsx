@@ -165,7 +165,7 @@ const copyFunc = (params, setLinkCopied, document) => {
   textField.remove();
 
   // setTimeout(() => {
-    setLinkCopied(true);
+  setLinkCopied(true);
   // }, 1000);
 
   // setTimeout(() => {
