@@ -164,13 +164,13 @@ const copyFunc = (params, setLinkCopied, document) => {
   document.execCommand('copy');
   textField.remove();
 
-  setTimeout(() => {
+  // setTimeout(() => {
     setLinkCopied(true);
-  }, 1000);
+  // }, 1000);
 
-  setTimeout(() => {
-    setLinkCopied(false);
-  }, 2000);
+  // setTimeout(() => {
+    // setLinkCopied(false);
+  // }, 2000);
 };
 
 const DetalhesComida = (props) => {
