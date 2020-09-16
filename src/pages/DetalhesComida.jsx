@@ -53,7 +53,7 @@ function IngredientsList(props) {
             className="quantidades"
             data-testid={`${index}-ingredient-name-and-measure`}
           >
-            - {element} - {quantities[index]} 
+            - {element} - {quantities[index]}
           </li>
         ))}
       </ul>
@@ -175,12 +175,14 @@ const copyFunc = (params, setLinkCopied, document) => {
   textField.select();
   document.execCommand('copy');
   textField.remove();
-    // 
-  setLinkCopied(true);
+
+  setTimeout(() => {
+    setLinkCopied(true);
+  }, 1500 );
 
   setTimeout(() => {
     setLinkCopied(false);
-  }, 5000);
+  }, 3000);
 };
 
 const DetalhesComida = (props) => {
