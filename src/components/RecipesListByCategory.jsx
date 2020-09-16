@@ -1,5 +1,4 @@
 import propTypes from 'prop-types';
-// import { useEffect } from 'react';                             
 import React, { useContext, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import { ReceitasContext } from '../Context/ReceitasContext';

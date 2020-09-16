@@ -178,7 +178,7 @@ const copyFunc = (params, setLinkCopied, document) => {
 
   setTimeout(() => {
     setLinkCopied(true);
-  }, 1500 );
+  }, 1500);
 
   setTimeout(() => {
     setLinkCopied(false);
