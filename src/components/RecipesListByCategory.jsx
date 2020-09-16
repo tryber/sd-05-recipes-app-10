@@ -1,5 +1,5 @@
+import propTypes from 'prop-types';
 import React, { useContext, useEffect } from 'react';
-// import propTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { ReceitasContext } from '../Context/ReceitasContext';
 import {
@@ -23,7 +23,8 @@ const RecipesListByCategory = (props) => {
           (e) => { setRecipesFiltered(e); }, (error) => console.log(error));
       }
     }
-  }, [drinkCategory]);
+  }, [props.pathname, drinkCategory, setRecipesFiltered]);
+
   useEffect(() => {
     console.log('vou fetch comidas');
     if (props.pathname === '/comidas') {
@@ -33,7 +34,8 @@ const RecipesListByCategory = (props) => {
         fetchMealsFilterdByCategory(category).then((e) => setRecipesFiltered(e));
       }
     }
-  }, [category]);
+  }, [props.pathname, category, setRecipesFiltered]);
+
   let auxRecipes = recipesFiltered;
   if (!Array.isArray(auxRecipes)) {
     auxRecipes = [];
@@ -57,8 +59,9 @@ const RecipesListByCategory = (props) => {
     </div>
   );
 };
-// RecipesListByCategory.propTypes = {
-//   pathname: propTypes.string.isRequired,
-// }
+
+RecipesListByCategory.propTypes = {
+  pathname: propTypes.string.isRequired,
+};
 
 export default RecipesListByCategory;
