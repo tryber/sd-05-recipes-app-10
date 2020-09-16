@@ -8,6 +8,7 @@ import { Success } from './DetalhesComida';
 import { faveFuncFavePage } from '../services/helpers';
 import FaveBtnForFavePage from '../components/FaveBtnForFavePage';
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const copyReceitasFavoritasUrl = (setLinkCopied) => {
   const path = 'http://localhost:3000/receitas-favoritas';
@@ -30,11 +31,8 @@ const FavoritesList = ({
   setFavoriteRecipes,
   categorieChosen,
 }) => {
-  // const favoriteRecipesFiltered = favoriteRecipes.filter(e => {
-  //   if(categorieChosen === 'All') return true;
-  // })
   let favoriteRecipesFiltered = favoriteRecipes;
-  console.log(categorieChosen)
+  
   if (categorieChosen === 'Food') {
     favoriteRecipesFiltered = favoriteRecipes.filter(e => e.type === 'comida')
   }
@@ -44,10 +42,15 @@ const FavoritesList = ({
   return (
     <div>
       {favoriteRecipesFiltered.map((e, index) => {
+        let type = e.type === 'comida' ? 'comidas' : 'bebidas';
         return (
           <div className="card">
+            <Link to={`/${type}/${e.id}`}>
             <img src={e.image} style={{ width: '200px' }} alt="" />
+            </Link>
+            <Link to={`/${type}/${e.id}`}>
             <h3> {e.name}</h3>
+            </Link>
             <button
               data-testid="share-btn"
               onClick={() => copyReceitasFavoritasUrl(setLinkCopied)}
