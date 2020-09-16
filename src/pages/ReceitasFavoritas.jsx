@@ -32,29 +32,38 @@ const FavoritesList = ({
   categorieChosen,
 }) => {
   let favoriteRecipesFiltered = favoriteRecipes;
-  
+
   if (categorieChosen === 'Food') {
-    favoriteRecipesFiltered = favoriteRecipes.filter(e => e.type === 'comida')
+    favoriteRecipesFiltered = favoriteRecipes.filter(
+      (e) => e.type === 'comida',
+    );
   }
   if (categorieChosen === 'Drink') {
-    favoriteRecipesFiltered = favoriteRecipes.filter(e => e.type === 'bebida')
+    favoriteRecipesFiltered = favoriteRecipes.filter(
+      (e) => e.type === 'bebida',
+    );
   }
   return (
     <div>
       {favoriteRecipesFiltered.map((e, index) => {
         let type = e.type === 'comida' ? 'comidas' : 'bebidas';
-        let category = e.alcoholicOrNot ? e.alcoholicOrNot : e.category;
+        let category = e.alcoholicOrNot ? e.alcoholicOrNot : `${e.area} - ${e.category}`;
         return (
           <div className="card">
-            <h6 data-testid={`${index}-horizontal-top-text`} >{category}</h6>
+            <h6 data-testid={`${index}-horizontal-top-text`}>{category}</h6>
             <Link to={`/${type}/${e.id}`}>
-            <img src={e.image} style={{ width: '200px' }} alt="" data-testid={`${index}-horizontal-image`} />
+              <img
+                src={e.image}
+                style={{ width: '200px' }}
+                alt=""
+                data-testid={`${index}-horizontal-image`}
+              />
             </Link>
             <Link to={`/${type}/${e.id}`}>
-            <h3 data-testid={`${index}-horizontal-name`}> {e.name}</h3>
+              <h3 data-testid={`${index}-horizontal-name`}> {e.name}</h3>
             </Link>
             <button
-               data-testid={`${index}-horizontal-share-btn`}
+              data-testid={`${index}-horizontal-share-btn`}
               onClick={() => copyReceitasFavoritasUrl(setLinkCopied)}
             >
               <img alt="share button" src={shareIcon} />
@@ -64,7 +73,6 @@ const FavoritesList = ({
               recipe={e}
               index={index}
               setFavoriteRecipes={setFavoriteRecipes}
-              // faveID={`${index}-horizontal-favorite-btn`}
             />
           </div>
         );
@@ -83,13 +91,16 @@ const ReceitasFavoritas = (props) => {
     setFavoriteRecipes(JSON.parse(localStorage.getItem('favoriteRecipes')));
   }, []);
 
-  // console.log(props);
   return (
     <Fragment>
       <Header pathname={props.history.location.pathname} />
       {favoritesCategories.map((e) => {
         return (
-          <button className="category" data-testid={`filter-by-${e.toLowerCase()}-btn`}onClick={() => setCategorieChosen(e)}>
+          <button
+            className="category"
+            data-testid={`filter-by-${e.toLowerCase()}-btn`}
+            onClick={() => setCategorieChosen(e)}
+          >
             {e}
           </button>
         );
