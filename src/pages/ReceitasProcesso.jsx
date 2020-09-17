@@ -5,7 +5,6 @@ import propTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
-import '../style/DetalhesComida.css';
 import {
   fetchMealById,
   fetchAllMeals,
@@ -79,57 +78,6 @@ Instructions.propTypes = {
   recipe: propTypes.objectOf(propTypes.string).isRequired,
 };
 
-function StrYoutube(props) {
-  const { recipe } = props;
-  return (
-    <div>
-      <h3>Vídeo</h3>
-      <video width="320" height="240" controls>
-        <source data-testid="video" src={recipe.strYoutube} type="video/mp4" />
-      </video>
-    </div>
-  );
-}
-
-StrYoutube.propTypes = {
-  recipe: propTypes.objectOf(propTypes.string).isRequired,
-};
-
-function RecommendationsList(props) {
-  const { recomendadas } = props;
-  return (
-    <div>
-      <h3>Recomendadas</h3>
-      <div className="drinks-card-details">
-        {recomendadas.slice(0, 6).map((recomendada, index) => (
-          <div
-            key={Math.random()}
-            data-testid={`${index}-recomendation-card`}
-          >
-            <img
-              alt="drinks or meals"
-              className="img-drinks"
-              src={recomendada.strDrinkThumb || recomendada.strMealThumb}
-            />
-            <div className="container">
-              <h4 data-testid="recipe-category">
-                {recomendada.strAlcoholic || recomendada.strCategory}
-              </h4>
-              <h4 data-testid={`${index}-recomendation-title`}>
-                {recomendada.strDrink || recomendada.strMeal}
-              </h4>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-RecommendationsList.propTypes = {
-  recomendadas: propTypes.arrayOf(propTypes.string).isRequired,
-};
-
 function Success() {
   return ('Link copiado!');
 }
@@ -173,7 +121,7 @@ const copyFunc = (params, setLinkCopied, document) => {
   // }, 2000);
 };
 
-const DetalhesComida = (props) => {
+const ReceitasProcesso = (props) => {
   const [recipe, setRecipe] = useState({});
   const [recommendations, setRecommendations] = useState([]);
   const { params, path } = props.match;
@@ -213,14 +161,12 @@ const DetalhesComida = (props) => {
       </button >
       <IngredientsList recipe={recipe} />
       <Instructions recipe={recipe} />
-      <StrYoutube recipe={recipe} />
-      <RecommendationsList recomendadas={recommendations} />
-      <Link to="/comidas/:id/process"><button style={btnStyle} data-testid="start-recipe-btn">Iniciar Receita</button></Link>
+      <Link to="/receitas-feitas"><button style={btnStyle} data-testid="finish-recipe-btn">Finalizar Receita</button></Link>
     </div>
   );
 };
 
-DetalhesComida.propTypes = {
+ReceitasProcesso.propTypes = {
   match: propTypes.shape({
     params: propTypes.shape({
       id: propTypes.string,
@@ -229,4 +175,4 @@ DetalhesComida.propTypes = {
   }).isRequired,
 };
 
-export default DetalhesComida;
+export default ReceitasProcesso;
