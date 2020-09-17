@@ -9,15 +9,21 @@ import { ReceitasContext } from '../Context/ReceitasContext';
 import { fetchDrinkDB } from '../services/ApiRequest';
 
 const Bebidas = (props) => {
-  const { setDrinkDB, setChooseAPI } = useContext(ReceitasContext);
+  const { setDrinkDB, setChooseAPI, filtradoPorIngrediente, setRecipesFiltered  } = useContext(ReceitasContext);
 
   useEffect(() => {
-    fetchDrinkDB().then((e) =>
-      setDrinkDB(() => ({
-        ...e,
-        categorias: [{ strCategory: 'All' }, ...e.categorias],
-      })),
-    );
+    if (filtradoPorIngrediente) {
+      fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${filtradoPorIngrediente}`)
+      .then(res => res.json())
+      .then(data => setRecipesFiltered(data.drinks) )
+    } else {
+      fetchDrinkDB().then((e) =>
+        setDrinkDB(() => ({
+          ...e,
+          categorias: [{ strCategory: 'All' }, ...e.categorias],
+        })),
+      );
+    }
   }, [setDrinkDB]);
 
   useEffect(() => {

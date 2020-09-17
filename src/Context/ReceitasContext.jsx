@@ -29,6 +29,7 @@ export const ReceitasContextProvider = ({ children }) => {
   const [category, setCategory] = useState('All');
   const [drinkCategory, setDrinkCategory] = useState('All');
   const [recipesFiltered, setRecipesFiltered] = useState([]);
+  const [filtradoPorIngrediente, setfiltradoPorIngrediente] = useState('');
 
   const context = {
     // qualPage,
@@ -51,6 +52,8 @@ export const ReceitasContextProvider = ({ children }) => {
     setDrinkCategory,
     ingredientes,
     setIngredientes,
+    filtradoPorIngrediente,
+    setfiltradoPorIngrediente,    
   };
 
   return (

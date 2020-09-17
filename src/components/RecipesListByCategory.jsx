@@ -12,8 +12,12 @@ import RecipeCard from './RecipeCard';
 
 const RecipesListByCategory = (props) => {
   const { drinkCategory, category } = useContext(ReceitasContext);
-  const { recipesFiltered, setRecipesFiltered, chooseAPI } = useContext(ReceitasContext);
+  const { recipesFiltered, setRecipesFiltered, chooseAPI, filtradoPorIngrediente } = useContext(ReceitasContext);
+
+
+
   useEffect(() => {
+    if(!filtradoPorIngrediente) {
     if (props.pathname === '/bebidas') {
       if (drinkCategory === 'All') {
         console.log('vou chamar fetch all drinks');
@@ -23,10 +27,12 @@ const RecipesListByCategory = (props) => {
           (e) => { setRecipesFiltered(e); }, (error) => console.log(error));
       }
     }
+  }
   }, [props.pathname, drinkCategory, setRecipesFiltered]);
 
   useEffect(() => {
-    console.log('vou fetch comidas');
+    // console.log('vou fetch comidas');
+    if(!filtradoPorIngrediente) {
     if (props.pathname === '/comidas') {
       if (category === 'All') {
         fetchAllMeals().then((e) => setRecipesFiltered(e));
@@ -34,7 +40,9 @@ const RecipesListByCategory = (props) => {
         fetchMealsFilterdByCategory(category).then((e) => setRecipesFiltered(e));
       }
     }
+  }
   }, [props.pathname, category, setRecipesFiltered]);
+  
 
   let auxRecipes = recipesFiltered;
   if (!Array.isArray(auxRecipes)) {
