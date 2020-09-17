@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 import Footer from '../components/Footer';
 import Header from '../components/header';
@@ -9,13 +9,16 @@ import IngredientCard from './IngredientCard';
 
 const ExplorarComidasOuBebidasPorIngrediente = ({history: {location: {pathname}}}) => {
   const { ingredientes, setIngredientes } = useContext(ReceitasContext);
-  console.log(pathname);
+  const [bebidasOuComidas, setBebidasOuComidas] = useState('comidas');
+  // console.log(pathname);
   useEffect(() => {
   if(pathname.includes('comidas')) {
+    setBebidasOuComidas('comidas')
       fetchMealDB().then((e) =>
       setIngredientes(() => (e.ingredientes)),
       );
     } else {
+      setBebidasOuComidas('bebidas')
       fetchDrinkDB().then((e) =>
       setIngredientes(() => 
         setIngredientes(() => (e.ingredientes)),
@@ -28,7 +31,7 @@ const ExplorarComidasOuBebidasPorIngrediente = ({history: {location: {pathname}}
   return (
     <Fragment>
       <Header pathname={pathname} />
-      {ingredientes.slice(0,12).map((e,index) => <IngredientCard strIngredient={e.strIngredient} index={index}/> )}
+      {ingredientes.slice(0,12).map((e,index) => <IngredientCard  bebidasOuComidas={bebidasOuComidas} strIngredient={e.strIngredient || e.strIngredient1} index={index}/> )}
       <Footer />
     </Fragment>
   );

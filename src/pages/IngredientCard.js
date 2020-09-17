@@ -1,18 +1,14 @@
 import React, { Fragment, useEffect } from 'react';
 
-const IngredientCard = ({strIngredient, index}) => {
-  let img = '';
-  // useEffect(() => {
-  //   fetch(`https://www.themealdb.com/images/ingredients/${strIngredient}.png`)
-  //   .then(res => res.json())
-  //   .then(data => { img = (data)})
+const IngredientCard = ({bebidasOuComidas, strIngredient, index}) => {
+  console.log(bebidasOuComidas)
+  let img = bebidasOuComidas === 'comidas' ? `https://www.themealdb.com/images/ingredients/${strIngredient}-Small.png` : `https://www.thecocktaildb.com/images/ingredients/${strIngredient}-Small.png`;
 
-  // }, [])
-
+  // https://www.thecocktaildb.com/images/ingredients/Light rum-Small.png
   return (<Fragment>
-    <div className="card">
+    <div data-testid={`${index}-ingredient-card`} className="card">
     {/* <h4 data-testid={`${index}-card-name`}>Name</h4> */}
-    <img src={`https://www.themealdb.com/images/ingredients/${strIngredient}.png`} width="150px"></img>
+    <img data-testid={`${index}-card-img`}src={img} width="150px"></img>
     <h4 data-testid={`${index}-card-name`}>{strIngredient}</h4>
     </div>
   </Fragment>);
