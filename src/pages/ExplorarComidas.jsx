@@ -5,7 +5,6 @@ import propTypes from 'prop-types';
 import Footer from '../components/Footer';
 import Header from '../components/header';
 
-
 const ExplorarComidas = (props) => {
   const [pageToRedirect, setPageToRedirect] = useState('');
   const [shouldRedirect, setShouldRedirect] = useState(false);
@@ -16,13 +15,13 @@ const ExplorarComidas = (props) => {
     setShouldRedirect(true);
   };
 
-    // já prepara uma comida random
+  // já prepara uma comida random
 
-    useEffect(() => {
-      fetch('https://www.themealdb.com/api/json/v1/1/random.php')
-      .then(res => res.json())
-      .then(data => setRandomRecipe(data.meals[0].idMeal))
-    }, [])
+  useEffect(() => {
+    fetch('https://www.themealdb.com/api/json/v1/1/random.php')
+      .then((res) => res.json())
+      .then((data) => setRandomRecipe(data.meals[0].idMeal));
+  }, []);
 
   useEffect(() => {
     setShouldRedirect(false);
@@ -52,7 +51,7 @@ const ExplorarComidas = (props) => {
         Por Local de Origem
       </button>
       <Link to={`/comidas/${randomRecipe}`}>
-      <button data-testid="explore-surprise">Me Surpreenda!</button>
+        <button data-testid="explore-surprise">Me Surpreenda!</button>
       </Link>
       <Footer />
     </div>

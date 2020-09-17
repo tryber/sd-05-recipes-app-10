@@ -19,13 +19,13 @@ const ExplorarBebidas = (props) => {
     setShouldRedirect(false);
   }, [shouldRedirect]);
 
-    // já prepara uma bebida random
+  // já prepara uma bebida random
 
-    useEffect(() => {
-      fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php')
-      .then(res => res.json())
-      .then(data => setRandomRecipe(data.drinks[0].idDrink))
-    }, [])
+  useEffect(() => {
+    fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php')
+      .then((res) => res.json())
+      .then((data) => setRandomRecipe(data.drinks[0].idDrink));
+  }, []);
 
   if (shouldRedirect) {
     return (
@@ -51,7 +51,7 @@ const ExplorarBebidas = (props) => {
         Por Local de Origem
       </button> */}
       <Link to={`/bebidas/${randomRecipe}`}>
-      <button data-testid="explore-surprise">Me Surpreenda!</button>
+        <button data-testid="explore-surprise">Me Surpreenda!</button>
       </Link>
       <Footer />
     </div>
