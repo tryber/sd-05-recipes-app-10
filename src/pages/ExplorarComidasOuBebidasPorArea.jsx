@@ -1,32 +1,38 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import propTypes from 'prop-types';
 import Footer from '../components/Footer';
 import Header from '../components/header';
 import { ReceitasContext } from '../Context/ReceitasContext';
-import { useContext } from 'react';
 import {
   fetchMealsFilterdByCategory,
   fetchDrinksFilteredByCategory,
   fetchAllMeals,
   fetchAllDrinks,
+  fetchMealDB,
 } from '../services/ApiRequest';
 import RecipeCard from '../components/RecipeCard';
 
-function selectRecipesChoosingCountry() {
-  const foodFilterCountry = 'https://www.themealdb.com/api/json/v1/1/filter.php?a=${}';
-  return (
-    <div>
-      {}
-    </div>
-  );
+function fetchSelectRecipesChoosingCountry(country) {
+  const foodFilterCountry = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${country}`;
+  return fetch(foodFilterCountry)
+    .then((result) => result.json())
+    .then((data) => data.meals)
 }
 
-function CountryInput(props) {
-  const { mealDB } = props;
-  const [initialValueSelect, setInitialValueSelect] = useState("All");
+function CountryInput({ initialValueSelect, setInitialValueSelect, mealDB }) {
+  const { setMealDB } = useContext(ReceitasContext);
   console.log('initialValueSelect', initialValueSelect);
   console.log('area', mealDB)
+  useEffect(() => {
+    fetchMealDB().then((e) =>
+      setMealDB(() => ({
+        ...e,
+        categorias: [{ strCategory: 'All' }, ...e.categorias],
+        areas: [{ strArea: 'All' }, ...e.areas]
+      })),
+    );
+  }, [setMealDB]);
   const resultCountries = Object.entries(mealDB.areas).map((area) => area[1].strArea);
   return (
     <div>
@@ -39,40 +45,26 @@ function CountryInput(props) {
 
 function ExplorarComidasOuBebidasPorArea(props) {
   const { mealDB } = useContext(ReceitasContext);
-  console.log(
-    'nao quero ter que por o return de novo quando tiver mais coisas',
-  );
-
-  const { drinkCategory, category } = useContext(ReceitasContext);
   const { recipesFiltered, setRecipesFiltered, chooseAPI } = useContext(ReceitasContext);
-  useEffect(() => {
-    if (props.pathname === '/bebidas') {
-      if (drinkCategory === 'All') {
-        console.log('vou chamar fetch all drinks');
-        fetchAllDrinks().then((e) => setRecipesFiltered(e));
-      } else {
-        fetchDrinksFilteredByCategory(drinkCategory).then(
-          (e) => { setRecipesFiltered(e); }, (error) => console.log(error));
-      }
-    }
-  }, [props.pathname, drinkCategory, setRecipesFiltered]);
+  const [initialValueSelect, setInitialValueSelect] = useState();
+  console.log('aqui', recipesFiltered);
 
   useEffect(() => {
-    console.log('vou fetch comidas');
     if (props.pathname === '/comidas') {
-      if (category === 'All') {
+      if (initialValueSelect === 'All') {
         fetchAllMeals().then((e) => setRecipesFiltered(e));
       } else {
-        fetchMealsFilterdByCategory(category).then((e) => setRecipesFiltered(e));
+        fetchSelectRecipesChoosingCountry(recipesFiltered).then((e) => setRecipesFiltered(e));
       }
     }
-  }, [props.pathname, category, setRecipesFiltered]);
+  }, [props.pathname, initialValueSelect, setRecipesFiltered]);
 
   let auxRecipes = recipesFiltered;
+  console.log('aqui tá o que', auxRecipes)
   if (!Array.isArray(auxRecipes)) {
     auxRecipes = [];
-    alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
-  } else if (auxRecipes.length === 1 && chooseAPI === 'comidas' && category !== 'Goat') {
+    // alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+  } else if (auxRecipes.length === 1 && chooseAPI === 'comidas' && initialValueSelect !== 'Goat') {
     return <Redirect to={`/comidas/${auxRecipes[0].idMeal}`} />;
   } else if (auxRecipes.length === 1 && chooseAPI === 'bebidas') {
     return <Redirect to={`/bebidas/${auxRecipes[0].idDrink}`} />;
@@ -81,7 +73,11 @@ function ExplorarComidasOuBebidasPorArea(props) {
   return (
     <Fragment>
       <Header pathname={props.history.location.pathname} />
-      <CountryInput mealDB={mealDB} />
+      <CountryInput
+        mealDB={mealDB}
+        setInitialValueSelect={setInitialValueSelect}
+        initialValueSelect={initialValueSelect}
+      />
       <div>
         {auxRecipes.slice(0, 12).map((recipe, index) => (
           <RecipeCard
