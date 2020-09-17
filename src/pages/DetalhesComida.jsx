@@ -131,7 +131,7 @@ RecommendationsList.propTypes = {
   recomendadas: propTypes.arrayOf(propTypes.string).isRequired,
 };
 
-function Success() {
+export function Success() {
   return ('Link copiado!');
 }
 
@@ -151,27 +151,19 @@ RecipeImage.propTypes = {
   recipe: propTypes.arrayOf(propTypes.string).isRequired,
 };
 
-const copyFunc = (params, setLinkCopied, document) => {
+const copyFunc = async (params, setLinkCopied) => {
   const pathToBeCopied = params.idMeal
     ? `http://localhost:3000/comidas/${params.idMeal}`
     : `http://localhost:3000/bebidas/${params.id}`;
 
-    // dica de rodrigo batista
-    // https://stackoverflow.com/questions/39501289/in-reactjs-how-to-copy-text-to-clipboard
-  const textField = document.createElement('textarea');
-  textField.innerText = pathToBeCopied;
-  document.body.appendChild(textField);
-  textField.select();
-  document.execCommand('copy');
-  textField.remove();
-
-  // setTimeout(() => {
-  setLinkCopied(true);
-  // }, 1000);
-
-  // setTimeout(() => {
-    // setLinkCopied(false);
-  // }, 2000);
+  // https://web.dev/async-clipboard/
+  try {
+    await navigator.clipboard.writeText(pathToBeCopied);
+    console.log('Page URL copied to clipboard');
+    setLinkCopied(true);
+  } catch (err) {
+    console.error('Failed to copy: ', err);
+  }
 };
 
 const DetalhesComida = (props) => {
@@ -209,7 +201,7 @@ const DetalhesComida = (props) => {
       </button>
       <button
         data-testid="share-btn"
-        onClick={() => copyFunc(params, setLinkCopied, document)}
+        onClick={() => copyFunc(params, setLinkCopied)}
       >
         <img alt="share button" src={shareIcon} />
         {linkCopied ? <Success /> : null}
