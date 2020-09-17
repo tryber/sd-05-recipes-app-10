@@ -114,7 +114,7 @@ const ReceitasFavoritas = (props) => {
   return (
     <Fragment>
       <Header pathname={props.history.location.pathname} />
-      {favoritesCategories.map(e => {
+      {favoritesCategories.map((e) => {
         console.log();
         return (
           <button
