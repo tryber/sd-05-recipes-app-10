@@ -5,16 +5,18 @@ import shareIcon from '../images/shareIcon.svg';
 import Header from '../components/header';
 import { useState } from 'react';
 import { Success } from './DetalhesComida';
-import { faveFuncFavePage } from '../services/helpers';
 import FaveBtnForFavePage from '../components/FaveBtnForFavePage';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-const copyReceitasFavoritasUrl = (setLinkCopied) => {
-  const path = 'http://localhost:3000/receitas-favoritas';
+const ShareButton = ({e, type, id, index}) => {
+  const [linkCopied, setLinkCopied] = useState(false);
+
+  const path = type === 'comida' ? `http://localhost:3000/comidas/${id}` : `http://localhost:3000/bebidas/${id}`;
 
   // dica de rodrigo batista
   // https://stackoverflow.com/questions/39501289/in-reactjs-how-to-copy-text-to-clipboard
+  const copyReceitasFavoritasUrl = (setLinkCopied) => {
   const textField = document.createElement('textarea');
   textField.innerText = path;
   document.body.appendChild(textField);
@@ -22,12 +24,25 @@ const copyReceitasFavoritasUrl = (setLinkCopied) => {
   document.execCommand('copy');
   textField.remove();
   setLinkCopied(true);
+  }
+
+  return (
+    <button
+    onClick={() => copyReceitasFavoritasUrl(setLinkCopied, e.type, e.id)}
+    src={shareIcon}
+  >
+    <img
+      data-testid={`${index}-horizontal-share-btn`}
+      alt="share button"
+      src={shareIcon}
+    />
+    {linkCopied ? <Success /> : null}
+  </button>
+  )
 };
 
 const FavoritesList = ({
   favoriteRecipes,
-  setLinkCopied,
-  linkCopied,
   setFavoriteRecipes,
   categorieChosen,
 }) => {
@@ -47,7 +62,9 @@ const FavoritesList = ({
     <div>
       {favoriteRecipesFiltered.map((e, index) => {
         let type = e.type === 'comida' ? 'comidas' : 'bebidas';
-        let category = e.alcoholicOrNot ? e.alcoholicOrNot : `${e.area} - ${e.category}`;
+        let category = e.alcoholicOrNot
+          ? e.alcoholicOrNot
+          : `${e.area} - ${e.category}`;
         return (
           <div className="card">
             <h6 data-testid={`${index}-horizontal-top-text`}>{category}</h6>
@@ -62,13 +79,7 @@ const FavoritesList = ({
             <Link to={`/${type}/${e.id}`}>
               <h3 data-testid={`${index}-horizontal-name`}> {e.name}</h3>
             </Link>
-            <button
-              data-testid={`${index}-horizontal-share-btn`}
-              onClick={() => copyReceitasFavoritasUrl(setLinkCopied)}
-            >
-              <img alt="share button" src={shareIcon} />
-              {linkCopied ? <Success /> : null}
-            </button>
+            <ShareButton e={e} type={e.type} id={e.id} index={index}/>
             <FaveBtnForFavePage
               recipe={e}
               index={index}
@@ -84,8 +95,6 @@ const FavoritesList = ({
 const ReceitasFavoritas = (props) => {
   const favoritesCategories = ['All', 'Food', 'Drink'];
   const [categorieChosen, setCategorieChosen] = useState('All');
-  const [linkCopied, setLinkCopied] = useState(false);
-  const [shouldReload, setShouldReload] = useState(false);
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
   useEffect(() => {
     setFavoriteRecipes(JSON.parse(localStorage.getItem('favoriteRecipes')));
@@ -107,15 +116,15 @@ const ReceitasFavoritas = (props) => {
       })}
       <FavoritesList
         favoriteRecipes={favoriteRecipes}
-        setLinkCopied={setLinkCopied}
-        linkCopied={linkCopied}
+        // setLinkCopied={setLinkCopied}
+        // linkCopied={linkCopied}
         setFavoriteRecipes={setFavoriteRecipes}
         categorieChosen={categorieChosen}
       />
     </Fragment>
   );
 };
-//onClick={() => faveFunc(setFavorite, favorite, recipe)
+
 ReceitasFavoritas.propTypes = {
   history: propTypes.shape({
     location: propTypes.shape({
