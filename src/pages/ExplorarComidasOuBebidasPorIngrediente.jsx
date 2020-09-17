@@ -5,24 +5,21 @@ import Header from '../components/header';
 import { fetchMealDB, fetchDrinkDB } from '../services/ApiRequest';
 import { useContext } from 'react';
 import { ReceitasContext } from '../Context/ReceitasContext';
+import IngredientCard from './IngredientCard';
 
 const ExplorarComidasOuBebidasPorIngrediente = ({history: {location: {pathname}}}) => {
-  const { setMealDB, setDrinkDB } = useContext(ReceitasContext);
+  const { ingredientes, setIngredientes } = useContext(ReceitasContext);
   console.log(pathname);
   useEffect(() => {
   if(pathname.includes('comidas')) {
       fetchMealDB().then((e) =>
-        setMealDB(() => ({
-          ...e,
-          categorias: [{ strCategory: 'All' }, ...e.categorias],
-        })),
+      setIngredientes(() => (e.ingredientes)),
       );
     } else {
       fetchDrinkDB().then((e) =>
-      setDrinkDB(() => ({
-        ...e,
-        categorias: [{ strCategory: 'All' }, ...e.categorias],
-      })),
+      setIngredientes(() => 
+        setIngredientes(() => (e.ingredientes)),
+      ),
     );
   }
   }, []);
@@ -31,6 +28,7 @@ const ExplorarComidasOuBebidasPorIngrediente = ({history: {location: {pathname}}
   return (
     <Fragment>
       <Header pathname={pathname} />
+      {ingredientes.slice(0,12).map((e,index) => <IngredientCard strIngredient={e.strIngredient} index={index}/> )}
       <Footer />
     </Fragment>
   );

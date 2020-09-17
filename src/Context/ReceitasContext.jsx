@@ -22,6 +22,7 @@ export const ReceitasContextProvider = ({ children }) => {
     ingredientes: [],
     recommendDrinks: [],
   });
+  const [ingredientes, setIngredientes] = useState([]);
 
   const [chooseAPI, setChooseAPI] = useState('comidas');
 
@@ -48,6 +49,8 @@ export const ReceitasContextProvider = ({ children }) => {
     setRecipesFiltered,
     drinkCategory,
     setDrinkCategory,
+    ingredientes,
+    setIngredientes,
   };
 
   return (
