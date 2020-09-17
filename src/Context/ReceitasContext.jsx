@@ -32,8 +32,6 @@ export const ReceitasContextProvider = ({ children }) => {
   const [filtradoPorIngrediente, setfiltradoPorIngrediente] = useState('');
 
   const context = {
-    // qualPage,
-    // setqualPage,
     email,
     setEmail,
     senha,

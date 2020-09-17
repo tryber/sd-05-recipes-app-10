@@ -1,9 +1,9 @@
 import React, { Fragment, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import propTypes from 'prop-types';
 import Footer from '../components/Footer';
 import Header from '../components/header';
 import { fetchMealDB, fetchDrinkDB } from '../services/ApiRequest';
-import { useContext } from 'react';
 import { ReceitasContext } from '../Context/ReceitasContext';
 import IngredientCard from './IngredientCard';
 
