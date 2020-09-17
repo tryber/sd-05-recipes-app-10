@@ -9,13 +9,20 @@ import { ReceitasContext } from '../Context/ReceitasContext';
 import { fetchDrinkDB } from '../services/ApiRequest';
 
 const Bebidas = (props) => {
-  const { setDrinkDB, setChooseAPI, filtradoPorIngrediente, setRecipesFiltered  } = useContext(ReceitasContext);
+  const {
+    setDrinkDB,
+    setChooseAPI,
+    filtradoPorIngrediente,
+    setRecipesFiltered,
+  } = useContext(ReceitasContext);
 
   useEffect(() => {
     if (filtradoPorIngrediente) {
-      fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${filtradoPorIngrediente}`)
-      .then(res => res.json())
-      .then(data => setRecipesFiltered(data.drinks) )
+      fetch(
+        `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${filtradoPorIngrediente}`,
+      )
+        .then((res) => res.json())
+        .then((data) => setRecipesFiltered(data.drinks));
     } else {
       fetchDrinkDB().then((e) =>
         setDrinkDB(() => ({
@@ -35,8 +42,6 @@ const Bebidas = (props) => {
       <Header pathname={props.history.location.pathname} />
       <MealCategories pathname={props.history.location.pathname} />
       <RecipesListByCategory pathname={props.history.location.pathname} />
-      {/* <Route */}
-      {/* <DetalhesComida pathname={props.history.location.pathname} /> */}
       <Footer />
     </Fragment>
   );

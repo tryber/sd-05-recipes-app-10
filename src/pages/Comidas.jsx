@@ -8,21 +8,27 @@ import { fetchMealDB } from '../services/ApiRequest';
 import RecipesListByCategory from '../components/RecipesListByCategory';
 
 const Comidas = (props) => {
-  const { setMealDB, setChooseAPI, filtradoPorIngrediente, setRecipesFiltered } = useContext(ReceitasContext);
+  const {
+    setMealDB,
+    setChooseAPI,
+    filtradoPorIngrediente,
+    setRecipesFiltered,
+  } = useContext(ReceitasContext);
 
   useEffect(() => {
     if (filtradoPorIngrediente) {
-      fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${filtradoPorIngrediente}`)
-      .then(res => res.json())
-      .then(data => setRecipesFiltered(data.meals) )
-
+      fetch(
+        `https://www.themealdb.com/api/json/v1/1/filter.php?i=${filtradoPorIngrediente}`,
+      )
+        .then((res) => res.json())
+        .then((data) => setRecipesFiltered(data.meals));
     } else {
-    fetchMealDB().then((e) =>
-      setMealDB(() => ({
-        ...e,
-        categorias: [{ strCategory: 'All' }, ...e.categorias],
-      })),
-    );
+      fetchMealDB().then((e) =>
+        setMealDB(() => ({
+          ...e,
+          categorias: [{ strCategory: 'All' }, ...e.categorias],
+        })),
+      );
     }
   }, [setMealDB]);
 

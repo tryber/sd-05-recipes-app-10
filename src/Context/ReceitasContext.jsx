@@ -53,7 +53,7 @@ export const ReceitasContextProvider = ({ children }) => {
     ingredientes,
     setIngredientes,
     filtradoPorIngrediente,
-    setfiltradoPorIngrediente,    
+    setfiltradoPorIngrediente,
   };
 
   return (
