@@ -193,6 +193,8 @@ const DetalhesComida = (props) => {
 
   ifIsFavoriteFunc(recipe, setFavorite);
 
+  const id = recipe.idMeal ? recipe.idMeal : recipe.idDrink;
+
   return (
     <div>
       <RecipeImage recipe={recipe} />
@@ -215,7 +217,7 @@ const DetalhesComida = (props) => {
       <Instructions recipe={recipe} />
       <StrYoutube recipe={recipe} />
       <RecommendationsList recomendadas={recommendations} />
-      <Link to="/comidas/:id/process"><button style={btnStyle} data-testid="start-recipe-btn">Iniciar Receita</button></Link>
+      <Link to={`/comidas/${id}/in-progress`}><button style={btnStyle} data-testid="start-recipe-btn">Iniciar Receita</button></Link>
     </div>
   );
 };
