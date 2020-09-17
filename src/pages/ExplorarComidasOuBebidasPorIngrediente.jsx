@@ -7,31 +7,36 @@ import { useContext } from 'react';
 import { ReceitasContext } from '../Context/ReceitasContext';
 import IngredientCard from './IngredientCard';
 
-const ExplorarComidasOuBebidasPorIngrediente = ({history: {location: {pathname}}}) => {
+const ExplorarComidasOuBebidasPorIngrediente = ({
+  history: {
+    location: { pathname },
+  },
+}) => {
   const { ingredientes, setIngredientes } = useContext(ReceitasContext);
   const [bebidasOuComidas, setBebidasOuComidas] = useState('comidas');
   // console.log(pathname);
   useEffect(() => {
-  if(pathname.includes('comidas')) {
-    setBebidasOuComidas('comidas')
-      fetchMealDB().then((e) =>
-      setIngredientes(() => (e.ingredientes)),
-      );
+    if (pathname.includes('comidas')) {
+      setBebidasOuComidas('comidas');
+      fetchMealDB().then((e) => setIngredientes(() => e.ingredientes));
     } else {
-      setBebidasOuComidas('bebidas')
+      setBebidasOuComidas('bebidas');
       fetchDrinkDB().then((e) =>
-      setIngredientes(() => 
-        setIngredientes(() => (e.ingredientes)),
-      ),
-    );
-  }
+        setIngredientes(() => setIngredientes(() => e.ingredientes)),
+      );
+    }
   }, []);
-
 
   return (
     <Fragment>
       <Header pathname={pathname} />
-      {ingredientes.slice(0,12).map((e,index) => <IngredientCard  bebidasOuComidas={bebidasOuComidas} strIngredient={e.strIngredient || e.strIngredient1} index={index}/> )}
+      {ingredientes.slice(0, 12).map((e, index) => (
+        <IngredientCard
+          bebidasOuComidas={bebidasOuComidas}
+          strIngredient={e.strIngredient || e.strIngredient1}
+          index={index}
+        />
+      ))}
       <Footer />
     </Fragment>
   );
