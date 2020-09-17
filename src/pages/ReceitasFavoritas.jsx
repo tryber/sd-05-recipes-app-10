@@ -2,8 +2,8 @@ import React, { Fragment } from 'react';
 import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { Success } from './DetalhesComida';
 import { useEffect } from 'react';
+import { Success } from './DetalhesComida';
 import shareIcon from '../images/shareIcon.svg';
 import Header from '../components/header';
 import FaveBtnForFavePage from '../components/FaveBtnForFavePage';
@@ -115,6 +115,7 @@ const ReceitasFavoritas = (props) => {
     <Fragment>
       <Header pathname={props.history.location.pathname} />
       {favoritesCategories.map(e => {
+        console.log();
         return (
           <button
             className="category"

@@ -27,6 +27,6 @@ FaveBtnForFavePage.propTypes = {
   index: propTypes.number.isRequired,
   recipe: propTypes.objectOf(propTypes.string).isRequired,
   setFavoriteRecipes: propTypes.func.isRequired,
-}
+};
 
 export default FaveBtnForFavePage;
