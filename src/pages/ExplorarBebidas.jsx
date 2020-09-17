@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import propTypes from 'prop-types';
 import Footer from '../components/Footer';
 import Header from '../components/header';
@@ -8,6 +8,7 @@ import Header from '../components/header';
 const ExplorarBebidas = (props) => {
   const [pageToRedirect, setPageToRedirect] = useState('');
   const [shouldRedirect, setShouldRedirect] = useState(false);
+  const [randomRecipe, setRandomRecipe] = useState({});
 
   const handleRedirect = (whereToExplore) => {
     setPageToRedirect(`explorar/bebidas/${whereToExplore}`);
@@ -17,6 +18,14 @@ const ExplorarBebidas = (props) => {
   useEffect(() => {
     setShouldRedirect(false);
   }, [shouldRedirect]);
+
+  // já prepara uma bebida random
+
+  useEffect(() => {
+    fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php')
+      .then((res) => res.json())
+      .then((data) => setRandomRecipe(data.drinks[0].idDrink));
+  }, []);
 
   if (shouldRedirect) {
     return (
@@ -33,15 +42,17 @@ const ExplorarBebidas = (props) => {
         onClick={() => handleRedirect('ingredientes')}
         data-testid="explore-by-ingredient"
       >
-        Por Ingrediente
+        Por Ingredientes
       </button>
-      <button
+      {/* <button
         onClick={() => handleRedirect('area')}
         data-testid="explore-by-area"
       >
         Por Local de Origem
-      </button>
-      <button data-testid="explore-surprise">Me surpreenda!</button>
+      </button> */}
+      <Link to={`/bebidas/${randomRecipe}`}>
+        <button data-testid="explore-surprise">Me Surpreenda!</button>
+      </Link>
       <Footer />
     </div>
   );
