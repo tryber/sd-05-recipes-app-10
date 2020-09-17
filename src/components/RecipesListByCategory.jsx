@@ -57,7 +57,6 @@ const RecipesListByCategory = (props) => {
           recipe={recipe}
         />
       ))}
-      ;
     </div>
   );
 };
