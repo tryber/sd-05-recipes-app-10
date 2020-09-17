@@ -3,10 +3,10 @@ import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { Success } from './DetalhesComida';
+import { useEffect } from 'react';
 import shareIcon from '../images/shareIcon.svg';
 import Header from '../components/header';
 import FaveBtnForFavePage from '../components/FaveBtnForFavePage';
-import { useEffect } from 'react';
 
 const ShareButton = ({ type, id, index }) => {
   const [linkCopied, setLinkCopied] = useState(false);
@@ -114,7 +114,7 @@ const ReceitasFavoritas = (props) => {
   return (
     <Fragment>
       <Header pathname={props.history.location.pathname} />
-      {favoritesCategories.map((e) => {
+      {favoritesCategories.map(e => {
         return (
           <button
             className="category"

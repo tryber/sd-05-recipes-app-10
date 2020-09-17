@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import propTypes from 'prop-types';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import { faveFuncFavePage } from '../services/helpers';
@@ -21,6 +22,11 @@ const FaveBtnForFavePage = ({ index, recipe, setFavoriteRecipes }) => {
     </div>
   );
 };
-// data-testid={`${props.index}
+
+FaveBtnForFavePage.propTypes = {
+  index: propTypes.number.isRequired,
+  recipe: propTypes.objectOf(propTypes.string).isRequired,
+  setFavoriteRecipes: propTypes.func.isRequired,
+}
 
 export default FaveBtnForFavePage;
