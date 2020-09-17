@@ -9,36 +9,34 @@ import FaveBtnForFavePage from '../components/FaveBtnForFavePage';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-const ShareButton = ({e, type, id, index}) => {
+const ShareButton = ({ type, id, index }) => {
   const [linkCopied, setLinkCopied] = useState(false);
 
-  const path = type === 'comida' ? `http://localhost:3000/comidas/${id}` : `http://localhost:3000/bebidas/${id}`;
+  const path =
+    type === 'comida'
+      ? `http://localhost:3000/comidas/${id}`
+      : `http://localhost:3000/bebidas/${id}`;
 
-  // dica de rodrigo batista
-  // https://stackoverflow.com/questions/39501289/in-reactjs-how-to-copy-text-to-clipboard
-  const copyReceitasFavoritasUrl = (setLinkCopied) => {
-  const textField = document.createElement('textarea');
-  textField.innerText = path;
-  document.body.appendChild(textField);
-  textField.select();
-  document.execCommand('copy');
-  textField.remove();
-  setLinkCopied(true);
+  async function copyPageUrl() {
+    try {
+      await navigator.clipboard.writeText(path);
+      console.log('Page URL copied to clipboard');
+      setLinkCopied(true);
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
   }
 
   return (
-    <button
-    onClick={() => copyReceitasFavoritasUrl(setLinkCopied, e.type, e.id)}
-    src={shareIcon}
-  >
-    <img
-      data-testid={`${index}-horizontal-share-btn`}
-      alt="share button"
-      src={shareIcon}
-    />
-    {linkCopied ? <Success /> : null}
-  </button>
-  )
+    <button onClick={() => copyPageUrl()} src={shareIcon}>
+      <img
+        data-testid={`${index}-horizontal-share-btn`}
+        alt="share button"
+        src={shareIcon}
+      />
+      {linkCopied ? <Success /> : null}
+    </button>
+  );
 };
 
 const FavoritesList = ({
@@ -79,7 +77,7 @@ const FavoritesList = ({
             <Link to={`/${type}/${e.id}`}>
               <h3 data-testid={`${index}-horizontal-name`}> {e.name}</h3>
             </Link>
-            <ShareButton e={e} type={e.type} id={e.id} index={index}/>
+            <ShareButton e={e} type={e.type} id={e.id} index={index} />
             <FaveBtnForFavePage
               recipe={e}
               index={index}

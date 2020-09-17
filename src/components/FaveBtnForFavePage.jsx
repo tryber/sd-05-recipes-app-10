@@ -5,8 +5,6 @@ import { faveFuncFavePage } from '../services/helpers';
 
 const FaveBtnForFavePage = ({ index, recipe, setFavoriteRecipes }) => {
   const [favorite, setFavorite] = useState(true);
-  // data-testid="0-horizontal-favorite-btn"
-  // data-testid="0-horizontal-favorite-btn"
   return (
     <div>
       <button
