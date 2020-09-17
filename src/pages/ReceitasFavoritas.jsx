@@ -1,13 +1,12 @@
 import React, { Fragment } from 'react';
 import propTypes from 'prop-types';
-import shareIcon from '../images/shareIcon.svg';
-
-import Header from '../components/header';
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { Success } from './DetalhesComida';
+import shareIcon from '../images/shareIcon.svg';
+import Header from '../components/header';
 import FaveBtnForFavePage from '../components/FaveBtnForFavePage';
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 
 const ShareButton = ({ type, id, index }) => {
   const [linkCopied, setLinkCopied] = useState(false);
@@ -16,6 +15,8 @@ const ShareButton = ({ type, id, index }) => {
     type === 'comida'
       ? `http://localhost:3000/comidas/${id}`
       : `http://localhost:3000/bebidas/${id}`;
+
+  // https://web.dev/async-clipboard/
 
   async function copyPageUrl() {
     try {
@@ -39,6 +40,12 @@ const ShareButton = ({ type, id, index }) => {
   );
 };
 
+ShareButton.propTypes = {
+  type: propTypes.string.isRequired,
+  id: propTypes.string.isRequired,
+  index: propTypes.number.isRequired,
+};
+
 const FavoritesList = ({
   favoriteRecipes,
   setFavoriteRecipes,
@@ -59,8 +66,8 @@ const FavoritesList = ({
   return (
     <div>
       {favoriteRecipesFiltered.map((e, index) => {
-        let type = e.type === 'comida' ? 'comidas' : 'bebidas';
-        let category = e.alcoholicOrNot
+        const type = e.type === 'comida' ? 'comidas' : 'bebidas';
+        const category = e.alcoholicOrNot
           ? e.alcoholicOrNot
           : `${e.area} - ${e.category}`;
         return (
@@ -88,6 +95,12 @@ const FavoritesList = ({
       })}
     </div>
   );
+};
+
+FavoritesList.propTypes = {
+  categorieChosen: propTypes.string.isRequired,
+  favoriteRecipes: propTypes.arrayOf(propTypes.string).isRequired,
+  setFavoriteRecipes: propTypes.func.isRequired,
 };
 
 const ReceitasFavoritas = (props) => {

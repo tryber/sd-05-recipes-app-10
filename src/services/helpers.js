@@ -80,7 +80,12 @@ export const ifIsFavoriteFunc = async (recipe, setFavorite) => {
   setFavorite(ehFavoritaNoLocal);
 };
 
-export const faveFuncFavePage = (setFavorite, favorite, recipe, setFavoriteRecipes) => {
+export const faveFuncFavePage = (
+  setFavorite,
+  favorite,
+  recipe,
+  setFavoriteRecipes,
+) => {
   setFavorite(!favorite);
 
   const favoritesArr =
@@ -88,11 +93,11 @@ export const faveFuncFavePage = (setFavorite, favorite, recipe, setFavoriteRecip
   // const isAlreadyFavorited = favoritesArr.some(
   //   (e) => e.id === recipe.idMeal || e.id === recipe.idDrink,
   // );
-  
+
   const favoritesArraywithOneLess = favoritesArr.filter(
     (e) => !(e.id === recipe.id),
   );
-  console.log(favoritesArraywithOneLess)
+  console.log(favoritesArraywithOneLess);
 
   localStorage.setItem(
     'favoriteRecipes',
