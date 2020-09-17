@@ -49,6 +49,7 @@ function IngredientsList(props) {
       <ul>
         {ingredients.map((element, index) => (
           <li
+            type="checkbox"
             key={Math.random()}
             className="quantidades"
             data-testid={`${index}-ingredient-name-and-measure`}
