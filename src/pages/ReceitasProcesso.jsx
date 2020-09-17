@@ -123,7 +123,7 @@ const copyFunc = (params, setLinkCopied, document) => {
 
 const ReceitasProcesso = (props) => {
   const [recipe, setRecipe] = useState({});
-  const [recommendations, setRecommendations] = useState([]);
+  const [inProgressRecipe, setInProgressRecipe] = useState([]);
   const { params, path } = props.match;
   const [favorite, setFavorite] = useState(false);
   const [linkCopied, setLinkCopied] = useState(false);
@@ -131,11 +131,11 @@ const ReceitasProcesso = (props) => {
   useEffect(() => {
     if (path.includes('comida')) {
       fetchMealById(params.idMeal).then((e) => setRecipe(e));
-      fetchAllDrinks().then((e) => setRecommendations(e));
+      fetchAllDrinks().then((e) => setInProgressRecipe(e));
     }
     if (path.includes('bebida')) {
       fetchDrinkById(params.id).then((e) => setRecipe(e));
-      fetchAllMeals().then((e) => setRecommendations(e));
+      fetchAllMeals().then((e) => setInProgressRecipe(e));
     }
   }, [params.id, params.idMeal, path]);
 
