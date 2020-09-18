@@ -4,7 +4,7 @@ import propTypes from 'prop-types';
 import './RecipeCard.css';
 
 const RecipeCard = (props) => {
-  const { testName, testIt, TestIdImage, recipe } = props;
+  const { recipe, index } = props;
   const { recipe: { strMeal, strMealThumb, strDrink, strDrinkThumb } } = props;
 
   if (strDrink) {
@@ -13,13 +13,13 @@ const RecipeCard = (props) => {
         to={{
           pathname: `/bebidas/${recipe.idDrink}`,
           state: { recipe } }}
-        className="card" data-testid={testIt} key={testIt}
+        className="card" data-testid={`${index}-recipe-card`}  key={`${index}-recipe-card`}
       >
         <img
-          src={strDrinkThumb} data-testid={TestIdImage}
+          src={strDrinkThumb} data-testid={`${index}-card-img`}
           style={{ width: '200px' }} alt=""
         />
-        <h3 data-testid={testName}> {strDrink}</h3>
+        <h3 data-testid={`${index}-card-name`}> {strDrink}</h3>
       </Link>
     );
   }
@@ -29,14 +29,14 @@ const RecipeCard = (props) => {
       to={{
         pathname: `/comidas/${recipe.idMeal}`,
         state: { recipe } }}
-      className="card" data-testid={testIt}
-      key={testIt} alt=""
+      className="card" data-testid={`${index}-recipe-card`} 
+      key={`${index}-recipe-card`} alt=""
     >
       <img
-        src={strMealThumb} data-testid={TestIdImage}
+        src={strMealThumb} data-testid={`${index}-card-img`}
         style={{ width: '200px' }} alt=""
       />
-      <h3 data-testid={testName}> {strMeal}</h3>
+      <h3 data-testid={`${index}-card-name`}> {strMeal}</h3>
     </Link>
   );
 };

@@ -21,7 +21,6 @@ const RecipesListByCategory = (props) => {
     if (!ing) {
       if (props.pathname === '/bebidas') {
         if (drinkCategory === 'All') {
-          console.log('vou chamar fetch all drinks');
           fetchAllDrinks().then((e) => setRecipesFiltered(e));
         } else {
           fetchDrinksFilteredByCategory(drinkCategory).then(
@@ -55,14 +54,8 @@ const RecipesListByCategory = (props) => {
   return (
     <div>
       {auxRecipes.slice(0, 12).map((recipe, index) => (
-        <RecipeCard
-          testIt={`${index}-recipe-card`}
-          testName={`${index}-card-name`}
-          TestIdImage={`${index}-card-img`}
-          recipe={recipe}
-        />
+        <RecipeCard index={index} recipe={recipe} />
       ))}
-      ;
     </div>
   );
 };
