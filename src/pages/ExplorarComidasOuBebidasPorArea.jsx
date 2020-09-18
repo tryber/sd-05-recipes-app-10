@@ -81,12 +81,12 @@ function ExplorarComidasOuBebidasPorArea(props) {
 }
 
 ExplorarComidasOuBebidasPorArea.propTypes = {
-  initialValueSelect: propTypes.object.isRequired,
-  setInitialValueSelect: propTypes.func.isRequired,
-  mealDB: propTypes.object.isRequired,
   history: propTypes.shape({
     location: propTypes.shape({
       pathname: propTypes.shape.isRequired,
+      initialValueSelect: propTypes.shape.isRequired,
+      setInitialValueSelect: propTypes.shape.isRequired,
+      mealDB: propTypes.shape.isRequired,
     }).isRequired,
   }).isRequired,
 };
