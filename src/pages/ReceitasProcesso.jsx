@@ -132,7 +132,7 @@ const ReceitasProcesso = (props) => {
   const [recipe, setRecipe] = useState({});
   const { params, path } = props.match;
   const [favorite, setFavorite] = useState(false);
-  const [linkCopied, setLinkCopied] = useState(false);
+  const [inProgress, setInProgress] = useState(false);
   const [type, setType] = useState('comida');
 
   useEffect(() => {
