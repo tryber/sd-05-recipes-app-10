@@ -8,14 +8,13 @@ import './Footer.css';
 import { ReceitasContext } from '../Context/ReceitasContext';
 
 const Footer = () => {
-  const { setDrinkCategory, setCategory, setChooseAPI } = useContext(ReceitasContext);
+  const { setDrinkCategory, setCategory, setChooseAPI, setIng } = useContext(ReceitasContext);
   const [pageToRedirect, setPageToRedirect] = useState('');
   const [shouldRedirect, setShouldRedirect] = useState(false);
 
   const handleRedirect = (whereToGo) => {
     setPageToRedirect(`${whereToGo}`);
     setShouldRedirect(true);
-    // setqualPage(`${whereToGo}`);
     setDrinkCategory('All');
     setCategory('All');
   };
@@ -34,13 +33,13 @@ const Footer = () => {
 
   return (
     <div className="footer" data-testid="footer">
-      <button onClick={() => { handleRedirect('bebidas'); setChooseAPI('bebidas'); }}>
+      <button onClick={() => { handleRedirect('bebidas'); setChooseAPI('bebidas'); setIng(''); }}>
         <img data-testid="drinks-bottom-btn" alt="drink" src={drinkIcon} />
       </button>
       <button onClick={() => handleRedirect('explorar')}>
         <img data-testid="explore-bottom-btn" alt="explore" src={exploreIcon} />
       </button>
-      <button onClick={() => { handleRedirect('comidas'); setChooseAPI('comidas'); }}>
+      <button onClick={() => { handleRedirect('comidas'); setChooseAPI('comidas'); setIng(''); }}>
         <img data-testid="food-bottom-btn" alt="meal" src={mealIcon} />
       </button>
     </div>

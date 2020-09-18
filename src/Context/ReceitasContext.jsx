@@ -22,16 +22,15 @@ export const ReceitasContextProvider = ({ children }) => {
     ingredientes: [],
     recommendDrinks: [],
   });
+  const [ingredientes, setIngredientes] = useState([]);
 
   const [chooseAPI, setChooseAPI] = useState('comidas');
-
   const [category, setCategory] = useState('All');
   const [drinkCategory, setDrinkCategory] = useState('All');
   const [recipesFiltered, setRecipesFiltered] = useState([]);
+  const [ing, setIng] = useState('');
 
   const context = {
-    // qualPage,
-    // setqualPage,
     email,
     setEmail,
     senha,
@@ -48,6 +47,10 @@ export const ReceitasContextProvider = ({ children }) => {
     setRecipesFiltered,
     drinkCategory,
     setDrinkCategory,
+    ingredientes,
+    setIngredientes,
+    ing,
+    setIng,
   };
 
   return (

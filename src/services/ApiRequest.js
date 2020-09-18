@@ -23,6 +23,7 @@ export const fetchAllMeals = () => {
     .then((res) => res.json())
     .then((data) => data.meals);
 };
+
 const filterAllDrinks =
   'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
 
