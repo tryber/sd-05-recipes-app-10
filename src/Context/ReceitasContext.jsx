@@ -24,7 +24,6 @@ export const ReceitasContextProvider = ({ children }) => {
   });
 
   const [chooseAPI, setChooseAPI] = useState('comidas');
-  const [area, setArea] = useState('All')
   const [category, setCategory] = useState('All');
   const [drinkCategory, setDrinkCategory] = useState('All');
   const [recipesFiltered, setRecipesFiltered] = useState([]);
@@ -32,8 +31,6 @@ export const ReceitasContextProvider = ({ children }) => {
   const context = {
     // qualPage,
     // setqualPage,
-    area,
-    setArea,
     email,
     setEmail,
     senha,

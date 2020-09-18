@@ -1,20 +1,16 @@
 import React, { Fragment, useEffect, useState, useContext } from 'react';
-import { Redirect } from 'react-router-dom';
 import propTypes from 'prop-types';
 import Footer from '../components/Footer';
 import Header from '../components/header';
 import { ReceitasContext } from '../Context/ReceitasContext';
 import {
-  fetchMealsFilterdByCategory,
-  fetchDrinksFilteredByCategory,
   fetchAllMeals,
-  fetchAllDrinks,
   fetchMealDB,
 } from '../services/ApiRequest';
 import RecipeCard from '../components/RecipeCard';
 
 function fetchSelectRecipesChoosingCountry(country) {
-  if(country === 'All') {
+  if (country === 'All') {
     return fetchAllMeals();
   }
   const foodFilterCountry = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${country}`;
