@@ -21,15 +21,26 @@ const btnStyle = {
 
 function IngredientsList(props) {
   const { recipe } = props;
-  // console.log(recipe);
   const quantities = [];
   const ingredients = [];
 
   Object.entries(recipe).forEach((element) => {
-    if (element[0].includes('strMeasure') && element[1] !== ' ' && element[1] !== '') {
+    if (
+      element[0].includes('strMeasure') &&
+      element[1] !== ' ' &&
+      element[1] !== '' &&
+      element[1] !== null
+    ) {
+      console.log('strMeasure', element[1]);
       quantities.push(element[1]);
     }
-    if (element[0].includes('strIngredient') && element[1] !== ' ' && element[1] !== '') {
+    if (
+      element[0].includes('strIngredient') &&
+      element[1] !== ' ' &&
+      element[1] !== '' &&
+      element[1] !== null
+    ) {
+      console.log('strIngredient', element[1]);
       ingredients.push(element[1]);
     }
   });
@@ -37,18 +48,14 @@ function IngredientsList(props) {
   return (
     <div>
       <h3>Ingredients</h3>
-      <ul>
-        {ingredients.map((element, index) => (
-          <div data-testid={`${index}-ingredient-step`}>
-            <input
-              type="checkbox"
-              id={`element${index + 1}`}
-              // onChange={(e) => toggleCheck(e.target.id, id)}
-            />
-            <label htmlFor={`element${index + 1}`}></label>
-          </div>
-        ))}
-      </ul>
+      {ingredients.map((element, index) => (
+        <div data-testid={`${index}-ingredient-step`}>
+          <input type="checkbox" id={`element${index + 1}`} />
+          <label htmlFor={`element${index + 1}`}>
+            {element} - {quantities[index]}
+          </label>
+        </div>
+      ))}
     </div>
   );
 }
@@ -98,8 +105,8 @@ const ShareButton = ({ type, id }) => {
 
   const path =
     type === 'comida'
-      ? `http://localhost:3000/comidas/${id}/in-progress`
-      : `http://localhost:3000/bebidas/${id}/in-progress`;
+      ? `http://localhost:3000/comidas/${id}`
+      : `http://localhost:3000/bebidas/${id}`;
 
   // https://web.dev/async-clipboard/
 
@@ -115,11 +122,7 @@ const ShareButton = ({ type, id }) => {
 
   return (
     <button onClick={() => copyPageUrl()} src={shareIcon}>
-      <img
-        data-testid="share-btn"
-        alt="share button"
-        src={shareIcon}
-      />
+      <img data-testid="share-btn" alt="share button" src={shareIcon} />
       {linkCopied ? <Success /> : null}
     </button>
   );
