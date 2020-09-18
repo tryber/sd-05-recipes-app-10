@@ -16,6 +16,8 @@ const RecipesListByCategory = (props) => {
   const { recipesFiltered, setRecipesFiltered } = useContext(ReceitasContext);
 
   useEffect(() => {
+    // se não tiver um ingrediente selecionado no context,
+    // faz a requisição de todos os drinks ou comidas normalmente
     if (!ing) {
       if (props.pathname === '/bebidas') {
         if (drinkCategory === 'All') {

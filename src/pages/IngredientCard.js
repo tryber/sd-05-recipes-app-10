@@ -1,7 +1,7 @@
 import React, { Fragment, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import { ReceitasContext } from '../Context/ReceitasContext';
 import propTypes from 'prop-types';
+import { ReceitasContext } from '../Context/ReceitasContext';
 
 const IngredientCard = ({ bebidasOuComidas, strIngredient, index }) => {
   const { setIng } = useContext(ReceitasContext);
@@ -32,6 +32,6 @@ IngredientCard.propTypes = {
   bebidasOuComidas: propTypes.string.isRequired,
   strIngredient: propTypes.string.isRequired,
   index: propTypes.number.isRequired,
-}
+};
 
 export default IngredientCard;
