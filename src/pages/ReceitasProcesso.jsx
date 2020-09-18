@@ -118,19 +118,19 @@ const copyFunc = (params, setLinkCopied, document) => {
 
 const ReceitasProcesso = (props) => {
   const [recipe, setRecipe] = useState({});
-  const [inProgressRecipe, setInProgressRecipe] = useState([]);
   const { params, path } = props.match;
   const [favorite, setFavorite] = useState(false);
   const [linkCopied, setLinkCopied] = useState(false);
 
+console.log(params)
+  
   useEffect(() => {
     if (path.includes('comida')) {
-      fetchMealById(params.idMeal).then((e) => setRecipe(e));
-      fetchAllDrinks().then((e) => setInProgressRecipe(e));
+      fetchMealById(params.id).then((e) => setRecipe(e));
     }
     if (path.includes('bebida')) {
+      console.log(params.id)
       fetchDrinkById(params.id).then((e) => setRecipe(e));
-      fetchAllMeals().then((e) => setInProgressRecipe(e));
     }
   }, [params.id, params.idMeal, path]);
 

@@ -12,31 +12,38 @@ import RecipeCard from './RecipeCard';
 
 const RecipesListByCategory = (props) => {
   const { drinkCategory, category } = useContext(ReceitasContext);
-  const { recipesFiltered, setRecipesFiltered, chooseAPI } = useContext(ReceitasContext);
+  const { chooseAPI, ing } = useContext(ReceitasContext);
+  const { recipesFiltered, setRecipesFiltered } = useContext(ReceitasContext);
+
   useEffect(() => {
-    if (props.pathname === '/bebidas') {
-      if (drinkCategory === 'All') {
-        console.log('vou chamar fetch all drinks');
-        fetchAllDrinks().then((e) => setRecipesFiltered(e));
-      } else {
-        fetchDrinksFilteredByCategory(drinkCategory).then(
-          (e) => { setRecipesFiltered(e); }, (error) => console.log(error));
+    // se não tiver um ingrediente selecionado no context,
+    // faz a requisição de todos os drinks ou comidas normalmente
+    if (!ing) {
+      if (props.pathname === '/bebidas') {
+        if (drinkCategory === 'All') {
+          fetchAllDrinks().then((e) => setRecipesFiltered(e));
+        } else {
+          fetchDrinksFilteredByCategory(drinkCategory).then(
+            (e) => { setRecipesFiltered(e); }, (error) => console.log(error));
+        }
       }
     }
   }, [props.pathname, drinkCategory, setRecipesFiltered]);
 
   useEffect(() => {
-    console.log('vou fetch comidas');
-    if (props.pathname === '/comidas') {
-      if (category === 'All') {
-        fetchAllMeals().then((e) => setRecipesFiltered(e));
-      } else {
-        fetchMealsFilterdByCategory(category).then((e) => setRecipesFiltered(e));
+    if (!ing) {
+      if (props.pathname === '/comidas') {
+        if (category === 'All') {
+          fetchAllMeals().then((e) => setRecipesFiltered(e));
+        } else {
+          fetchMealsFilterdByCategory(category).then((e) => setRecipesFiltered(e));
+        }
       }
     }
   }, [props.pathname, category, setRecipesFiltered]);
 
   let auxRecipes = recipesFiltered;
+
   if (!Array.isArray(auxRecipes)) {
     auxRecipes = [];
     alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
@@ -48,14 +55,8 @@ const RecipesListByCategory = (props) => {
   return (
     <div>
       {auxRecipes.slice(0, 12).map((recipe, index) => (
-        <RecipeCard
-          testIt={`${index}-recipe-card`}
-          testName={`${index}-card-name`}
-          TestIdImage={`${index}-card-img`}
-          recipe={recipe}
-        />
+        <RecipeCard index={index} recipe={recipe} />
       ))}
-      ;
     </div>
   );
 };
