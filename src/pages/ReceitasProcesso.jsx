@@ -26,18 +26,10 @@ function IngredientsList(props) {
   const ingredients = [];
 
   Object.entries(recipe).forEach((element) => {
-    if (
-      element[0].includes('strMeasure') &&
-      element[1] !== ' ' &&
-      element[1] !== ''
-    ) {
+    if (element[0].includes('strMeasure') && element[1] !== ' ' && element[1] !== '') {
       quantities.push(element[1]);
     }
-    if (
-      element[0].includes('strIngredient') &&
-      element[1] !== ' ' &&
-      element[1] !== ''
-    ) {
+    if (element[0].includes('strIngredient') && element[1] !== ' ' && element[1] !== '') {
       ingredients.push(element[1]);
     }
   });
@@ -47,14 +39,14 @@ function IngredientsList(props) {
       <h3>Ingredients</h3>
       <ul>
         {ingredients.map((element, index) => (
-          <input
-            type="checkbox"
-            key={Math.random()}
-            className="quantidades"
-            data-testid={`${index}-ingredient-name-and-measure`}
-          >
-            - {element} - {quantities[index]}
-          </input>
+          <div data-testid={`${index}-ingredient-step`}>
+            <input
+              type="checkbox"
+              id={`element${index + 1}`}
+              // onChange={(e) => toggleCheck(e.target.id, id)}
+            />
+            <label htmlFor={`element${index + 1}`}></label>
+          </div>
         ))}
       </ul>
     </div>
@@ -80,7 +72,7 @@ Instructions.propTypes = {
 };
 
 function Success() {
-  return ('Link copiado!');
+  return 'Link copiado!';
 }
 
 function RecipeImage(props) {
@@ -88,7 +80,9 @@ function RecipeImage(props) {
   return (
     <div>
       <img
-        alt="detail" className="recipe-photo" data-testid="recipe-photo"
+        alt="detail"
+        className="recipe-photo"
+        data-testid="recipe-photo"
         src={recipe.strMealThumb || recipe.strDrinkThumb}
       />
     </div>
@@ -104,8 +98,8 @@ const copyFunc = (params, setLinkCopied, document) => {
     ? `http://localhost:3000/comidas/${params.idMeal}`
     : `http://localhost:3000/bebidas/${params.id}`;
 
-    // dica de rodrigo batista
-    // https://stackoverflow.com/questions/39501289/in-reactjs-how-to-copy-text-to-clipboard
+  // dica de rodrigo batista
+  // https://stackoverflow.com/questions/39501289/in-reactjs-how-to-copy-text-to-clipboard
   const textField = document.createElement('textarea');
   textField.innerText = pathToBeCopied;
   document.body.appendChild(textField);
@@ -118,7 +112,7 @@ const copyFunc = (params, setLinkCopied, document) => {
   // }, 1000);
 
   // setTimeout(() => {
-    // setLinkCopied(false);
+  // setLinkCopied(false);
   // }, 2000);
 };
 
@@ -147,22 +141,24 @@ const ReceitasProcesso = (props) => {
       <RecipeImage recipe={recipe} />
       <h2 data-testid="recipe-title">{recipe.strMeal || recipe.strDrink}</h2>
       <h4 data-testid="recipe-category">{recipe.strAlcoholic || recipe.strCategory}</h4>
-      <button onClick={() => faveFunc(setFavorite, favorite, recipe)} >
+      <button onClick={() => faveFunc(setFavorite, favorite, recipe)}>
         <img
-          alt="favorite button" data-testid="favorite-btn"
+          alt="favorite button"
+          data-testid="favorite-btn"
           src={favorite ? blackHeartIcon : whiteHeartIcon}
         />
       </button>
-      <button
-        data-testid="share-btn"
-        onClick={() => copyFunc(params, setLinkCopied, document)}
-      >
+      <button data-testid="share-btn" onClick={() => copyFunc(params, setLinkCopied, document)}>
         <img alt="share button" src={shareIcon} />
         {linkCopied ? <Success /> : null}
-      </button >
+      </button>
       <IngredientsList recipe={recipe} />
       <Instructions recipe={recipe} />
-      <Link to="/receitas-feitas"><button style={btnStyle} data-testid="finish-recipe-btn">Finalizar Receita</button></Link>
+      <Link to="/receitas-feitas">
+        <button style={btnStyle} data-testid="finish-recipe-btn">
+          Finalizar Receita
+        </button>
+      </Link>
     </div>
   );
 };
