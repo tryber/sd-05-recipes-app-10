@@ -20,7 +20,7 @@ function fetchSelectRecipesChoosingCountry(country) {
   const foodFilterCountry = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${country}`;
   return fetch(foodFilterCountry)
     .then((result) => result.json())
-    .then((data) => data.meals)
+    .then((data) => data.meals);
 }
 
 function CountryInput({ initialValueSelect, setInitialValueSelect, mealDB }) {
@@ -30,7 +30,7 @@ function CountryInput({ initialValueSelect, setInitialValueSelect, mealDB }) {
     fetchMealDB().then((e) =>
       setMealDB(() => ({
         ...e,
-        areas: [{ strArea: 'All' }, ...e.areas]
+        areas: [{ strArea: 'All' }, ...e.areas],
       })),
     );
   }, [setMealDB]);
@@ -40,7 +40,7 @@ function CountryInput({ initialValueSelect, setInitialValueSelect, mealDB }) {
       <select
         data-testid="explore-by-area-dropdown"
         value={initialValueSelect}
-        onChange={event => setInitialValueSelect(event.target.value)}
+        onChange={(event) => setInitialValueSelect(event.target.value)}
       >
         {resultCountries.map((area) => <option data-testid={`${area}-option`} value={area}>{area}</option>)}
       </select>
@@ -50,8 +50,8 @@ function CountryInput({ initialValueSelect, setInitialValueSelect, mealDB }) {
 
 function ExplorarComidasOuBebidasPorArea(props) {
   const { mealDB } = useContext(ReceitasContext);
-  const { recipesFiltered, setRecipesFiltered, chooseAPI } = useContext(ReceitasContext);
-  const [initialValueSelect, setInitialValueSelect] = useState("All");
+  const { recipesFiltered, setRecipesFiltered } = useContext(ReceitasContext);
+  const [initialValueSelect, setInitialValueSelect] = useState('All');
 
   useEffect(() => {
     fetchSelectRecipesChoosingCountry(initialValueSelect).then((e) => setRecipesFiltered(e));
@@ -74,13 +74,16 @@ function ExplorarComidasOuBebidasPorArea(props) {
             recipe={recipe}
           />
         ))}
-    </div>
+      </div>
       <Footer />
     </Fragment>
   );
-};
+}
 
 ExplorarComidasOuBebidasPorArea.propTypes = {
+  initialValueSelect: propTypes.object,
+  setInitialValueSelect: propTypes.func,
+  mealDB: propTypes.object,
   history: propTypes.shape({
     location: propTypes.shape({
       pathname: propTypes.shape.isRequired,
