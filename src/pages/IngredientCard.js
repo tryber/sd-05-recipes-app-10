@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { ReceitasContext } from '../Context/ReceitasContext';
 
 const IngredientCard = ({ bebidasOuComidas, strIngredient, index }) => {
-  const { setfiltradoPorIngrediente } = useContext(ReceitasContext);
+  const { setIng } = useContext(ReceitasContext);
   const history = useHistory();
   const img =
     bebidasOuComidas === 'comidas'
@@ -15,7 +15,7 @@ const IngredientCard = ({ bebidasOuComidas, strIngredient, index }) => {
       <button
         onClick={() => {
           history.push(`/${bebidasOuComidas}`);
-          setfiltradoPorIngrediente(strIngredient);
+          setIng(strIngredient);
         }}
         data-testid={`${index}-ingredient-card`}
         className="card"

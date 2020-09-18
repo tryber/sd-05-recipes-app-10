@@ -11,14 +11,14 @@ const Comidas = (props) => {
   const {
     setMealDB,
     setChooseAPI,
-    filtradoPorIngrediente,
+    ing,
     setRecipesFiltered,
   } = useContext(ReceitasContext);
 
   useEffect(() => {
-    if (filtradoPorIngrediente) {
+    if (ing) {
       fetch(
-        `https://www.themealdb.com/api/json/v1/1/filter.php?i=${filtradoPorIngrediente}`,
+        `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ing}`,
       )
         .then((res) => res.json())
         .then((data) => setRecipesFiltered(data.meals));
