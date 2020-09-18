@@ -80,10 +80,19 @@ ExplorarComidasOuBebidasPorArea.propTypes = {
   history: propTypes.shape({
     location: propTypes.shape({
       pathname: propTypes.shape.isRequired,
-      initialValueSelect: propTypes.shape.isRequired,
-      setInitialValueSelect: propTypes.shape.isRequired,
-      mealDB: propTypes.shape.isRequired,
     }).isRequired,
+  }).isRequired,
+};
+
+CountryInput.propTypes = {
+  initialValueSelect: propTypes.string.isRequired,
+  setInitialValueSelect: propTypes.func.isRequired,
+  mealDB: propTypes.shape({
+    areas: propTypes.arrayOf(propTypes.string),
+    categorias: propTypes.arrayOf(propTypes.string),
+    ingredientes: propTypes.arrayOf(propTypes.string),
+    revenue: propTypes.arrayOf(propTypes.string),
+    recipeDetails: propTypes.arrayOf(propTypes.string),
   }).isRequired,
 };
 
