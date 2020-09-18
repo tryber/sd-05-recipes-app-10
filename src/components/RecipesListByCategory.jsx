@@ -43,6 +43,7 @@ const RecipesListByCategory = (props) => {
   }, [props.pathname, category, setRecipesFiltered]);
 
   let auxRecipes = recipesFiltered;
+
   if (!Array.isArray(auxRecipes)) {
     auxRecipes = [];
     alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');

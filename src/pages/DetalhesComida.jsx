@@ -22,7 +22,7 @@ const btnStyle = {
 
 function IngredientsList(props) {
   const { recipe } = props;
-  // console.log(recipe);
+  console.log('recipe', recipe);
   const quantities = [];
   const ingredients = [];
 
