@@ -14,21 +14,22 @@ import {
 import RecipeCard from '../components/RecipeCard';
 
 function fetchSelectRecipesChoosingCountry(country) {
+  if(country === 'All') {
+    return fetchAllMeals();
+  }
   const foodFilterCountry = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${country}`;
   return fetch(foodFilterCountry)
     .then((result) => result.json())
-    .then((data) => console.log('data', data.meals))
+    .then((data) => data.meals)
 }
 
 function CountryInput({ initialValueSelect, setInitialValueSelect, mealDB }) {
   const { setMealDB } = useContext(ReceitasContext);
-  console.log('initialValueSelect', initialValueSelect);
-  console.log('area', mealDB)
+
   useEffect(() => {
     fetchMealDB().then((e) =>
       setMealDB(() => ({
         ...e,
-        categorias: [{ strCategory: 'All' }, ...e.categorias],
         areas: [{ strArea: 'All' }, ...e.areas]
       })),
     );
@@ -39,7 +40,7 @@ function CountryInput({ initialValueSelect, setInitialValueSelect, mealDB }) {
       <select
         data-testid="explore-by-area-dropdown"
         value={initialValueSelect}
-        onChange={event => fetchSelectRecipesChoosingCountry(event.target.value)}
+        onChange={event => setInitialValueSelect(event.target.value)}
       >
         {resultCountries.map((area) => <option data-testid={`${area}-option`} value={area}>{area}</option>)}
       </select>
@@ -49,14 +50,12 @@ function CountryInput({ initialValueSelect, setInitialValueSelect, mealDB }) {
 
 function ExplorarComidasOuBebidasPorArea(props) {
   const { mealDB } = useContext(ReceitasContext);
-  const { drinkCategory, category } = useContext(ReceitasContext);
   const { recipesFiltered, setRecipesFiltered, chooseAPI } = useContext(ReceitasContext);
   const [initialValueSelect, setInitialValueSelect] = useState("All");
-  console.log('rsrs', recipesFiltered)
 
   useEffect(() => {
-    fetchSelectRecipesChoosingCountry().then((initialValueSelect) => setRecipesFiltered(initialValueSelect));
-  }, [setRecipesFiltered]);
+    fetchSelectRecipesChoosingCountry(initialValueSelect).then((e) => setRecipesFiltered(e));
+  }, [initialValueSelect]);
 
   return (
     <Fragment>
@@ -67,14 +66,14 @@ function ExplorarComidasOuBebidasPorArea(props) {
         initialValueSelect={initialValueSelect}
       />
       <div>
-        {/* {auxRecipes.slice(0, 12).map((recipe, index) => (
+        {recipesFiltered.slice(0, 12).map((recipe, index) => (
           <RecipeCard
             testIt={`${index}-recipe-card`}
             testName={`${index}-card-name`}
             TestIdImage={`${index}-card-img`}
             recipe={recipe}
           />
-        ))} */}
+        ))}
     </div>
       <Footer />
     </Fragment>
