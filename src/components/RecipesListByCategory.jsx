@@ -31,13 +31,13 @@ const RecipesListByCategory = (props) => {
 
   useEffect(() => {
     if (!ing) {
-    if (props.pathname === '/comidas') {
-      if (category === 'All') {
-        fetchAllMeals().then((e) => setRecipesFiltered(e));
-      } else {
-        fetchMealsFilterdByCategory(category).then((e) => setRecipesFiltered(e));
+      if (props.pathname === '/comidas') {
+        if (category === 'All') {
+          fetchAllMeals().then((e) => setRecipesFiltered(e));
+        } else {
+          fetchMealsFilterdByCategory(category).then((e) => setRecipesFiltered(e));
+        }
       }
-    }
     }
   }, [props.pathname, category, setRecipesFiltered]);
 
