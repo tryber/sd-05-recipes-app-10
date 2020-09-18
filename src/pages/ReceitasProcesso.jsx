@@ -93,27 +93,36 @@ RecipeImage.propTypes = {
   recipe: propTypes.arrayOf(propTypes.string).isRequired,
 };
 
-const copyFunc = (params, setLinkCopied, document) => {
-  const pathToBeCopied = params.idMeal
-    ? `http://localhost:3000/comidas/${params.idMeal}`
-    : `http://localhost:3000/bebidas/${params.id}`;
+const ShareButton = ({ type, id }) => {
+  const [linkCopied, setLinkCopied] = useState(false);
 
-  // dica de rodrigo batista
-  // https://stackoverflow.com/questions/39501289/in-reactjs-how-to-copy-text-to-clipboard
-  const textField = document.createElement('textarea');
-  textField.innerText = pathToBeCopied;
-  document.body.appendChild(textField);
-  textField.select();
-  document.execCommand('copy');
-  textField.remove();
+  const path =
+    type === 'comida'
+      ? `http://localhost:3000/comidas/${id}/in-progress`
+      : `http://localhost:3000/bebidas/${id}/in-progress`;
 
-  // setTimeout(() => {
-  setLinkCopied(true);
-  // }, 1000);
+  // https://web.dev/async-clipboard/
 
-  // setTimeout(() => {
-  // setLinkCopied(false);
-  // }, 2000);
+  async function copyPageUrl() {
+    try {
+      await navigator.clipboard.writeText(path);
+      console.log('Page URL copied to clipboard');
+      setLinkCopied(true);
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
+  }
+
+  return (
+    <button onClick={() => copyPageUrl()} src={shareIcon}>
+      <img
+        data-testid="share-btn"
+        alt="share button"
+        src={shareIcon}
+      />
+      {linkCopied ? <Success /> : null}
+    </button>
+  );
 };
 
 const ReceitasProcesso = (props) => {
@@ -121,15 +130,14 @@ const ReceitasProcesso = (props) => {
   const { params, path } = props.match;
   const [favorite, setFavorite] = useState(false);
   const [linkCopied, setLinkCopied] = useState(false);
+  const [type, setType] = useState('comida');
 
-console.log(params)
-  
   useEffect(() => {
     if (path.includes('comida')) {
       fetchMealById(params.id).then((e) => setRecipe(e));
     }
     if (path.includes('bebida')) {
-      console.log(params.id)
+      setType('bebida');
       fetchDrinkById(params.id).then((e) => setRecipe(e));
     }
   }, [params.id, params.idMeal, path]);
@@ -148,10 +156,7 @@ console.log(params)
           src={favorite ? blackHeartIcon : whiteHeartIcon}
         />
       </button>
-      <button data-testid="share-btn" onClick={() => copyFunc(params, setLinkCopied, document)}>
-        <img alt="share button" src={shareIcon} />
-        {linkCopied ? <Success /> : null}
-      </button>
+      <ShareButton type={type} id={params.id} />
       <IngredientsList recipe={recipe} />
       <Instructions recipe={recipe} />
       <Link to="/receitas-feitas">
