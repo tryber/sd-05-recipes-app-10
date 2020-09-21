@@ -29,6 +29,7 @@ export const ReceitasContextProvider = ({ children }) => {
   const [drinkCategory, setDrinkCategory] = useState('All');
   const [recipesFiltered, setRecipesFiltered] = useState([]);
   const [ing, setIng] = useState('');
+  const [recipesDone, setRecipesDone] = useState(false);
 
   const context = {
     email,
@@ -51,6 +52,8 @@ export const ReceitasContextProvider = ({ children }) => {
     setIngredientes,
     ing,
     setIng,
+    recipesDone,
+    setRecipesDone,
   };
 
   return (

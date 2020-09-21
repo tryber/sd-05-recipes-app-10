@@ -18,7 +18,48 @@ const btnStyle = {
   position: 'fixed',
   bottom: 0,
 };
+// Ref - 
+const changeLocalStorage = (option, id, setRecipesInProgress) => {
+  const recipesInProgress = JSON.parse(localStorage.getItem('inProgressRecipes')) || {
+    cocktails: { [id]: [] },
+    meals: {},
+  };
+  const progressMeals = {
+    ...recipesInProgress,
+    cocktails: { [id]: [...recipesInProgress.cocktails[id], option] },
+  };
+  setRecipesInProgress(progressMeals);
+  return localStorage.setItem('inProgressRecipes', JSON.stringify(progressMeals));
+};
 
+const removeFromLocalStorage = (option, id, setRecipesInProgress) => {
+  const recipesInProgress = JSON.parse(localStorage.getItem('inProgressRecipes')) || {
+    cocktails: { [id]: [] },
+    meals: {},
+  };
+  const progressMeals = {
+    ...recipesInProgress,
+    cocktails: { [id]: recipesInProgress.cocktails[id].filter((item) => item !== option) },
+  };
+  setRecipesInProgress(progressMeals);
+  return localStorage.setItem('inProgressRecipes', JSON.stringify(progressMeals));
+};
+
+const toggleCheck = (target, id, setRecipesInProgress, setRecipeDone) => {
+  const label = document.querySelector(`label[for=${target.id}]`);
+  if (label.style.textDecoration === 'line-through') {
+    removeFromLocalStorage(target.id, id, setRecipesInProgress);
+  } else {
+    changeLocalStorage(target.id, id, setRecipesInProgress);
+  }
+  if (
+    document.querySelectorAll('input[type=checkbox]:checked').length ===
+    document.querySelectorAll('input[type=checkbox]').length
+  ) {
+    setRecipeDone(true);
+  }
+};
+// 
 function IngredientsList(props) {
   const { recipe } = props;
   const quantities = [];
@@ -132,8 +173,35 @@ const ReceitasProcesso = (props) => {
   const [recipe, setRecipe] = useState({});
   const { params, path } = props.match;
   const [favorite, setFavorite] = useState(false);
-  const [inProgress, setInProgress] = useState(false);
+  const [inProgress, setInProgress] = useState({});
   const [type, setType] = useState('comida');
+
+  //REF
+  useEffect(() => {
+    const localStore = JSON.parse(localStorage.getItem('inProgressRecipes')) || {
+      cocktails: { [id]: [] },
+      meals: {},
+    };
+    if (!localStore.cocktails[id]) {
+      const inProgressRecipe = { ...localStore, cocktails: { ...localStore.cocktails, [id]: [] } };
+      localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipe));
+    } else {
+      localStorage.setItem('inProgressRecipes', JSON.stringify(localStore));
+    }
+    setRecipesInProgress(JSON.parse(localStorage.getItem('inProgressRecipes')));
+  }, [setRecipesInProgress, id]);
+  let counter = 1;
+  const ingredients = Object.keys(Drink).reduce((array, key) => {
+    if (key.includes('strIngredient') && Drink[key] !== null && Drink[key].length > 0) {
+      const object = {};
+      object[key] = Drink[key];
+      object[`strMeasure${counter}`] = Drink[`strMeasure${counter}`];
+      counter += 1;
+      return [...array, object];
+    }
+    return array;
+  }, []);
+  //
 
   useEffect(() => {
     if (path.includes('comida')) {
