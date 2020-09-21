@@ -7,8 +7,6 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import {
   fetchMealById,
-  fetchAllMeals,
-  fetchAllDrinks,
   fetchDrinkById,
 } from '../services/ApiRequest';
 import { faveFunc, ifIsFavoriteFunc } from '../services/helpers';
@@ -18,52 +16,12 @@ const btnStyle = {
   position: 'fixed',
   bottom: 0,
 };
-// Ref - 
-const changeLocalStorage = (option, id, setRecipesInProgress) => {
-  const recipesInProgress = JSON.parse(localStorage.getItem('inProgressRecipes')) || {
-    cocktails: { [id]: [] },
-    meals: {},
-  };
-  const progressMeals = {
-    ...recipesInProgress,
-    cocktails: { [id]: [...recipesInProgress.cocktails[id], option] },
-  };
-  setRecipesInProgress(progressMeals);
-  return localStorage.setItem('inProgressRecipes', JSON.stringify(progressMeals));
-};
 
-const removeFromLocalStorage = (option, id, setRecipesInProgress) => {
-  const recipesInProgress = JSON.parse(localStorage.getItem('inProgressRecipes')) || {
-    cocktails: { [id]: [] },
-    meals: {},
-  };
-  const progressMeals = {
-    ...recipesInProgress,
-    cocktails: { [id]: recipesInProgress.cocktails[id].filter((item) => item !== option) },
-  };
-  setRecipesInProgress(progressMeals);
-  return localStorage.setItem('inProgressRecipes', JSON.stringify(progressMeals));
-};
-
-const toggleCheck = (target, id, setRecipesInProgress, setRecipeDone) => {
-  const label = document.querySelector(`label[for=${target.id}]`);
-  if (label.style.textDecoration === 'line-through') {
-    removeFromLocalStorage(target.id, id, setRecipesInProgress);
-  } else {
-    changeLocalStorage(target.id, id, setRecipesInProgress);
-  }
-  if (
-    document.querySelectorAll('input[type=checkbox]:checked').length ===
-    document.querySelectorAll('input[type=checkbox]').length
-  ) {
-    setRecipeDone(true);
-  }
-};
-// 
 function IngredientsList(props) {
   const { recipe } = props;
   const quantities = [];
   const ingredients = [];
+  const [recipesInProgress, setRecipesInProgress] = useState({});
 
   Object.entries(recipe).forEach((element) => {
     if (
@@ -90,7 +48,7 @@ function IngredientsList(props) {
     <div>
       <h3>Ingredients</h3>
       {ingredients.map((element, index) => (
-        <div data-testid={`${index}-ingredient-step`}>
+        <div data-testid={`${index}-ingredient-step`} key={`element${index + 1}`}>
           <input type="checkbox" id={`element${index + 1}`} />
           <label htmlFor={`element${index + 1}`}>
             {element} - {quantities[index]}
@@ -173,35 +131,8 @@ const ReceitasProcesso = (props) => {
   const [recipe, setRecipe] = useState({});
   const { params, path } = props.match;
   const [favorite, setFavorite] = useState(false);
-  const [inProgress, setInProgress] = useState({});
+  const [inProgress, setInProgress] = useState(false);
   const [type, setType] = useState('comida');
-
-  //REF
-  useEffect(() => {
-    const localStore = JSON.parse(localStorage.getItem('inProgressRecipes')) || {
-      cocktails: { [id]: [] },
-      meals: {},
-    };
-    if (!localStore.cocktails[id]) {
-      const inProgressRecipe = { ...localStore, cocktails: { ...localStore.cocktails, [id]: [] } };
-      localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipe));
-    } else {
-      localStorage.setItem('inProgressRecipes', JSON.stringify(localStore));
-    }
-    setRecipesInProgress(JSON.parse(localStorage.getItem('inProgressRecipes')));
-  }, [setRecipesInProgress, id]);
-  let counter = 1;
-  const ingredients = Object.keys(Drink).reduce((array, key) => {
-    if (key.includes('strIngredient') && Drink[key] !== null && Drink[key].length > 0) {
-      const object = {};
-      object[key] = Drink[key];
-      object[`strMeasure${counter}`] = Drink[`strMeasure${counter}`];
-      counter += 1;
-      return [...array, object];
-    }
-    return array;
-  }, []);
-  //
 
   useEffect(() => {
     if (path.includes('comida')) {
