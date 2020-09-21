@@ -152,7 +152,7 @@ const ReceitasProcesso = (props) => {
         <img
           alt="favorite button"
           data-testid="favorite-btn"
-          src={favorite ? blackHeartIcon : whiteHeartIcon}
+          src={favorito ? blackHeartIcon : whiteHeartIcon}
         />
       </button>
       <Button type={type} id={params.id} />
