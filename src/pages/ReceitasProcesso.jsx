@@ -128,7 +128,7 @@ Button.propTypes = {
 const ReceitasProcesso = (props) => {
   const [recipe, setRecipe] = useState({});
   const { params, path } = props.match;
-  const [favorite, setFavorite] = useState(false);
+  const [favorito, setFavorite] = useState(false);
   const [type, setType] = useState('comida');
 
   useEffect(() => {
@@ -148,7 +148,7 @@ const ReceitasProcesso = (props) => {
       <RecipeImage recipe={recipe} />
       <h2 data-testid="recipe-title">{recipe.strMeal || recipe.strDrink}</h2>
       <h4 data-testid="recipe-category">{recipe.strAlcoholic || recipe.strCategory}</h4>
-      <button onClick={() => faveFunc(setFavorite, favorite, recipe)}>
+      <button onClick={() => faveFunc(setFavorite, favorito, recipe)}>
         <img
           alt="favorite button"
           data-testid="favorite-btn"
