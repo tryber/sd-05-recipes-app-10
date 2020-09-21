@@ -94,7 +94,7 @@ RecipeImage.propTypes = {
   recipe: propTypes.arrayOf(propTypes.string).isRequired,
 };
 
-const Button = ({ type, id }) => {
+const ShareButt = ({ type, id }) => {
   const [linkCopied, setLinkCopied] = useState(false);
 
   const path =
@@ -121,7 +121,7 @@ const Button = ({ type, id }) => {
     </button>
   );
 };
-Button.propTypes = {
+ShareButt.propTypes = {
   type: propTypes.string.isRequired,
   id: propTypes.string.isRequired,
 };
@@ -155,7 +155,7 @@ const ReceitasProcesso = (props) => {
           src={favorito ? blackHeartIcon : whiteHeartIcon}
         />
       </button>
-      <Button type={type} id={params.id} />
+      <ShareButt type={type} id={params.id} />
       <IngredientsList recipe={recipe} />
       <Instructions recipe={recipe} />
       <Link to="/receitas-feitas">
