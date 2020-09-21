@@ -5,10 +5,7 @@ import propTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
-import {
-  fetchMealById,
-  fetchDrinkById,
-} from '../services/ApiRequest';
+import { fetchMealById, fetchDrinkById } from '../services/ApiRequest';
 import { faveFunc, ifIsFavoriteFunc } from '../services/helpers';
 // o botão tem que ser bottom com posição fixa o resto pode estilizar
 const btnStyle = {
@@ -21,7 +18,6 @@ function IngredientsList(props) {
   const { recipe } = props;
   const quantities = [];
   const ingredients = [];
-  
   Object.entries(recipe).forEach((element) => {
     if (
       element[0].includes('strMeasure') &&
@@ -98,7 +94,7 @@ RecipeImage.propTypes = {
   recipe: propTypes.arrayOf(propTypes.string).isRequired,
 };
 
-const ShareButton = ({ type, id }) => {
+const Button = ({ type, id }) => {
   const [linkCopied, setLinkCopied] = useState(false);
 
   const path =
@@ -108,7 +104,7 @@ const ShareButton = ({ type, id }) => {
 
   // https://web.dev/async-clipboard/
 
-  async function copyPageUrl() {
+  async function copyUrl() {
     try {
       await navigator.clipboard.writeText(path);
       console.log('Page URL copied to clipboard');
@@ -119,13 +115,13 @@ const ShareButton = ({ type, id }) => {
   }
 
   return (
-    <button onClick={() => copyPageUrl()} src={shareIcon}>
+    <button onClick={() => copyUrl()} src={shareIcon}>
       <img data-testid="share-btn" alt="share button" src={shareIcon} />
       {linkCopied ? <Success /> : null}
     </button>
   );
 };
-ShareButton.propTypes = {
+Button.propTypes = {
   type: propTypes.string.isRequired,
   id: propTypes.string.isRequired,
 };
@@ -159,7 +155,7 @@ const ReceitasProcesso = (props) => {
           src={favorite ? blackHeartIcon : whiteHeartIcon}
         />
       </button>
-      <ShareButton type={type} id={params.id} />
+      <Button type={type} id={params.id} />
       <IngredientsList recipe={recipe} />
       <Instructions recipe={recipe} />
       <Link to="/receitas-feitas">
