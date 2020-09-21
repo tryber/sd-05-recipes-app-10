@@ -14,10 +14,25 @@ const btnStyle = {
   bottom: 0,
 };
 
+// incluir ref
+const IfChecked = (setButton, index) => {
+  if (document.querySelector(`label[for="element${index}"]`).style.textDecoration === 'line-through') {
+    document.querySelector(`label[for="element${index}"]`).style.textDecoration = null;
+  } else {
+    document.querySelector(`label[for="element${index}"]`).style.textDecoration = 'line-through';
+  }
+  if (document.querySelectorAll('input[name="nameinput"]:checked').length === document.querySelectorAll('input[name="nameinput"]').length) {
+    document.getElementById('btn').disabled = false;
+  } else {
+    document.getElementById('btn').disabled = true;
+  }
+};
+
 function IngredientsList(props) {
   const { recipe } = props;
   const quantities = [];
   const ingredients = [];
+
   Object.entries(recipe).forEach((element) => {
     if (
       element[0].includes('strMeasure') &&
@@ -44,8 +59,8 @@ function IngredientsList(props) {
       <h3>Ingredients</h3>
       {ingredients.map((element, index) => (
         <div data-testid={`${index}-ingredient-step`} key={`element${index + 1}`}>
-          <input type="checkbox" id={`element${index + 1}`} />
-          <label htmlFor={`element${index + 1}`}>
+          <input name="nameinput" type="checkbox" id={`element${index + 1}`} onChange={() => IfChecked(element, index)} />
+          <label htmlFor={`element${index}`}>
             {element} - {quantities[index]}
           </label>
         </div>
@@ -159,7 +174,7 @@ const ReceitasProcesso = (props) => {
       <IngredientsList recipe={recipe} />
       <Instructions recipe={recipe} />
       <Link to="/receitas-feitas">
-        <button style={btnStyle} data-testid="finish-recipe-btn">
+        <button style={btnStyle} id="btn" data-testid="finish-recipe-btn">
           Finalizar Receita
         </button>
       </Link>
