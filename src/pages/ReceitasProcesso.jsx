@@ -21,8 +21,7 @@ function IngredientsList(props) {
   const { recipe } = props;
   const quantities = [];
   const ingredients = [];
-  const [recipesInProgress, setRecipesInProgress] = useState({});
-
+  
   Object.entries(recipe).forEach((element) => {
     if (
       element[0].includes('strMeasure') &&
@@ -126,12 +125,14 @@ const ShareButton = ({ type, id }) => {
     </button>
   );
 };
-
+ShareButton.propTypes = {
+  type: propTypes.string.isRequired,
+  id: propTypes.string.isRequired,
+};
 const ReceitasProcesso = (props) => {
   const [recipe, setRecipe] = useState({});
   const { params, path } = props.match;
   const [favorite, setFavorite] = useState(false);
-  const [inProgress, setInProgress] = useState(false);
   const [type, setType] = useState('comida');
 
   useEffect(() => {
